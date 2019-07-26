@@ -37,7 +37,7 @@ public class Account_View extends JFrame {
 
 	private Color Color_navy = new Color(0,73,118);
 	
-	private JPanel contentPane;
+	private JFrame frame;
 	private JTable table;
 	
 
@@ -61,20 +61,20 @@ public class Account_View extends JFrame {
 	 * Create the frame.
 	 */
 	public Account_View(int cardNumber) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 600);
-		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(120, 120, 800, 600);
+		frame.getContentPane().setBackground(Color.WHITE);
+		setContentPane(frame.getContentPane());
+		SpringLayout springLayout = new SpringLayout();
 		SpringLayout sl_contentPane = new SpringLayout();
-		contentPane.setLayout(sl_contentPane);
+		frame.getContentPane().setLayout(sl_contentPane);
 		
 		JPanel brandPanel = new JPanel();
-		sl_contentPane.putConstraint(SpringLayout.NORTH, brandPanel, 10, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, brandPanel, 274, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, brandPanel, 10, SpringLayout.NORTH, frame.getContentPane());
+		sl_contentPane.putConstraint(SpringLayout.WEST, brandPanel, 274, SpringLayout.WEST, frame.getContentPane());
 		brandPanel.setBackground(Color.WHITE);
-		contentPane.add(brandPanel);
+		frame.getContentPane().add(brandPanel);
 		
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -115,11 +115,11 @@ public class Account_View extends JFrame {
 		brandPanel.setLayout(gl_brandPanel);
 		
 		JPanel infoPanel = new JPanel();
-		sl_contentPane.putConstraint(SpringLayout.NORTH, infoPanel, 66, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, infoPanel, 0, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, infoPanel, 223, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, infoPanel, 0, SpringLayout.EAST, contentPane);
-		contentPane.add(infoPanel);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, infoPanel, 66, SpringLayout.NORTH, frame.getContentPane());
+		sl_contentPane.putConstraint(SpringLayout.WEST, infoPanel, 0, SpringLayout.WEST, frame.getContentPane());
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, infoPanel, 223, SpringLayout.NORTH, frame.getContentPane());
+		sl_contentPane.putConstraint(SpringLayout.EAST, infoPanel, 0, SpringLayout.EAST, frame.getContentPane());
+		frame.getContentPane().add(infoPanel);
 		infoPanel.setLayout(null);
 		
 		JLabel lblCurrent = new JLabel("Current Balance");
@@ -207,10 +207,10 @@ public class Account_View extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		sl_contentPane.putConstraint(SpringLayout.NORTH, panel, 10, SpringLayout.SOUTH, infoPanel);
-		sl_contentPane.putConstraint(SpringLayout.WEST, panel, 0, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, panel, 0, SpringLayout.SOUTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, panel, 776, SpringLayout.WEST, contentPane);
-		contentPane.add(panel);
+		sl_contentPane.putConstraint(SpringLayout.WEST, panel, 0, SpringLayout.WEST, frame.getContentPane());
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, panel, 0, SpringLayout.SOUTH, frame.getContentPane());
+		sl_contentPane.putConstraint(SpringLayout.EAST, panel, 776, SpringLayout.WEST, frame.getContentPane());
+		frame.getContentPane().add(panel);
 		
 		JLabel lblTransactions = new JLabel("Transactions");
 		lblTransactions.setFont(new Font("Arial", Font.BOLD, 25));

@@ -33,7 +33,8 @@ public class Home_View extends JFrame {
 
 	private Color Color_navy = new Color(0,73,118);
 	
-	private JPanel contentPane;
+	private JFrame frame;
+
 
 	/**
 	 * Launch the application.
@@ -55,22 +56,23 @@ public class Home_View extends JFrame {
 	 * Create the frame.
 	 */
 	public Home_View(ResultSet loginUser) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame = new JFrame();
+
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
-		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		frame.getContentPane().setBackground(Color.WHITE);
+		setContentPane(frame.getContentPane());
 		SpringLayout springLayout = new SpringLayout();
 		SpringLayout sl_contentPane = new SpringLayout();
-		contentPane.setLayout(sl_contentPane);
+		frame.getContentPane().setLayout(sl_contentPane);
 		
 		JPanel brandPanel = new JPanel();
-		sl_contentPane.putConstraint(SpringLayout.NORTH, brandPanel, 5, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, brandPanel, 299, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, brandPanel, -261, SpringLayout.EAST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, brandPanel, 5, SpringLayout.NORTH, frame.getContentPane());
+		sl_contentPane.putConstraint(SpringLayout.WEST, brandPanel, 299, SpringLayout.WEST, frame.getContentPane());
+		sl_contentPane.putConstraint(SpringLayout.EAST, brandPanel, -261, SpringLayout.EAST, frame.getContentPane());
 		brandPanel.setBackground(Color.WHITE);
-		contentPane.add(brandPanel);
+		frame.getContentPane().add(brandPanel);
 		
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -110,11 +112,11 @@ public class Home_View extends JFrame {
 		brandPanel.setLayout(gl_brandPanel);
 		
 		JPanel welcomPanel = new JPanel();
-		sl_contentPane.putConstraint(SpringLayout.NORTH, welcomPanel, 66, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, welcomPanel, 0, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, welcomPanel, 0, SpringLayout.EAST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, welcomPanel, 166, SpringLayout.NORTH, contentPane);
-		contentPane.add(welcomPanel);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, welcomPanel, 66, SpringLayout.NORTH, frame.getContentPane());
+		sl_contentPane.putConstraint(SpringLayout.WEST, welcomPanel, 0, SpringLayout.WEST, frame.getContentPane());
+		sl_contentPane.putConstraint(SpringLayout.EAST, welcomPanel, 0, SpringLayout.EAST, frame.getContentPane());
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, welcomPanel, 166, SpringLayout.NORTH, frame.getContentPane());
+		frame.getContentPane().add(welcomPanel);
 		SpringLayout sl_welcomPanel = new SpringLayout();
 		welcomPanel.setLayout(sl_welcomPanel);
 		
@@ -144,11 +146,11 @@ public class Home_View extends JFrame {
 		welcomPanel.add(lblGreeting);
 		
 		JPanel cardPanel = new JPanel();
-		sl_contentPane.putConstraint(SpringLayout.NORTH, cardPanel, 183, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, cardPanel, -10, SpringLayout.SOUTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, cardPanel, 183, SpringLayout.NORTH, frame.getContentPane());
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, cardPanel, -10, SpringLayout.SOUTH, frame.getContentPane());
 		cardPanel.setBackground(Color.WHITE);
-		sl_contentPane.putConstraint(SpringLayout.WEST, cardPanel, 50, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, cardPanel, -50, SpringLayout.EAST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.WEST, cardPanel, 50, SpringLayout.WEST, frame.getContentPane());
+		sl_contentPane.putConstraint(SpringLayout.EAST, cardPanel, -50, SpringLayout.EAST, frame.getContentPane());
 		
 		JLabel lblgreetingBackground = new JLabel();
 		Image greetingImg = new ImageIcon(Login_View.class.getResource("greeting_background.png")).getImage().getScaledInstance(776, 100, Image.SCALE_SMOOTH);
@@ -160,7 +162,7 @@ public class Home_View extends JFrame {
 		sl_welcomPanel.putConstraint(SpringLayout.EAST, lblgreetingBackground, 0, SpringLayout.EAST, welcomPanel);
 		welcomPanel.add(lblgreetingBackground);
 		
-		contentPane.add(cardPanel);
+		frame.getContentPane().add(cardPanel);
 		// drop down menu
 		cardPanel.setLayout(new GridLayout(2, 2, 10, 10)); 
 		String choice[] = {
@@ -170,22 +172,22 @@ public class Home_View extends JFrame {
 				"<html><strong>Sign Out<strong></html>"};
 		JComboBox comboBox = new JComboBox(choice);
 		sl_contentPane.putConstraint(SpringLayout.WEST, comboBox, -153, SpringLayout.EAST, cardPanel);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, comboBox, 54, SpringLayout.NORTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, comboBox, 54, SpringLayout.NORTH, frame.getContentPane());
 		comboBox.setForeground(Color.WHITE);
 		comboBox.setFont(new Font("Arial", Font.PLAIN, 20));
 		comboBox.setBackground(Color_navy);
 		comboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				// TODO
+				// TODO drop down options
 				if (e.getStateChange() == 1) {
 					System.out.println(e.getItem() + " " + e.getStateChange() );
 				}
 			}
 		});
 		
-		sl_contentPane.putConstraint(SpringLayout.NORTH, comboBox, 20, SpringLayout.NORTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, comboBox, 20, SpringLayout.NORTH, frame.getContentPane());
 		sl_contentPane.putConstraint(SpringLayout.EAST, comboBox, 0, SpringLayout.EAST, cardPanel);
-		contentPane.add(comboBox);
+		frame.getContentPane().add(comboBox);
 		
 		// display all credit card on cardPanel (dynamically)
 		ArrayList<JPanel> cardList = new ArrayList<>();
@@ -212,11 +214,13 @@ public class Home_View extends JFrame {
 							con.close();
 						}
 						catch(Exception err) {
-							
+							err.printStackTrace();
 						}
-						contentPane.setVisible(false);;
-						Account_View acc_view = new Account_View(cardNum);
-						acc_view.setVisible(true);
+						finally {
+							Account_View acc_view = new Account_View(cardNum);
+							acc_view.setVisible(true);
+							frame.dispose();
+						}
 					}
 				});
 				cardPanel.add(panel_1);
