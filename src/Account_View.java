@@ -5,9 +5,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.SpringLayout;
 import java.awt.Color;
@@ -21,34 +23,48 @@ import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableModel;
+import javax.swing.border.LineBorder;
+import java.awt.Cursor;
+import javax.swing.JTable;
 
 public class Account_View extends JFrame {
 
+	private Color Color_navy = new Color(0,73,118);
+	
 	private JPanel contentPane;
+	private JTable table;
+	
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Account_View frame = new Account_View();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Account_View frame = new Account_View();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public Account_View() {
+	public Account_View(int cardNumber) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		SpringLayout sl_contentPane = new SpringLayout();
@@ -104,51 +120,180 @@ public class Account_View extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, infoPanel, 223, SpringLayout.NORTH, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.EAST, infoPanel, 0, SpringLayout.EAST, contentPane);
 		contentPane.add(infoPanel);
-		SpringLayout sl_infoPanel = new SpringLayout();
-		infoPanel.setLayout(sl_infoPanel);
+		infoPanel.setLayout(null);
 		
 		JLabel lblCurrent = new JLabel("Current Balance");
+		lblCurrent.setBounds(312, 16, 162, 15);
 		lblCurrent.setForeground(Color.WHITE);
-		sl_infoPanel.putConstraint(SpringLayout.NORTH, lblCurrent, 10, SpringLayout.NORTH, infoPanel);
-		sl_infoPanel.putConstraint(SpringLayout.WEST, lblCurrent, 312, SpringLayout.WEST, infoPanel);
-		sl_infoPanel.putConstraint(SpringLayout.SOUTH, lblCurrent, 25, SpringLayout.NORTH, infoPanel);
-		sl_infoPanel.putConstraint(SpringLayout.EAST, lblCurrent, -302, SpringLayout.EAST, infoPanel);
-		lblCurrent.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblCurrent.setFont(new Font("Arial", Font.BOLD, 18));
 		infoPanel.add(lblCurrent);
 		
 		JLabel lblCreditCard = new JLabel("Credit Card");
-		sl_infoPanel.putConstraint(SpringLayout.NORTH, lblCreditCard, 10, SpringLayout.NORTH, infoPanel);
-		sl_infoPanel.putConstraint(SpringLayout.WEST, lblCreditCard, 10, SpringLayout.WEST, infoPanel);
-		sl_infoPanel.putConstraint(SpringLayout.EAST, lblCreditCard, 200, SpringLayout.WEST, infoPanel);
+		lblCreditCard.setBounds(10, 10, 190, 41);
 		lblCreditCard.setForeground(Color.WHITE);
 		infoPanel.add(lblCreditCard);
 		lblCreditCard.setFont(new Font("Arial", Font.PLAIN, 35));
 		
-		JLabel lblNewLabel = new JLabel("");
+		JLabel lblBackgroundImg = new JLabel("");
+		lblBackgroundImg.setBounds(0, 0, 776, 157);
 		Image wave_background = new ImageIcon(Account_View.class.getResource("navy_background.png")).getImage().getScaledInstance(776, 157, Image.SCALE_SMOOTH);
-		lblNewLabel.setIcon(new ImageIcon(wave_background));
-		sl_infoPanel.putConstraint(SpringLayout.NORTH, lblNewLabel, 0, SpringLayout.NORTH, infoPanel);
-		sl_infoPanel.putConstraint(SpringLayout.WEST, lblNewLabel, 0, SpringLayout.WEST, infoPanel);
-		sl_infoPanel.putConstraint(SpringLayout.SOUTH, lblNewLabel, 0, SpringLayout.SOUTH, infoPanel);
-		sl_infoPanel.putConstraint(SpringLayout.EAST, lblNewLabel, 0, SpringLayout.EAST, infoPanel);
-		infoPanel.add(lblNewLabel);
+		lblBackgroundImg.setIcon(new ImageIcon(wave_background));
 		
-		int cardNumber = 1;
+		JLabel lblCardnumber = new JLabel("cardNumber");
+		lblCardnumber.setAlignmentY(15.0f);
+		lblCardnumber.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblCardnumber.setForeground(Color.WHITE);
+		lblCardnumber.setBounds(20, 55, 117, 15);
+		infoPanel.add(lblCardnumber);
+		
+		JLabel lblBalance = new JLabel("balance");
+		lblBalance.setForeground(new Color(255, 255, 255));
+		lblBalance.setFont(new Font("Arial", Font.BOLD, 35));
+		lblBalance.setBounds(325, 35, 142, 41);
+		infoPanel.add(lblBalance);
+		
+		JLabel lblDollarSign = new JLabel("$");
+		lblDollarSign.setForeground(Color.WHITE);
+		lblDollarSign.setFont(new Font("Arial", Font.PLAIN, 25));
+		lblDollarSign.setBounds(310, 30, 15, 41);
+		infoPanel.add(lblDollarSign);
+		
+		JLabel lblAvaliableBalance = new JLabel("Available  Credit");
+		lblAvaliableBalance.setForeground(Color.WHITE);
+		lblAvaliableBalance.setFont(new Font("Arial", Font.PLAIN, 18));
+		lblAvaliableBalance.setBounds(318, 135, 142, 15);
+		infoPanel.add(lblAvaliableBalance);
+		
+		JLabel lblDollarSign_2 = new JLabel("$");
+		lblDollarSign_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDollarSign_2.setForeground(Color.WHITE);
+		lblDollarSign_2.setFont(new Font("Arial", Font.PLAIN, 25));
+		lblDollarSign_2.setBounds(320, 110, 15, 23);
+		infoPanel.add(lblDollarSign_2);
+		
+		JLabel lblCredit = new JLabel("remain");
+		lblCredit.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCredit.setForeground(Color.WHITE);
+		lblCredit.setFont(new Font("Arial", Font.PLAIN, 25));
+		lblCredit.setBounds(325, 110, 129, 23);
+		infoPanel.add(lblCredit);
+		
+		JButton btnMakePayment = new JButton("Make a Payment");
+		btnMakePayment.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnMakePayment.setForeground(Color.WHITE);
+		btnMakePayment.setBounds(582, 45, 170, 48);
+		infoPanel.add(btnMakePayment);
+		btnMakePayment.setBackground(Color.BLACK);
+		btnMakePayment.setBorder(new LineBorder(new Color(255, 255, 255), 3, true));
+		btnMakePayment.setFont(new Font("Arial", Font.BOLD, 18));
+		btnMakePayment.setFocusable(false);
+		btnMakePayment.setContentAreaFilled(false);
+		
+		JLabel lblCreditLine = new JLabel("Credit Line");
+		lblCreditLine.setForeground(Color.WHITE);
+		lblCreditLine.setFont(new Font("Arial", Font.PLAIN, 15));
+		lblCreditLine.setBounds(600, 130, 74, 15);
+		infoPanel.add(lblCreditLine);
+		
+		JLabel lblCreditAmt = new JLabel("$creditline");
+		lblCreditAmt.setForeground(Color.WHITE);
+		lblCreditAmt.setFont(new Font("Arial", Font.PLAIN, 15));
+		lblCreditAmt.setBounds(680, 130, 74, 15);
+		infoPanel.add(lblCreditAmt);
+		
+		
+		infoPanel.add(lblBackgroundImg);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, panel, 10, SpringLayout.SOUTH, infoPanel);
+		sl_contentPane.putConstraint(SpringLayout.WEST, panel, 0, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, panel, 0, SpringLayout.SOUTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, panel, 776, SpringLayout.WEST, contentPane);
+		contentPane.add(panel);
+		
+		JLabel lblTransactions = new JLabel("Transactions");
+		lblTransactions.setFont(new Font("Arial", Font.BOLD, 25));
+		lblTransactions.setBounds(10, 5, 176, 30);
+		lblTransactions.setForeground(Color.BLACK);
+		panel.add(lblTransactions);
+		
+
+		ArrayList<String[]> transData = new ArrayList<>();
 		// DataBase connect
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver"); 
 			Connection con=DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");  
-			Statement stmt = con.createStatement();
-			ResultSet res = stmt.executeQuery("SELECT * FROM transactions WHERE cardNumber = "+ cardNumber);
-			
-			while (res.next()) {
-				System.out.println(res.getString("cost"));
+			Statement transStmt = con.createStatement();
+			Statement cardStmt = con.createStatement();
+			ResultSet transRes = transStmt.executeQuery("SELECT * FROM transactions WHERE cardNumber = "+ cardNumber + " ORDER BY date");
+			ResultSet cardRes = cardStmt.executeQuery("SELECT * FROM credit_cards WHERE cardNumber = "+ cardNumber);
+			// update credit card info
+			if (cardRes.next()) {	
+				lblCardnumber.setText("..."+String.format("%04d", Integer.parseInt(cardRes.getString("cardNumber"))));
+				double remainCredit = Double.parseDouble(cardRes.getString("remainCredit"));
+				double creditLmt = Double.parseDouble(cardRes.getString("creditLimit"));
+				double balance = creditLmt - remainCredit;
+				lblBalance.setText(String.format("%.2f", balance));
+				lblCredit.setText(String.format("%.2f", remainCredit));
+				lblCreditAmt.setText(String.format("%.2f", creditLmt));;
+				
+			}
+			// create transaction array
+			if (transRes.next()) {
+				do {
+					String transRow[] = new String[3];
+					transRow[0] = transRes.getString("date");
+					transRow[1] = transRes.getString("paidTo");
+					transRow[2] = "$"+transRes.getString("cost");
+					transData.add(transRow);
+				} while (transRes.next());
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		String columns[] = {"Date", "Description", "Amout"};
+		panel.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBorder(null);
+		scrollPane.setViewportBorder(null);
+		scrollPane.setFocusable(false);
+		scrollPane.setBackground(Color.WHITE);
+		scrollPane.setFont(new Font("Arial", Font.BOLD, 20));
+		scrollPane.setBounds(10, 40, 756, 216);
+		
+		panel.add(scrollPane);
+		
+		String[][] arrData = new String[transData.size()][];
+		for (int i=0; i<transData.size(); i ++) {
+			arrData[i] = transData.get(i);
+		}
+		
+		table = new AlterColor_JTable(arrData, columns);
+		table.setGridColor(Color.WHITE);
+		table.setColumnSelectionAllowed(true);
+		table.setBorder(null);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
+		table.setEnabled(false);
+		table.setFocusable(false);
+		table.setRowSelectionAllowed(false);
+		scrollPane.setViewportView(table);
+		table.setFont(new Font("Arial", Font.PLAIN, 17));
+		
+		// table header styling
+		JTableHeader header = table.getTableHeader();
+		header.setFont(new Font("Arial", Font.BOLD, 20));
+		header.setForeground(Color_navy);
+		DefaultTableCellRenderer  renderer = (DefaultTableCellRenderer)table.getTableHeader().getDefaultRenderer();
+	    renderer.setHorizontalAlignment(JLabel.LEFT);		// header alignment left
+		
+		for (int i=0; i<transData.size(); i++) {
+			table.setRowHeight(i, 30);
+		}
+		
 		
 	}
 }

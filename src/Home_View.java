@@ -161,6 +161,7 @@ public class Home_View extends JFrame {
 		welcomPanel.add(lblgreetingBackground);
 		
 		contentPane.add(cardPanel);
+		// drop down menu
 		cardPanel.setLayout(new GridLayout(2, 2, 10, 10)); 
 		String choice[] = {
 				firstName,
@@ -198,13 +199,24 @@ public class Home_View extends JFrame {
 			ResultSet res = stmt.executeQuery("SELECT * FROM credit_cards WHERE cardHolder = "+userID);
 			
 			while (res.next()) {
-				String lastNum = String.format("%04d", Integer.parseInt(res.getString("cardNumber")));
+				int cardNum = Integer.parseInt(res.getString("cardNumber"));
+				String lastNum = String.format("%04d", cardNum);
 				String balanceStr = String.format("%.2f", Double.parseDouble(res.getString("creditLimit")) - Double.parseDouble(res.getString("remainCredit")));
 				JPanel panel_1 = new JPanel();
 				panel_1.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						System.out.println(Integer.parseInt(lastNum, 10));
+						try {
+							res.close();
+							stmt.close();
+							con.close();
+						}
+						catch(Exception err) {
+							
+						}
+						contentPane.setVisible(false);;
+						Account_View acc_view = new Account_View(cardNum);
+						acc_view.setVisible(true);
 					}
 				});
 				cardPanel.add(panel_1);
