@@ -33,7 +33,7 @@ public class Home_View extends JFrame {
 
 	private Color Color_navy = new Color(0,73,118);
 	
-	private JFrame frame;
+	private JPanel contentPane;
 
 
 	/**
@@ -56,23 +56,21 @@ public class Home_View extends JFrame {
 	 * Create the frame.
 	 */
 	public Home_View(ResultSet loginUser) {
-		frame = new JFrame();
+		contentPane = new JPanel();
 
 		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
-		frame.getContentPane().setBackground(Color.WHITE);
-		setContentPane(frame.getContentPane());
+		contentPane.setBackground(Color.WHITE);
+		setContentPane(contentPane);
 		SpringLayout springLayout = new SpringLayout();
 		SpringLayout sl_contentPane = new SpringLayout();
-		frame.getContentPane().setLayout(sl_contentPane);
+		contentPane.setLayout(sl_contentPane);
 		
 		JPanel brandPanel = new JPanel();
-		sl_contentPane.putConstraint(SpringLayout.NORTH, brandPanel, 5, SpringLayout.NORTH, frame.getContentPane());
-		sl_contentPane.putConstraint(SpringLayout.WEST, brandPanel, 299, SpringLayout.WEST, frame.getContentPane());
-		sl_contentPane.putConstraint(SpringLayout.EAST, brandPanel, -261, SpringLayout.EAST, frame.getContentPane());
+		sl_contentPane.putConstraint(SpringLayout.WEST, brandPanel, 280, SpringLayout.WEST, contentPane);
 		brandPanel.setBackground(Color.WHITE);
-		frame.getContentPane().add(brandPanel);
+		contentPane.add(brandPanel);
 		
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -112,11 +110,12 @@ public class Home_View extends JFrame {
 		brandPanel.setLayout(gl_brandPanel);
 		
 		JPanel welcomPanel = new JPanel();
-		sl_contentPane.putConstraint(SpringLayout.NORTH, welcomPanel, 66, SpringLayout.NORTH, frame.getContentPane());
-		sl_contentPane.putConstraint(SpringLayout.WEST, welcomPanel, 0, SpringLayout.WEST, frame.getContentPane());
-		sl_contentPane.putConstraint(SpringLayout.EAST, welcomPanel, 0, SpringLayout.EAST, frame.getContentPane());
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, welcomPanel, 166, SpringLayout.NORTH, frame.getContentPane());
-		frame.getContentPane().add(welcomPanel);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, brandPanel, -6, SpringLayout.NORTH, welcomPanel);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, welcomPanel, 66, SpringLayout.NORTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.WEST, welcomPanel, 0, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, welcomPanel, 0, SpringLayout.EAST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, welcomPanel, 166, SpringLayout.NORTH, contentPane);
+		contentPane.add(welcomPanel);
 		SpringLayout sl_welcomPanel = new SpringLayout();
 		welcomPanel.setLayout(sl_welcomPanel);
 		
@@ -137,8 +136,10 @@ public class Home_View extends JFrame {
 			greetingStr =  "Good Evening";
 		}
 		String firstName= null;
+		String username = null;
 		try {
 			firstName = loginUser.getString("firstName");
+			username = loginUser.getString("accountID");
 			lblGreeting.setText(greetingStr+", "+firstName);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -146,11 +147,11 @@ public class Home_View extends JFrame {
 		welcomPanel.add(lblGreeting);
 		
 		JPanel cardPanel = new JPanel();
-		sl_contentPane.putConstraint(SpringLayout.NORTH, cardPanel, 183, SpringLayout.NORTH, frame.getContentPane());
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, cardPanel, -10, SpringLayout.SOUTH, frame.getContentPane());
+		sl_contentPane.putConstraint(SpringLayout.NORTH, cardPanel, 183, SpringLayout.NORTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, cardPanel, -10, SpringLayout.SOUTH, contentPane);
 		cardPanel.setBackground(Color.WHITE);
-		sl_contentPane.putConstraint(SpringLayout.WEST, cardPanel, 50, SpringLayout.WEST, frame.getContentPane());
-		sl_contentPane.putConstraint(SpringLayout.EAST, cardPanel, -50, SpringLayout.EAST, frame.getContentPane());
+		sl_contentPane.putConstraint(SpringLayout.WEST, cardPanel, 50, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, cardPanel, -50, SpringLayout.EAST, contentPane);
 		
 		JLabel lblgreetingBackground = new JLabel();
 		Image greetingImg = new ImageIcon(Login_View.class.getResource("greeting_background.png")).getImage().getScaledInstance(776, 100, Image.SCALE_SMOOTH);
@@ -161,33 +162,44 @@ public class Home_View extends JFrame {
 		sl_welcomPanel.putConstraint(SpringLayout.SOUTH, lblgreetingBackground, 0, SpringLayout.SOUTH, welcomPanel);
 		sl_welcomPanel.putConstraint(SpringLayout.EAST, lblgreetingBackground, 0, SpringLayout.EAST, welcomPanel);
 		welcomPanel.add(lblgreetingBackground);
+		contentPane.add(cardPanel);
 		
-		frame.getContentPane().add(cardPanel);
 		// drop down menu
 		cardPanel.setLayout(new GridLayout(2, 2, 10, 10)); 
 		String choice[] = {
-				firstName,
+				username,
 				"<html><strong>Profile</strong><br>Edit Info</html>", 
 				"<html><strong>Security</strong><br>Login Setting</html>", 
 				"<html><strong>Sign Out<strong></html>"};
 		JComboBox comboBox = new JComboBox(choice);
+		sl_contentPane.putConstraint(SpringLayout.EAST, brandPanel, -77, SpringLayout.WEST, comboBox);
 		sl_contentPane.putConstraint(SpringLayout.WEST, comboBox, -153, SpringLayout.EAST, cardPanel);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, comboBox, 54, SpringLayout.NORTH, frame.getContentPane());
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, comboBox, 54, SpringLayout.NORTH, contentPane);
 		comboBox.setForeground(Color.WHITE);
 		comboBox.setFont(new Font("Arial", Font.PLAIN, 20));
 		comboBox.setBackground(Color_navy);
 		comboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				// TODO drop down options
 				if (e.getStateChange() == 1) {
-					System.out.println(e.getItem() + " " + e.getStateChange() );
+					if (((String)e.getItem()).contains("Profile")) {
+						System.out.println("Go to Profile");
+					}
+					else if (((String)e.getItem()).contains("Security")) {
+						System.out.println("Go to Security");
+					}
+					else if (((String)e.getItem()).contains("Sign Out")) {
+						Login_View back = new Login_View();
+						back.frame.setVisible(true);
+						dispose();
+						
+					}
 				}
 			}
 		});
 		
-		sl_contentPane.putConstraint(SpringLayout.NORTH, comboBox, 20, SpringLayout.NORTH, frame.getContentPane());
+		sl_contentPane.putConstraint(SpringLayout.NORTH, comboBox, 20, SpringLayout.NORTH, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.EAST, comboBox, 0, SpringLayout.EAST, cardPanel);
-		frame.getContentPane().add(comboBox);
+		contentPane.add(comboBox);
 		
 		// display all credit card on cardPanel (dynamically)
 		ArrayList<JPanel> cardList = new ArrayList<>();
@@ -198,18 +210,18 @@ public class Home_View extends JFrame {
 			Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");  
 			Statement stmt = con.createStatement();
-			ResultSet res = stmt.executeQuery("SELECT * FROM credit_cards WHERE cardHolder = "+userID);
+			ResultSet cardRes = stmt.executeQuery("SELECT * FROM credit_cards WHERE cardHolder = "+userID);
 			
-			while (res.next()) {
-				int cardNum = Integer.parseInt(res.getString("cardNumber"));
+			while (cardRes.next()) {
+				int cardNum = Integer.parseInt(cardRes.getString("cardNumber"));
 				String lastNum = String.format("%04d", cardNum);
-				String balanceStr = String.format("%.2f", Double.parseDouble(res.getString("creditLimit")) - Double.parseDouble(res.getString("remainCredit")));
+				String balanceStr = String.format("%.2f", Double.parseDouble(cardRes.getString("creditLimit")) - Double.parseDouble(cardRes.getString("remainCredit")));
 				JPanel panel_1 = new JPanel();
 				panel_1.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						try {
-							res.close();
+							cardRes.close();
 							stmt.close();
 							con.close();
 						}
@@ -217,9 +229,9 @@ public class Home_View extends JFrame {
 							err.printStackTrace();
 						}
 						finally {
-							Account_View acc_view = new Account_View(cardNum);
+							Account_View acc_view = new Account_View(loginUser, cardNum);
 							acc_view.setVisible(true);
-							frame.dispose();
+							dispose();
 						}
 					}
 				});

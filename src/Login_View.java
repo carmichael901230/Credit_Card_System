@@ -13,6 +13,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JFrame;
 import javax.swing.SpringLayout;
@@ -31,16 +35,18 @@ import java.awt.Rectangle;
 import javax.swing.JPasswordField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Login_View {
 	private Color Color_navy = new Color(0,73,118);
 	private Color Color_darkGreen = new Color(18, 128, 32);
 	
-	private JFrame frame;
+	public JFrame frame;
 	
 	// interactive components
 	private JTextField usernameTextField;
-	private JPasswordField passwordField;
+	private JPasswordField passwordTextField;
 	
 	// indicative components
 	private JLabel lblUsernameErr;
@@ -222,24 +228,33 @@ public class Login_View {
 		Image passIcon = new ImageIcon(Login_View.class.getResource("pwIcon.png")).getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH);
 		lblPasswordIcon.setIcon(new ImageIcon(passIcon));
 		
-		passwordField = new JPasswordField();
-		sl_passwordPanel.putConstraint(SpringLayout.WEST, passwordField, 30, SpringLayout.EAST, lblPasswordIcon);
-		sl_passwordPanel.putConstraint(SpringLayout.EAST, passwordField, -9, SpringLayout.EAST, passwordPanel);
-		passwordField.setForeground(Color.BLACK);
-		passwordField.setFont(new Font("Arial", Font.PLAIN, 20));
-		passwordField.setBounds(new Rectangle(0, 0, 300, 0));
-		passwordField.setBorder(null);
-		sl_passwordPanel.putConstraint(SpringLayout.NORTH, passwordField, 0, SpringLayout.NORTH, passwordPanel);
-		sl_passwordPanel.putConstraint(SpringLayout.SOUTH, passwordField, 41, SpringLayout.NORTH, passwordPanel);
-		passwordPanel.add(passwordField);
+		passwordTextField = new JPasswordField();
+		sl_passwordPanel.putConstraint(SpringLayout.WEST, passwordTextField, 30, SpringLayout.EAST, lblPasswordIcon);
+		sl_passwordPanel.putConstraint(SpringLayout.EAST, passwordTextField, -9, SpringLayout.EAST, passwordPanel);
+		passwordTextField.setForeground(Color.BLACK);
+		passwordTextField.setFont(new Font("Arial", Font.PLAIN, 20));
+		passwordTextField.setBounds(new Rectangle(0, 0, 300, 0));
+		passwordTextField.setBorder(null);
+		sl_passwordPanel.putConstraint(SpringLayout.NORTH, passwordTextField, 0, SpringLayout.NORTH, passwordPanel);
+		sl_passwordPanel.putConstraint(SpringLayout.SOUTH, passwordTextField, 41, SpringLayout.NORTH, passwordPanel);
+		passwordPanel.add(passwordTextField);
 		
 		JButton btnSignin = new JButton("Sign In");
+		sl_loginPanel.putConstraint(SpringLayout.WEST, btnSignin, 0, SpringLayout.WEST, lblUsername);
+		sl_loginPanel.putConstraint(SpringLayout.SOUTH, btnSignin, -41, SpringLayout.SOUTH, loginPanel);
+		sl_loginPanel.putConstraint(SpringLayout.EAST, btnSignin, -49, SpringLayout.EAST, loginPanel);
+		btnSignin.setBackground(Color_darkGreen);
+		btnSignin.setForeground(Color.WHITE);
+		btnSignin.setFocusable(false);
+		btnSignin.setFont(new Font("Arial", Font.BOLD, 20));
+		loginPanel.add(btnSignin);
+		
 		btnSignin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// Get user inputs
 				String username = usernameTextField.getText();
-				String password = new String(passwordField.getPassword());
+				String password = new String(passwordTextField.getPassword());
 				String hashedPW = hashMD5(password);
 				
 				try {
@@ -250,6 +265,7 @@ public class Login_View {
 					Statement stmt = con.createStatement();
 					// Query get result
 					ResultSet res = stmt.executeQuery("SELECT * FROM users WHERE accountID = '"+username+"'");
+					
 					// get DB password
 					String dbPW = null;
 					if (res.next())
@@ -282,30 +298,117 @@ public class Login_View {
 				}
 			}
 		});
-		btnSignin.setBackground(Color_darkGreen);
-		btnSignin.setForeground(Color.WHITE);
-		btnSignin.setFocusable(false);
-		sl_loginPanel.putConstraint(SpringLayout.WEST, btnSignin, 50, SpringLayout.WEST, loginPanel);
-		sl_loginPanel.putConstraint(SpringLayout.EAST, btnSignin, -50, SpringLayout.EAST, loginPanel);
-		btnSignin.setFont(new Font("Arial", Font.BOLD, 20));
-		loginPanel.add(btnSignin);
+		usernameTextField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER){
+					// Get user inputs
+					String username = usernameTextField.getText();
+					String password = new String(passwordTextField.getPassword());
+					String hashedPW = hashMD5(password);
+					
+					try {
+						// System.out.println("Connect");
+						Class.forName("com.mysql.cj.jdbc.Driver"); 
+						Connection con=DriverManager.getConnection(  
+								"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");  
+						Statement stmt = con.createStatement();
+						// Query get result
+						ResultSet res = stmt.executeQuery("SELECT * FROM users WHERE accountID = '"+username+"'");
+						// get DB password
+						String dbPW = null;
+						if (res.next())
+							dbPW = res.getString("password");
+						if (dbPW != null) {
+							if (hashedPW.equals(dbPW)) {
+								// qualified
+								btnSignin.setBackground(Color.LIGHT_GRAY);
+								lblUsernameErr.setVisible(false);
+								lblPasswordErr.setVisible(false);
+								// System.out.println("Qualified");
+								Home_View openFrame = new Home_View(res);
+								openFrame.setVisible(true);
+								frame.dispose();
+							}
+							else {
+								// incorrect password
+								lblUsernameErr.setVisible(false);
+								lblPasswordErr.setVisible(true);
+							}
+						}
+						else {
+							// user not found
+							lblPasswordErr.setVisible(false);
+							lblUsernameErr.setVisible(true);
+						}
+							
+					}
+					catch (Exception e1) {
+						e1.printStackTrace();
+					}
+			    }
+			}
+		});
+		passwordTextField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER){
+					// Get user inputs
+					String username = usernameTextField.getText();
+					String password = new String(passwordTextField.getPassword());
+					String hashedPW = hashMD5(password);
+					
+					try {
+						// System.out.println("Connect");
+						Class.forName("com.mysql.cj.jdbc.Driver"); 
+						Connection con=DriverManager.getConnection(  
+								"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");  
+						Statement stmt = con.createStatement();
+						// Query get result
+						ResultSet res = stmt.executeQuery("SELECT * FROM users WHERE accountID = '"+username+"'");
+						// get DB password
+						String dbPW = null;
+						if (res.next())
+							dbPW = res.getString("password");
+						if (dbPW != null) {
+							if (hashedPW.equals(dbPW)) {
+								// qualified
+								btnSignin.setBackground(Color.LIGHT_GRAY);
+								lblUsernameErr.setVisible(false);
+								lblPasswordErr.setVisible(false);
+								// System.out.println("Qualified");
+								Home_View openFrame = new Home_View(res);
+								openFrame.setVisible(true);
+								frame.dispose();
+							}
+							else {
+								// incorrect password
+								lblUsernameErr.setVisible(false);
+								lblPasswordErr.setVisible(true);
+							}
+						}
+						else {
+							// user not found
+							lblPasswordErr.setVisible(false);
+							lblUsernameErr.setVisible(true);
+						}
+							
+					}
+					catch (Exception e1) {
+						e1.printStackTrace();
+					}
+			    }
+			}
+		});
+		
 		
 		JLabel lblForgetPassword = new JLabel("<html><U>Forget password?</U></html>");
-		sl_loginPanel.putConstraint(SpringLayout.NORTH, btnSignin, 23, SpringLayout.SOUTH, lblForgetPassword);
+		sl_loginPanel.putConstraint(SpringLayout.NORTH, btnSignin, 37, SpringLayout.SOUTH, lblForgetPassword);
 		sl_loginPanel.putConstraint(SpringLayout.NORTH, lblForgetPassword, 17, SpringLayout.SOUTH, passwordPanel);
 		sl_loginPanel.putConstraint(SpringLayout.WEST, lblForgetPassword, 0, SpringLayout.WEST, lblUsername);
 		lblForgetPassword.setForeground(Color.BLUE);
 		lblForgetPassword.setFont(new Font("Arial", Font.PLAIN, 16));
 		loginPanel.add(lblForgetPassword);
-		
-		JLabel lblNewCusomerCreate = new JLabel("<html><U>New cusomer? Create an account</U></html>");
-		sl_loginPanel.putConstraint(SpringLayout.SOUTH, btnSignin, -15, SpringLayout.NORTH, lblNewCusomerCreate);
-		sl_loginPanel.putConstraint(SpringLayout.EAST, lblNewCusomerCreate, -100, SpringLayout.EAST, loginPanel);
-		sl_loginPanel.putConstraint(SpringLayout.WEST, lblNewCusomerCreate, 96, SpringLayout.WEST, loginPanel);
-		lblNewCusomerCreate.setForeground(Color.BLUE);
-		sl_loginPanel.putConstraint(SpringLayout.NORTH, lblNewCusomerCreate, 342, SpringLayout.NORTH, loginPanel);
-		lblNewCusomerCreate.setFont(new Font("Arial", Font.PLAIN, 18));
-		loginPanel.add(lblNewCusomerCreate);
 		
 		lblUsernameErr = new JLabel("Username doesn't exist");
 		sl_loginPanel.putConstraint(SpringLayout.NORTH, lblUsernameErr, 7, SpringLayout.NORTH, lblUsername);
