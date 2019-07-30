@@ -41,6 +41,7 @@ import java.awt.event.KeyEvent;
 public class Login_View {
 	private Color Color_navy = new Color(0,73,118);
 	private Color Color_darkGreen = new Color(18, 128, 32);
+	private Color Color_marsh = new Color(155, 146, 60);
 	
 	public JFrame frame;
 	
@@ -117,57 +118,49 @@ public class Login_View {
 		
 		JPanel brandPanel = new JPanel();
 		springLayout.putConstraint(SpringLayout.NORTH, brandPanel, 10, SpringLayout.NORTH, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.WEST, brandPanel, 10, SpringLayout.WEST, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, brandPanel, 65, SpringLayout.NORTH, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, brandPanel, 218, SpringLayout.WEST, frame.getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, brandPanel, 159, SpringLayout.WEST, frame.getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, brandPanel, -181, SpringLayout.EAST, frame.getContentPane());
 		brandPanel.setBackground(Color.WHITE);
 		frame.getContentPane().add(brandPanel);
 		brandPanel.setLayout(null);
 		
 		JLabel lblLogo = new JLabel("");
-		lblLogo.setBounds(0, 0, 50, 50);
+		lblLogo.setBounds(0, 0, 55, 55);
 		lblLogo.setAlignmentY(Component.TOP_ALIGNMENT);
-		Image logo = new ImageIcon(Login_View.class.getResource("bankLogo.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		Image logo = new ImageIcon(Login_View.class.getResource("shoank_logo.png")).getImage().getScaledInstance(55, 55, Image.SCALE_SMOOTH);
 		lblLogo.setIcon(new ImageIcon(logo));
 		brandPanel.add(lblLogo);
 		
-		JLabel lblCapital = new JLabel("Capital");
-		lblCapital.setForeground(Color_navy);
-		lblCapital.setBounds(47, 10, 113, 29);
-		springLayout.putConstraint(SpringLayout.EAST, lblCapital, 183, SpringLayout.WEST, brandPanel);
-		brandPanel.add(lblCapital);
-		lblCapital.setFont(new Font("Arial Black", Font.BOLD | Font.ITALIC, 25));
-		
-		JLabel lblTwo = new JLabel("Two");
-		lblTwo.setForeground(Color_navy);
-		lblTwo.setVerticalAlignment(SwingConstants.TOP);
-		lblTwo.setFont(new Font("Gabriola", Font.ITALIC, 30));
-		lblTwo.setBounds(153, 21, 67, 29);
-		brandPanel.add(lblTwo);
-		
 		JPanel loginPanel = new JPanel();
-		loginPanel.setBackground(Color.WHITE);
-		springLayout.putConstraint(SpringLayout.NORTH, loginPanel, 6, SpringLayout.SOUTH, brandPanel);
-		springLayout.putConstraint(SpringLayout.WEST, loginPanel, 50, SpringLayout.WEST, frame.getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, brandPanel, -6, SpringLayout.NORTH, loginPanel);
+		springLayout.putConstraint(SpringLayout.NORTH, loginPanel, 71, SpringLayout.NORTH, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, loginPanel, -10, SpringLayout.SOUTH, frame.getContentPane());
+		
+		JLabel lblShoank = new JLabel("S H O A N K");
+		lblShoank.setForeground(Color_marsh);
+		lblShoank.setVerticalAlignment(SwingConstants.TOP);
+		lblShoank.setHorizontalAlignment(SwingConstants.CENTER);
+		lblShoank.setFont(new Font("Ink Free", Font.PLAIN, 25));
+		lblShoank.setBounds(53, 0, 183, 24);
+		brandPanel.add(lblShoank);
+		
+		JLabel lblShopingBankTwo = new JLabel("Shoping Bank Two in One");
+		lblShopingBankTwo.setForeground(Color_marsh);
+		lblShopingBankTwo.setFont(new Font("Arial", Font.PLAIN, 15));
+		lblShopingBankTwo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblShopingBankTwo.setBounds(60, 30, 186, 25);
+		brandPanel.add(lblShopingBankTwo);
+		loginPanel.setBackground(Color.WHITE);
+		springLayout.putConstraint(SpringLayout.WEST, loginPanel, 50, SpringLayout.WEST, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, loginPanel, -50, SpringLayout.EAST, frame.getContentPane());
 		frame.getContentPane().add(loginPanel);
 		SpringLayout sl_loginPanel = new SpringLayout();
 		loginPanel.setLayout(sl_loginPanel);
 		
-		JLabel lblSignin = new JLabel("Sign In");
-		sl_loginPanel.putConstraint(SpringLayout.NORTH, lblSignin, 0, SpringLayout.NORTH, loginPanel);
-		sl_loginPanel.putConstraint(SpringLayout.WEST, lblSignin, 190, SpringLayout.WEST, loginPanel);
-		sl_loginPanel.putConstraint(SpringLayout.SOUTH, lblSignin, 34, SpringLayout.NORTH, loginPanel);
-		sl_loginPanel.putConstraint(SpringLayout.EAST, lblSignin, -190, SpringLayout.EAST, loginPanel);
-		lblSignin.setForeground(Color.DARK_GRAY);
-		lblSignin.setFont(new Font("Arial", Font.PLAIN, 30));
-		loginPanel.add(lblSignin);
-		
 		JLabel lblUsername = new JLabel("Username");
 		sl_loginPanel.putConstraint(SpringLayout.SOUTH, lblUsername, 70, SpringLayout.NORTH, loginPanel);
 		lblUsername.setForeground(Color.GRAY);
-		lblUsername.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblUsername.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		sl_loginPanel.putConstraint(SpringLayout.WEST, lblUsername, 51, SpringLayout.WEST, loginPanel);
 		loginPanel.add(lblUsername);
 		
@@ -206,7 +199,7 @@ public class Login_View {
 		sl_loginPanel.putConstraint(SpringLayout.WEST, lblPassword, 50, SpringLayout.WEST, loginPanel);
 		sl_loginPanel.putConstraint(SpringLayout.SOUTH, lblPassword, -205, SpringLayout.SOUTH, loginPanel);
 		lblPassword.setForeground(Color.GRAY);
-		lblPassword.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblPassword.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		loginPanel.add(lblPassword);
 		
 		JPanel passwordPanel = new JPanel();
@@ -243,7 +236,7 @@ public class Login_View {
 		sl_loginPanel.putConstraint(SpringLayout.WEST, btnSignin, 0, SpringLayout.WEST, lblUsername);
 		sl_loginPanel.putConstraint(SpringLayout.SOUTH, btnSignin, -41, SpringLayout.SOUTH, loginPanel);
 		sl_loginPanel.putConstraint(SpringLayout.EAST, btnSignin, -49, SpringLayout.EAST, loginPanel);
-		btnSignin.setBackground(Color_darkGreen);
+		btnSignin.setBackground(Color_marsh);
 		btnSignin.setForeground(Color.WHITE);
 		btnSignin.setFocusable(false);
 		btnSignin.setFont(new Font("Arial", Font.BOLD, 20));
@@ -276,7 +269,7 @@ public class Login_View {
 							lblUsernameErr.setVisible(false);
 							lblPasswordErr.setVisible(false);
 							// System.out.println("Qualified");
-							Home_View openFrame = new Home_View(res);
+							Index_View openFrame = new Index_View(res);
 							openFrame.setVisible(true);
 							frame.dispose();
 						}
@@ -326,7 +319,7 @@ public class Login_View {
 								lblUsernameErr.setVisible(false);
 								lblPasswordErr.setVisible(false);
 								// System.out.println("Qualified");
-								Home_View openFrame = new Home_View(res);
+								Index_View openFrame = new Index_View(res);
 								openFrame.setVisible(true);
 								frame.dispose();
 							}
@@ -377,7 +370,7 @@ public class Login_View {
 								lblUsernameErr.setVisible(false);
 								lblPasswordErr.setVisible(false);
 								// System.out.println("Qualified");
-								Home_View openFrame = new Home_View(res);
+								Index_View openFrame = new Index_View(res);
 								openFrame.setVisible(true);
 								frame.dispose();
 							}
@@ -404,10 +397,11 @@ public class Login_View {
 		
 		JLabel lblForgetPassword = new JLabel("<html><U>Forget password?</U></html>");
 		sl_loginPanel.putConstraint(SpringLayout.NORTH, btnSignin, 37, SpringLayout.SOUTH, lblForgetPassword);
+		sl_loginPanel.putConstraint(SpringLayout.EAST, lblForgetPassword, 153, SpringLayout.WEST, lblUsername);
 		sl_loginPanel.putConstraint(SpringLayout.NORTH, lblForgetPassword, 17, SpringLayout.SOUTH, passwordPanel);
 		sl_loginPanel.putConstraint(SpringLayout.WEST, lblForgetPassword, 0, SpringLayout.WEST, lblUsername);
 		lblForgetPassword.setForeground(Color.BLUE);
-		lblForgetPassword.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblForgetPassword.setFont(new Font("Consolas", Font.PLAIN, 16));
 		loginPanel.add(lblForgetPassword);
 		
 		lblUsernameErr = new JLabel("Username doesn't exist");
