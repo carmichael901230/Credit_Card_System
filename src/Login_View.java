@@ -144,9 +144,9 @@ public class Login_View {
 		lblShoank.setBounds(53, 0, 183, 24);
 		brandPanel.add(lblShoank);
 		
-		JLabel lblShopingBankTwo = new JLabel("Shoping Bank Two in One");
+		JLabel lblShopingBankTwo = new JLabel("Shop & Bank Two in One");
 		lblShopingBankTwo.setForeground(Color_marsh);
-		lblShopingBankTwo.setFont(new Font("Arial", Font.PLAIN, 15));
+		lblShopingBankTwo.setFont(new Font("Arial", Font.ITALIC, 15));
 		lblShopingBankTwo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblShopingBankTwo.setBounds(60, 30, 186, 25);
 		brandPanel.add(lblShopingBankTwo);

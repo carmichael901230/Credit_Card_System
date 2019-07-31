@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
@@ -16,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.border.EmptyBorder;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
@@ -28,6 +30,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JComboBox;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import javax.swing.border.LineBorder;
+import java.awt.Cursor;
 
 public class Home_View extends JFrame {
 
@@ -147,9 +151,10 @@ public class Home_View extends JFrame {
 		welcomPanel.add(lblGreeting);
 		
 		JPanel cardPanel = new JPanel();
+		cardPanel.setBackground(Color.WHITE);
+		cardPanel.setLayout(new GridLayout(2, 2, 10, 10)); 
 		sl_contentPane.putConstraint(SpringLayout.NORTH, cardPanel, 183, SpringLayout.NORTH, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, cardPanel, -10, SpringLayout.SOUTH, contentPane);
-		cardPanel.setBackground(Color.WHITE);
 		sl_contentPane.putConstraint(SpringLayout.WEST, cardPanel, 50, SpringLayout.WEST, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.EAST, cardPanel, -50, SpringLayout.EAST, contentPane);
 		
@@ -165,11 +170,13 @@ public class Home_View extends JFrame {
 		contentPane.add(cardPanel);
 		
 		// drop down menu
-		cardPanel.setLayout(new GridLayout(2, 2, 10, 10)); 
-		String choice[] = {
+		Object choice[] = {
 				username,
-				"<html><strong>Profile</strong><br>Edit Info</html>", 
-				"<html><strong>Security</strong><br>Login Setting</html>", 
+				new JSeparator(JSeparator.HORIZONTAL),
+				"<html><strong>Profile</strong></html>", 
+				new JSeparator(JSeparator.HORIZONTAL),
+				"<html><strong>Security</strong></html>", 
+				new JSeparator(JSeparator.HORIZONTAL),
 				"<html><strong>Sign Out<strong></html>"};
 		JComboBox comboBox = new JComboBox(choice);
 		sl_contentPane.putConstraint(SpringLayout.EAST, brandPanel, -77, SpringLayout.WEST, comboBox);
@@ -177,7 +184,10 @@ public class Home_View extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, comboBox, 54, SpringLayout.NORTH, contentPane);
 		comboBox.setForeground(Color.WHITE);
 		comboBox.setFont(new Font("Arial", Font.PLAIN, 20));
-		comboBox.setBackground(Color_navy);
+		comboBox.setBackground(new Color(29, 132, 199));
+		ComboBoxRenderer renderer= new ComboBoxRenderer();
+	    renderer.setPreferredSize(new Dimension(125, 30));
+	    comboBox.setRenderer(renderer);
 		comboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == 1) {
@@ -200,6 +210,28 @@ public class Home_View extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.NORTH, comboBox, 20, SpringLayout.NORTH, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.EAST, comboBox, 0, SpringLayout.EAST, cardPanel);
 		contentPane.add(comboBox);
+		
+		JButton btnBack = new JButton("< Back");
+		btnBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Index_View back = new Index_View(loginUser);
+				back.setVisible(true);
+				dispose();
+			}
+		});
+		btnBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		sl_contentPane.putConstraint(SpringLayout.NORTH, btnBack, 8, SpringLayout.NORTH, brandPanel);
+		sl_contentPane.putConstraint(SpringLayout.WEST, btnBack, 24, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnBack, -10, SpringLayout.SOUTH, brandPanel);
+		sl_contentPane.putConstraint(SpringLayout.EAST, btnBack, -125, SpringLayout.WEST, brandPanel);
+		btnBack.setOpaque(false);
+		btnBack.setFont(new Font("Arial", Font.PLAIN, 25));
+		btnBack.setFocusable(false);
+		btnBack.setContentAreaFilled(false);
+		btnBack.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		btnBack.setBackground(Color.WHITE);
+		contentPane.add(btnBack);
 		
 		// display all credit card on cardPanel (dynamically)
 		ArrayList<JPanel> cardList = new ArrayList<>();

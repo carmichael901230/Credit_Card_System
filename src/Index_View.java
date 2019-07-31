@@ -4,8 +4,12 @@ import java.awt.EventQueue;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.SpringLayout;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Image;
@@ -15,10 +19,15 @@ import java.util.Calendar;
 
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
+
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Cursor;
 
 public class Index_View extends JFrame {
 
@@ -103,7 +112,7 @@ public class Index_View extends JFrame {
 		lblGreetings.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblGreetings.setFont(new Font("Candara", Font.ITALIC, 25));
 		lblGreetings.setForeground(Color.BLACK);
-		lblGreetings.setBounds(131, 10, 156, 35);
+		lblGreetings.setBounds(40, 10, 247, 35);
 		greetingPanel.add(lblGreetings);
 		
 		String firstName = null;
@@ -142,6 +151,12 @@ public class Index_View extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				btnShopping.setBackground(Color.white);
 				btnShopping.setForeground(Color_marsh);
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Shops_View shop = new Shops_View(loginUser);
+				shop.setVisible(true);
+				dispose();
 			}
 		});
 		btnShopping.setBorderPainted(false);
@@ -185,5 +200,51 @@ public class Index_View extends JFrame {
 		btnBanking.setBackground(Color.WHITE);
 		btnBanking.setBounds(5, 6, 246, 75);
 		bankBtnPanel.add(btnBanking);
+		
+		String username = null;
+		try {
+			username = loginUser.getString("accountID");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		Object choice[] = {
+				username,
+				new JSeparator(JSeparator.HORIZONTAL),
+				"<html><strong>Profile</strong></html>", 
+				new JSeparator(JSeparator.HORIZONTAL),
+				"<html><strong>Security</strong></html>", 
+				new JSeparator(JSeparator.HORIZONTAL),
+				"<html><strong>Sign Out<strong></html>"};
+		JComboBox<Object> comboBox = new JComboBox<Object>(choice);
+		comboBox.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		ComboBoxRenderer renderer= new ComboBoxRenderer();
+	    renderer.setPreferredSize(new Dimension(125, 30));
+	    comboBox.setRenderer(renderer);
+	    
+		comboBox.setLocation(451, 10);
+		comboBox.setSize(125, 30);
+		comboBox.setForeground(Color.WHITE);
+		comboBox.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
+		comboBox.setBackground(Color_marsh);
+		comboBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == 1) {
+					if (((String)e.getItem()).contains("Profile")) {
+						System.out.println("Go to Profile");
+					}
+					else if (((String)e.getItem()).contains("Security")) {
+						System.out.println("Go to Security");
+					}
+					else if (((String)e.getItem()).contains("Sign Out")) {
+						Login_View back = new Login_View();
+						back.frame.setVisible(true);
+						dispose();
+						
+					}
+				}
+			}
+		});
+		contentPane.add(comboBox);
 	}
 }
