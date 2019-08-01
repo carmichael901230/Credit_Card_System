@@ -37,13 +37,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
-public class Login_View {
+public class Login_View extends JFrame {
 	private Color Color_navy = new Color(0,73,118);
 	private Color Color_darkGreen = new Color(18, 128, 32);
 	private Color Color_marsh = new Color(155, 146, 60);
 	
-	public JFrame frame;
+	private JPanel contentPane;
 	
 	// interactive components
 	private JTextField usernameTextField;
@@ -56,18 +58,18 @@ public class Login_View {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Login_View window = new Login_View();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Login_View window = new Login_View();
+//					window.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 	
 	/**
 	 * Helper functions
@@ -97,6 +99,53 @@ public class Login_View {
             throw new RuntimeException(e); 
         } 
     } 
+	
+	private void login() {
+		// Get user inputs
+		String username = usernameTextField.getText();
+		String password = new String(passwordTextField.getPassword());
+		String hashedPW = hashMD5(password);
+		
+		try {
+			// System.out.println("Connect");
+			Class.forName("com.mysql.cj.jdbc.Driver"); 
+			Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");  
+			Statement stmt = con.createStatement();
+			// Query get result
+			ResultSet res = stmt.executeQuery("SELECT * FROM users WHERE accountID = '"+username+"'");
+			
+			// get DB password
+			String dbPW = null;
+			if (res.next())
+				dbPW = res.getString("password");
+			if (dbPW != null) {
+				if (hashedPW.equals(dbPW)) {
+					// qualified
+					lblUsernameErr.setVisible(false);
+					lblPasswordErr.setVisible(false);
+					// System.out.println("Qualified");
+					Bank_View openFrame = new Bank_View(res);
+					openFrame.setVisible(true);
+					dispose();
+				}
+				else {
+					// incorrect password
+					lblUsernameErr.setVisible(false);
+					lblPasswordErr.setVisible(true);
+				}
+			}
+			else {
+				// user not found
+				lblPasswordErr.setVisible(false);
+				lblUsernameErr.setVisible(true);
+			}
+				
+		}
+		catch (Exception e1) {
+			e1.printStackTrace();
+		}
+	}
 
 	/**
 	 * Create the application.
@@ -109,58 +158,29 @@ public class Login_View {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.getContentPane().setBackground(Color.WHITE);
-		frame.setBounds(100, 100, 600, 500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		contentPane = new JPanel();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 600, 500);
+		contentPane.setBackground(Color.WHITE);
+		setContentPane(contentPane);
 		SpringLayout springLayout = new SpringLayout();
-		frame.getContentPane().setLayout(springLayout);
-		
-		JPanel brandPanel = new JPanel();
-		springLayout.putConstraint(SpringLayout.NORTH, brandPanel, 10, SpringLayout.NORTH, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.WEST, brandPanel, 159, SpringLayout.WEST, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, brandPanel, -181, SpringLayout.EAST, frame.getContentPane());
-		brandPanel.setBackground(Color.WHITE);
-		frame.getContentPane().add(brandPanel);
-		brandPanel.setLayout(null);
-		
-		JLabel lblLogo = new JLabel("");
-		lblLogo.setBounds(0, 0, 55, 55);
-		lblLogo.setAlignmentY(Component.TOP_ALIGNMENT);
+		contentPane.setLayout(springLayout);
 		Image logo = new ImageIcon(Login_View.class.getResource("shoank_logo.png")).getImage().getScaledInstance(55, 55, Image.SCALE_SMOOTH);
-		lblLogo.setIcon(new ImageIcon(logo));
-		brandPanel.add(lblLogo);
 		
 		JPanel loginPanel = new JPanel();
-		springLayout.putConstraint(SpringLayout.SOUTH, brandPanel, -6, SpringLayout.NORTH, loginPanel);
-		springLayout.putConstraint(SpringLayout.NORTH, loginPanel, 71, SpringLayout.NORTH, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, loginPanel, -10, SpringLayout.SOUTH, frame.getContentPane());
-		
-		JLabel lblShoank = new JLabel("S H O A N K");
-		lblShoank.setForeground(Color_marsh);
-		lblShoank.setVerticalAlignment(SwingConstants.TOP);
-		lblShoank.setHorizontalAlignment(SwingConstants.CENTER);
-		lblShoank.setFont(new Font("Ink Free", Font.PLAIN, 25));
-		lblShoank.setBounds(53, 0, 183, 24);
-		brandPanel.add(lblShoank);
-		
-		JLabel lblShopingBankTwo = new JLabel("Shop & Bank Two in One");
-		lblShopingBankTwo.setForeground(Color_marsh);
-		lblShopingBankTwo.setFont(new Font("Arial", Font.ITALIC, 15));
-		lblShopingBankTwo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblShopingBankTwo.setBounds(60, 30, 186, 25);
-		brandPanel.add(lblShopingBankTwo);
+		springLayout.putConstraint(SpringLayout.NORTH, loginPanel, 71, SpringLayout.NORTH, contentPane);
+		springLayout.putConstraint(SpringLayout.SOUTH, loginPanel, -10, SpringLayout.SOUTH, contentPane);
 		loginPanel.setBackground(Color.WHITE);
-		springLayout.putConstraint(SpringLayout.WEST, loginPanel, 50, SpringLayout.WEST, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, loginPanel, -50, SpringLayout.EAST, frame.getContentPane());
-		frame.getContentPane().add(loginPanel);
+		springLayout.putConstraint(SpringLayout.WEST, loginPanel, 50, SpringLayout.WEST, contentPane);
+		springLayout.putConstraint(SpringLayout.EAST, loginPanel, -50, SpringLayout.EAST, contentPane);
+		contentPane.add(loginPanel);
 		SpringLayout sl_loginPanel = new SpringLayout();
 		loginPanel.setLayout(sl_loginPanel);
 		
 		JLabel lblUsername = new JLabel("Username");
 		sl_loginPanel.putConstraint(SpringLayout.SOUTH, lblUsername, 70, SpringLayout.NORTH, loginPanel);
 		lblUsername.setForeground(Color.GRAY);
-		lblUsername.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		lblUsername.setFont(new Font("Arial", Font.PLAIN, 20));
 		sl_loginPanel.putConstraint(SpringLayout.WEST, lblUsername, 51, SpringLayout.WEST, loginPanel);
 		loginPanel.add(lblUsername);
 		
@@ -199,7 +219,7 @@ public class Login_View {
 		sl_loginPanel.putConstraint(SpringLayout.WEST, lblPassword, 50, SpringLayout.WEST, loginPanel);
 		sl_loginPanel.putConstraint(SpringLayout.SOUTH, lblPassword, -205, SpringLayout.SOUTH, loginPanel);
 		lblPassword.setForeground(Color.GRAY);
-		lblPassword.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		lblPassword.setFont(new Font("Arial", Font.PLAIN, 20));
 		loginPanel.add(lblPassword);
 		
 		JPanel passwordPanel = new JPanel();
@@ -236,7 +256,7 @@ public class Login_View {
 		sl_loginPanel.putConstraint(SpringLayout.WEST, btnSignin, 0, SpringLayout.WEST, lblUsername);
 		sl_loginPanel.putConstraint(SpringLayout.SOUTH, btnSignin, -41, SpringLayout.SOUTH, loginPanel);
 		sl_loginPanel.putConstraint(SpringLayout.EAST, btnSignin, -49, SpringLayout.EAST, loginPanel);
-		btnSignin.setBackground(Color_marsh);
+		btnSignin.setBackground(Color_navy);
 		btnSignin.setForeground(Color.WHITE);
 		btnSignin.setFocusable(false);
 		btnSignin.setFont(new Font("Arial", Font.BOLD, 20));
@@ -245,100 +265,14 @@ public class Login_View {
 		btnSignin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// Get user inputs
-				String username = usernameTextField.getText();
-				String password = new String(passwordTextField.getPassword());
-				String hashedPW = hashMD5(password);
-				
-				try {
-					// System.out.println("Connect");
-					Class.forName("com.mysql.cj.jdbc.Driver"); 
-					Connection con=DriverManager.getConnection(  
-							"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");  
-					Statement stmt = con.createStatement();
-					// Query get result
-					ResultSet res = stmt.executeQuery("SELECT * FROM users WHERE accountID = '"+username+"'");
-					
-					// get DB password
-					String dbPW = null;
-					if (res.next())
-						dbPW = res.getString("password");
-					if (dbPW != null) {
-						if (hashedPW.equals(dbPW)) {
-							// qualified
-							lblUsernameErr.setVisible(false);
-							lblPasswordErr.setVisible(false);
-							// System.out.println("Qualified");
-							Index_View openFrame = new Index_View(res);
-							openFrame.setVisible(true);
-							frame.dispose();
-						}
-						else {
-							// incorrect password
-							lblUsernameErr.setVisible(false);
-							lblPasswordErr.setVisible(true);
-						}
-					}
-					else {
-						// user not found
-						lblPasswordErr.setVisible(false);
-						lblUsernameErr.setVisible(true);
-					}
-						
-				}
-				catch (Exception e1) {
-					e1.printStackTrace();
-				}
+				login();
 			}
 		});
 		usernameTextField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode()==KeyEvent.VK_ENTER){
-					// Get user inputs
-					String username = usernameTextField.getText();
-					String password = new String(passwordTextField.getPassword());
-					String hashedPW = hashMD5(password);
-					
-					try {
-						// System.out.println("Connect");
-						Class.forName("com.mysql.cj.jdbc.Driver"); 
-						Connection con=DriverManager.getConnection(  
-								"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");  
-						Statement stmt = con.createStatement();
-						// Query get result
-						ResultSet res = stmt.executeQuery("SELECT * FROM users WHERE accountID = '"+username+"'");
-						// get DB password
-						String dbPW = null;
-						if (res.next())
-							dbPW = res.getString("password");
-						if (dbPW != null) {
-							if (hashedPW.equals(dbPW)) {
-								// qualified
-								btnSignin.setBackground(Color.LIGHT_GRAY);
-								lblUsernameErr.setVisible(false);
-								lblPasswordErr.setVisible(false);
-								// System.out.println("Qualified");
-								Index_View openFrame = new Index_View(res);
-								openFrame.setVisible(true);
-								frame.dispose();
-							}
-							else {
-								// incorrect password
-								lblUsernameErr.setVisible(false);
-								lblPasswordErr.setVisible(true);
-							}
-						}
-						else {
-							// user not found
-							lblPasswordErr.setVisible(false);
-							lblUsernameErr.setVisible(true);
-						}
-							
-					}
-					catch (Exception e1) {
-						e1.printStackTrace();
-					}
+					login();
 			    }
 			}
 		});
@@ -346,62 +280,20 @@ public class Login_View {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode()==KeyEvent.VK_ENTER){
-					// Get user inputs
-					String username = usernameTextField.getText();
-					String password = new String(passwordTextField.getPassword());
-					String hashedPW = hashMD5(password);
-					
-					try {
-						// System.out.println("Connect");
-						Class.forName("com.mysql.cj.jdbc.Driver"); 
-						Connection con=DriverManager.getConnection(  
-								"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");  
-						Statement stmt = con.createStatement();
-						// Query get result
-						ResultSet res = stmt.executeQuery("SELECT * FROM users WHERE accountID = '"+username+"'");
-						// get DB password
-						String dbPW = null;
-						if (res.next())
-							dbPW = res.getString("password");
-						if (dbPW != null) {
-							if (hashedPW.equals(dbPW)) {
-								// qualified
-								btnSignin.setBackground(Color.LIGHT_GRAY);
-								lblUsernameErr.setVisible(false);
-								lblPasswordErr.setVisible(false);
-								// System.out.println("Qualified");
-								Index_View openFrame = new Index_View(res);
-								openFrame.setVisible(true);
-								frame.dispose();
-							}
-							else {
-								// incorrect password
-								lblUsernameErr.setVisible(false);
-								lblPasswordErr.setVisible(true);
-							}
-						}
-						else {
-							// user not found
-							lblPasswordErr.setVisible(false);
-							lblUsernameErr.setVisible(true);
-						}
-							
-					}
-					catch (Exception e1) {
-						e1.printStackTrace();
-					}
+					login();
 			    }
 			}
 		});
 		
 		
 		JLabel lblForgetPassword = new JLabel("<html><U>Forget password?</U></html>");
+		lblForgetPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		sl_loginPanel.putConstraint(SpringLayout.NORTH, btnSignin, 37, SpringLayout.SOUTH, lblForgetPassword);
-		sl_loginPanel.putConstraint(SpringLayout.EAST, lblForgetPassword, 153, SpringLayout.WEST, lblUsername);
+		sl_loginPanel.putConstraint(SpringLayout.EAST, lblForgetPassword, 145, SpringLayout.WEST, lblUsername);
 		sl_loginPanel.putConstraint(SpringLayout.NORTH, lblForgetPassword, 17, SpringLayout.SOUTH, passwordPanel);
 		sl_loginPanel.putConstraint(SpringLayout.WEST, lblForgetPassword, 0, SpringLayout.WEST, lblUsername);
 		lblForgetPassword.setForeground(Color.BLUE);
-		lblForgetPassword.setFont(new Font("Consolas", Font.PLAIN, 16));
+		lblForgetPassword.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
 		loginPanel.add(lblForgetPassword);
 		
 		lblUsernameErr = new JLabel("Username doesn't exist");
@@ -423,5 +315,73 @@ public class Login_View {
 		lblPasswordErr.setVisible(false);
 		loginPanel.add(lblPasswordErr);
 		
+		JPanel logoPanel = new JPanel();
+		springLayout.putConstraint(SpringLayout.WEST, logoPanel, 185, SpringLayout.WEST, contentPane);
+		springLayout.putConstraint(SpringLayout.SOUTH, logoPanel, -1, SpringLayout.NORTH, loginPanel);
+		springLayout.putConstraint(SpringLayout.EAST, logoPanel, 386, SpringLayout.WEST, contentPane);
+		contentPane.add(logoPanel);
+		logoPanel.setBackground(Color.WHITE);
+		
+		JLabel lblLogo = new JLabel("");
+		Image bankLogo = new ImageIcon(Login_View.class.getResource("bankLogo.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		lblLogo.setIcon(new ImageIcon(bankLogo));
+		lblLogo.setAlignmentY(0.0f);
+		
+		JLabel lblCapital = new JLabel("Capital");
+		lblCapital.setForeground(new Color(0, 73, 118));
+		lblCapital.setFont(new Font("Arial Black", Font.BOLD | Font.ITALIC, 25));
+		
+		JLabel lblTwo = new JLabel("Two");
+		lblTwo.setVerticalAlignment(SwingConstants.TOP);
+		lblTwo.setForeground(new Color(0, 73, 118));
+		lblTwo.setFont(new Font("Gabriola", Font.ITALIC, 30));
+		GroupLayout gl_logoPanel = new GroupLayout(logoPanel);
+		gl_logoPanel.setHorizontalGroup(
+			gl_logoPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_logoPanel.createSequentialGroup()
+					.addGroup(gl_logoPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblLogo)
+						.addGroup(gl_logoPanel.createSequentialGroup()
+							.addGap(47)
+							.addComponent(lblCapital, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_logoPanel.createSequentialGroup()
+							.addGap(153)
+							.addComponent(lblTwo, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(22, Short.MAX_VALUE))
+		);
+		gl_logoPanel.setVerticalGroup(
+			gl_logoPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_logoPanel.createSequentialGroup()
+					.addGroup(gl_logoPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblLogo)
+						.addGroup(gl_logoPanel.createSequentialGroup()
+							.addGap(10)
+							.addComponent(lblCapital, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_logoPanel.createSequentialGroup()
+							.addGap(21)
+							.addComponent(lblTwo, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		logoPanel.setLayout(gl_logoPanel);
+		
+		JButton btnBack = new JButton("< Back");
+		btnBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Index_View back = new Index_View();
+				back.frame.setVisible(true);
+				dispose();
+			}
+		});
+		btnBack.setFocusable(false);
+		btnBack.setContentAreaFilled(false);
+		btnBack.setBorder(new LineBorder(Color_navy, 2, true));
+		btnBack.setForeground(Color_navy);
+		btnBack.setFont(new Font("Arial", Font.PLAIN, 25));
+		springLayout.putConstraint(SpringLayout.NORTH, btnBack, 12, SpringLayout.NORTH, contentPane);
+		springLayout.putConstraint(SpringLayout.WEST, btnBack, 10, SpringLayout.WEST, contentPane);
+		springLayout.putConstraint(SpringLayout.SOUTH, btnBack, 47, SpringLayout.NORTH, contentPane);
+		springLayout.putConstraint(SpringLayout.EAST, btnBack, 129, SpringLayout.WEST, contentPane);
+		contentPane.add(btnBack);
 	}
 }

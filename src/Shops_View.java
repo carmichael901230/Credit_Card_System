@@ -51,9 +51,9 @@ public class Shops_View extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Shops_View(ResultSet loginUser) {
+	public Shops_View() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 450);
+		setBounds(100, 100, 565, 450);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -63,7 +63,7 @@ public class Shops_View extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(217, 10, 246, 55);
+		panel.setBounds(170, 10, 246, 55);
 		contentPane.add(panel);
 		
 		JLabel lblLogo = new JLabel("");
@@ -90,7 +90,7 @@ public class Shops_View extends JFrame {
 		
 		JPanel shopsPanel = new JPanel();
 		shopsPanel.setBackground(Color.WHITE);
-		shopsPanel.setBounds(110, 109, 473, 294);
+		shopsPanel.setBounds(39, 109, 473, 294);
 		contentPane.add(shopsPanel);
 		shopsPanel.setLayout(new GridLayout(2, 2, 10, 10));
 		
@@ -133,59 +133,14 @@ public class Shops_View extends JFrame {
 		JPanel panel_4 = new JPanel();
 		shopsPanel.add(panel_4);
 		panel_4.setLayout(null);
-		
-		String username = null;
-		try {
-			username = loginUser.getString("accountID");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		Object choice[] = {
-				username,
-				new JSeparator(JSeparator.HORIZONTAL),
-				"<html><strong>Profile</strong></html>", 
-				new JSeparator(JSeparator.HORIZONTAL),
-				"<html><strong>Security</strong></html>", 
-				new JSeparator(JSeparator.HORIZONTAL),
-				"<html><strong>Sign Out<strong></html>"};
-		JComboBox<Object> comboBox = new JComboBox<Object>(choice);
-		comboBox.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		ComboBoxRenderer renderer= new ComboBoxRenderer();
-	    renderer.setPreferredSize(new Dimension(125, 30));
-	    comboBox.setRenderer(renderer);
-	    
-		comboBox.setLocation(551, 10);
-		comboBox.setSize(125, 30);
-		comboBox.setForeground(Color.WHITE);
-		comboBox.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
-		comboBox.setBackground(Color_marsh);
-		comboBox.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				if (e.getStateChange() == 1) {
-					if (((String)e.getItem()).contains("Profile")) {
-						System.out.println("Go to Profile");
-					}
-					else if (((String)e.getItem()).contains("Security")) {
-						System.out.println("Go to Security");
-					}
-					else if (((String)e.getItem()).contains("Sign Out")) {
-						Login_View back = new Login_View();
-						back.frame.setVisible(true);
-						dispose();
-						
-					}
-				}
-			}
-		});
-		contentPane.add(comboBox);
+
 		
 		JButton btnBack = new JButton("< Back");
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Index_View back = new Index_View(loginUser);
-				back.setVisible(true);
+				Index_View back = new Index_View();
+				back.frame.setVisible(true);
 				dispose();
 			}
 		});

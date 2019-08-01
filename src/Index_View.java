@@ -29,45 +29,45 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Cursor;
 
-public class Index_View extends JFrame {
+public class Index_View{
 
-	private JPanel contentPane;
+	public JFrame frame;
 	
 	private Color Color_marsh = new Color(155, 146, 60);
 
 	/**
 	 * Launch the application.
 	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					Index_View frame = new Index_View();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Index_View window = new Index_View();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
 	 */
-	public Index_View(ResultSet loginUser) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 400);
-		contentPane = new JPanel();
-		contentPane.setBackground(Color.white);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+	public Index_View() {
+		frame = new JFrame();
+		frame.getContentPane().setBackground(Color.WHITE);
+		frame.setBounds(100, 100, 600, 401);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		SpringLayout springLayout = new SpringLayout();
+		frame.getContentPane().setLayout(null);
+		
 		
 		JPanel logoPanel = new JPanel();
 		logoPanel.setLayout(null);
 		logoPanel.setBackground(Color.WHITE);
 		logoPanel.setBounds(150, 10, 246, 55);
-		contentPane.add(logoPanel);
+		frame.getContentPane().add(logoPanel);
 		
 		JLabel lblLogo = new JLabel("");
 		Image logo = new ImageIcon(Login_View.class.getResource("shoank_logo.png")).getImage().getScaledInstance(55, 55, Image.SCALE_SMOOTH);
@@ -94,7 +94,7 @@ public class Index_View extends JFrame {
 		JPanel greetingPanel = new JPanel();
 		greetingPanel.setBackground(Color.WHITE);
 		greetingPanel.setBounds(10, 96, 566, 55);
-		contentPane.add(greetingPanel);
+		frame.getContentPane().add(greetingPanel);
 		greetingPanel.setLayout(null);
 		
 		Calendar c = Calendar.getInstance();
@@ -108,35 +108,24 @@ public class Index_View extends JFrame {
 			greetingStr =  "Good Evening";
 		}
 		
-		JLabel lblGreetings = new JLabel(greetingStr+", ");
-		lblGreetings.setHorizontalAlignment(SwingConstants.RIGHT);
+		JLabel lblGreetings = new JLabel(greetingStr);
+		lblGreetings.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGreetings.setFont(new Font("Candara", Font.ITALIC, 25));
 		lblGreetings.setForeground(Color.BLACK);
-		lblGreetings.setBounds(40, 10, 247, 35);
+		lblGreetings.setBounds(141, 10, 247, 35);
 		greetingPanel.add(lblGreetings);
-		
-		String firstName = null;
-		try {
-			firstName = loginUser.getString("firstName");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		JLabel lblUserName = new JLabel(firstName);
-		lblUserName.setFont(new Font("Candara", Font.BOLD | Font.ITALIC, 25));
-		lblUserName.setBounds(297, 10, 184, 35);
-		greetingPanel.add(lblUserName);
+
 		
 		JPanel selectPanel = new JPanel();
 		selectPanel.setBackground(Color.WHITE);
 		selectPanel.setBounds(10, 161, 566, 192);
-		contentPane.add(selectPanel);
+		frame.getContentPane().add(selectPanel);
 		selectPanel.setLayout(null);
 		
 		JPanel shopBtnPanel = new JPanel();
 		shopBtnPanel.setBackground(Color.WHITE);
 		shopBtnPanel.setBorder(new LineBorder(new Color(155, 146, 60), 4, true));
-		shopBtnPanel.setBounds(10, 41, 257, 87);
+		shopBtnPanel.setBounds(10, 59, 257, 87);
 		selectPanel.add(shopBtnPanel);
 		shopBtnPanel.setLayout(null);
 		
@@ -154,9 +143,9 @@ public class Index_View extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Shops_View shop = new Shops_View(loginUser);
+				Shops_View shop = new Shops_View();
 				shop.setVisible(true);
-				dispose();
+				frame.dispose();
 			}
 		});
 		btnShopping.setBorderPainted(false);
@@ -171,7 +160,7 @@ public class Index_View extends JFrame {
 		bankBtnPanel.setLayout(null);
 		bankBtnPanel.setBorder(new LineBorder(new Color(155, 146, 60), 4, true));
 		bankBtnPanel.setBackground(Color.WHITE);
-		bankBtnPanel.setBounds(300, 41, 257, 87);
+		bankBtnPanel.setBounds(299, 59, 257, 87);
 		selectPanel.add(bankBtnPanel);
 		
 		JButton btnBanking = new JButton("Banking");
@@ -188,9 +177,9 @@ public class Index_View extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Home_View openFrame = new Home_View(loginUser);
+				Login_View openFrame = new Login_View();
 				openFrame.setVisible(true);
-				dispose();
+				frame.dispose();
 			}
 		});
 		btnBanking.setForeground(new Color(155, 146, 60));
@@ -201,50 +190,5 @@ public class Index_View extends JFrame {
 		btnBanking.setBounds(5, 6, 246, 75);
 		bankBtnPanel.add(btnBanking);
 		
-		String username = null;
-		try {
-			username = loginUser.getString("accountID");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		Object choice[] = {
-				username,
-				new JSeparator(JSeparator.HORIZONTAL),
-				"<html><strong>Profile</strong></html>", 
-				new JSeparator(JSeparator.HORIZONTAL),
-				"<html><strong>Security</strong></html>", 
-				new JSeparator(JSeparator.HORIZONTAL),
-				"<html><strong>Sign Out<strong></html>"};
-		JComboBox<Object> comboBox = new JComboBox<Object>(choice);
-		comboBox.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		ComboBoxRenderer renderer= new ComboBoxRenderer();
-	    renderer.setPreferredSize(new Dimension(125, 30));
-	    comboBox.setRenderer(renderer);
-	    
-		comboBox.setLocation(451, 10);
-		comboBox.setSize(125, 30);
-		comboBox.setForeground(Color.WHITE);
-		comboBox.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
-		comboBox.setBackground(Color_marsh);
-		comboBox.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				if (e.getStateChange() == 1) {
-					if (((String)e.getItem()).contains("Profile")) {
-						System.out.println("Go to Profile");
-					}
-					else if (((String)e.getItem()).contains("Security")) {
-						System.out.println("Go to Security");
-					}
-					else if (((String)e.getItem()).contains("Sign Out")) {
-						Login_View back = new Login_View();
-						back.frame.setVisible(true);
-						dispose();
-						
-					}
-				}
-			}
-		});
-		contentPane.add(comboBox);
 	}
 }

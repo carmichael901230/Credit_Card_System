@@ -302,7 +302,7 @@ public class Account_View extends JFrame {
 					}
 					else if (((String)e.getItem()).contains("Sign Out")) {
 						Login_View back = new Login_View();
-						back.frame.setVisible(true);
+						back.setVisible(true);
 						dispose();
 						
 					}
@@ -346,7 +346,7 @@ public class Account_View extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				Home_View back = new Home_View(loginUser);
+				Bank_View back = new Bank_View(loginUser);
 				back.setVisible(true);
 				dispose();
 			}

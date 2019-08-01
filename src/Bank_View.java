@@ -33,7 +33,7 @@ import java.awt.event.ItemEvent;
 import javax.swing.border.LineBorder;
 import java.awt.Cursor;
 
-public class Home_View extends JFrame {
+public class Bank_View extends JFrame {
 
 	private Color Color_navy = new Color(0,73,118);
 	
@@ -59,7 +59,7 @@ public class Home_View extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Home_View(ResultSet loginUser) {
+	public Bank_View(ResultSet loginUser) {
 		contentPane = new JPanel();
 
 		
@@ -114,7 +114,6 @@ public class Home_View extends JFrame {
 		brandPanel.setLayout(gl_brandPanel);
 		
 		JPanel welcomPanel = new JPanel();
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, brandPanel, -6, SpringLayout.NORTH, welcomPanel);
 		sl_contentPane.putConstraint(SpringLayout.NORTH, welcomPanel, 66, SpringLayout.NORTH, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.WEST, welcomPanel, 0, SpringLayout.WEST, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.EAST, welcomPanel, 0, SpringLayout.EAST, contentPane);
@@ -199,7 +198,7 @@ public class Home_View extends JFrame {
 					}
 					else if (((String)e.getItem()).contains("Sign Out")) {
 						Login_View back = new Login_View();
-						back.frame.setVisible(true);
+						back.setVisible(true);
 						dispose();
 						
 					}
@@ -215,8 +214,8 @@ public class Home_View extends JFrame {
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Index_View back = new Index_View(loginUser);
-				back.setVisible(true);
+				Index_View back = new Index_View();
+				back.frame.setVisible(true);
 				dispose();
 			}
 		});
