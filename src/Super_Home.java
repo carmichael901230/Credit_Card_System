@@ -103,7 +103,7 @@ public class Super_Home extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Search_View shop = new Search_View(loginUser);
+				SearchUser_View shop = new SearchUser_View(loginUser);
 				shop.setVisible(true);
 				dispose();
 			}

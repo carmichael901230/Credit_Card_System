@@ -35,7 +35,7 @@ import javax.swing.border.LineBorder;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class Search_View extends JFrame {
+public class SearchUser_View extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField firstnameTextField;
@@ -63,7 +63,7 @@ public class Search_View extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Search_View(String loginUser) {
+	public SearchUser_View(String loginUser) {
 		setForeground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 530, 453);
@@ -247,6 +247,7 @@ public class Search_View extends JFrame {
 					Statement custStmt = con.createStatement();
 					ResultSet custRes = custStmt.executeQuery("SELECT * FROM users WHERE SSN ='" +ssn + "' AND firstName = '"+firstName+"' AND lastName = '"+lastName+"'");
 					if (custRes.next()) {
+						System.out.println(loginUser);
 						CheckUser_Card_View newFrame = new CheckUser_Card_View(custRes, loginUser);
 						newFrame.setVisible(true);
 						dispose();

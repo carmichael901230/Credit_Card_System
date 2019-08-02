@@ -1,4 +1,3 @@
-package project2;
 
 import java.awt.EventQueue;
 
@@ -78,7 +77,7 @@ public class groundfood extends vendor{
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 500, 393);
+		frame.setBounds(100, 100, 500, 402);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		for(int i=0;i<cost.length;i++) {

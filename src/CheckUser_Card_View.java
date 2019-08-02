@@ -39,7 +39,7 @@ public class CheckUser_Card_View extends JFrame {
 	
 	private JPanel contentPane;
 
-
+	private ResultSet loginRes;
 	/**
 	 * Launch the application.
 	 */
@@ -266,7 +266,7 @@ public class CheckUser_Card_View extends JFrame {
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Search_View back = new Search_View(loginUser);
+				SearchUser_View back = new SearchUser_View(loginUser);
 				back.setVisible(true);
 				dispose();
 			}
@@ -290,9 +290,10 @@ public class CheckUser_Card_View extends JFrame {
 			Class.forName("com.mysql.cj.jdbc.Driver"); 
 			Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");  
-			Statement stmt = con.createStatement();
-			ResultSet cardRes = stmt.executeQuery("SELECT * FROM credit_cards WHERE cardHolder = "+userID);
-			
+			Statement cardStmt = con.createStatement();
+			Statement loginStmt = con.createStatement();
+			ResultSet cardRes = cardStmt.executeQuery("SELECT * FROM credit_cards WHERE cardHolder = "+userID);
+			loginRes = loginStmt.executeQuery("SELECT * FROM users WHERE accountID = '"+loginUser+"'");
 			while (cardRes.next()) {
 				int cardNum = Integer.parseInt(cardRes.getString("cardNumber"));
 				String lastNum = String.format("%04d", cardNum);
@@ -302,19 +303,9 @@ public class CheckUser_Card_View extends JFrame {
 				panel_1.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						try {
-							cardRes.close();
-							stmt.close();
-							con.close();
-						}
-						catch(Exception err) {
-							err.printStackTrace();
-						}
-						finally {
-							Account_View acc_view = new Account_View(customer, cardNum);
-							acc_view.setVisible(true);
-							dispose();
-						}
+						CheckDetail_View acc_view = new CheckDetail_View(loginRes, customer, cardNum);
+						acc_view.setVisible(true);
+						dispose();
 					}
 				});
 				cardPanel.add(panel_1);
