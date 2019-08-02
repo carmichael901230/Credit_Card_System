@@ -131,7 +131,7 @@ public class Login_View extends JFrame {
 						lblUsernameErr.setVisible(false);
 						lblPasswordErr.setVisible(false);
 						// System.out.println("Qualified");
-						Super_Home openFrame = new Super_Home(username);
+						SuperHome_View openFrame = new SuperHome_View(username);
 						openFrame.setVisible(true);
 						dispose();
 					}

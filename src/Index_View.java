@@ -35,7 +35,7 @@ public class Index_View{
 	
 	private Color Color_marsh = new Color(155, 146, 60);
 	
-	private Calendar start = null;
+	final private Calendar start = Calendar.getInstance();
 
 	/**
 	 * Launch the application.
@@ -58,7 +58,6 @@ public class Index_View{
 	 */
 	public Index_View() {
 		
-		start = Calendar.getInstance();
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 600, 401);
@@ -70,7 +69,7 @@ public class Index_View{
 		JPanel logoPanel = new JPanel();
 		logoPanel.setLayout(null);
 		logoPanel.setBackground(Color.WHITE);
-		logoPanel.setBounds(150, 10, 246, 55);
+		logoPanel.setBounds(174, 10, 246, 55);
 		frame.getContentPane().add(logoPanel);
 		
 		JLabel lblLogo = new JLabel("");
@@ -116,8 +115,13 @@ public class Index_View{
 		lblGreetings.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGreetings.setFont(new Font("Candara", Font.ITALIC, 25));
 		lblGreetings.setForeground(Color.BLACK);
-		lblGreetings.setBounds(141, 10, 247, 35);
+		lblGreetings.setBounds(165, 7, 247, 25);
 		greetingPanel.add(lblGreetings);
+		
+		JLabel lblThankYouFor = new JLabel("Thank you for choosing SHOANK");
+		lblThankYouFor.setFont(new Font("Candara", Font.ITALIC, 18));
+		lblThankYouFor.setBounds(165, 30, 253, 25);
+		greetingPanel.add(lblThankYouFor);
 
 		
 		JPanel selectPanel = new JPanel();

@@ -19,6 +19,8 @@ import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -189,8 +191,45 @@ public class CheckDetail_View extends JFrame {
 		btnIncrease.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Payment_View payWindow = new Payment_View(loginUser, cardNumber);
-				payWindow.setVisible(true);
+				String newLimit = JOptionPane.showInputDialog(
+						contentPane,
+				        "Enter new Credit Limit"
+				);
+				try {
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					Connection con = DriverManager.getConnection(
+							"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC", "root", "wang87067835");
+					Statement getStmt = con.createStatement();
+					Statement InsertStmt = con.createStatement();
+					Statement userStmt = con.createStatement();
+					ResultSet getRes = getStmt.executeQuery("SELECT * FROM credit_cards WHERE cardNumber = '"+cardNumber+"'");
+					ResultSet userRes = userStmt.executeQuery("SELECT * FROM users WHERE accountID = '"+loginUser+"'");
+					String loginUserStr = null;
+					if (userRes.next()) {
+						loginUserStr = userRes.getString("accoundID");
+					}
+					int success = 0;
+					double curLimit = Double.parseDouble(getRes.getString("creditLimit"));
+					double curRemain = Double.parseDouble(getRes.getString("remainCredit"));
+					double newRemain = Double.parseDouble(newLimit)-curLimit+curRemain;
+					if (Double.parseDouble(newLimit) < curLimit-curRemain ) {
+						JOptionPane.showMessageDialog(null, "User own $"+(curLimit-curRemain)+"\nNew credit line $"+newLimit);
+					}
+					else {
+						success += InsertStmt.executeUpdate("UPDATE `credit_card_system`.`credit_cards` SET `creditLimit` = '"+newLimit+"', `remainCredit` = '"+newRemain+"' WHERE (`cardNumber` = '"+cardNumber+"');");
+					}
+					if (success == 1) {
+						JOptionPane.showMessageDialog(null, "Credit Line is changed to $"+newLimit+"\nRemaining credit is $"+newRemain);
+						CheckUser_Card_View back = new CheckUser_Card_View(customer, loginUserStr);
+						back.setVisible(true);
+						dispose();
+					}
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		btnIncrease.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

@@ -82,7 +82,7 @@ public class bananabee extends vendor{
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 500, 452);
+		frame.setBounds(100, 100, 500, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		for(int i=0;i<cost.length;i++) {
@@ -347,7 +347,7 @@ public class bananabee extends vendor{
 		JButton btnChangeStore = new JButton("change store");
 		btnChangeStore.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ShopsInterface next= new ShopsInterface(s);
+				Shops_View next= new Shops_View(s);
 				next.setVisible(true);
 				frame.dispose();
 			}

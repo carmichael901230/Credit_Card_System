@@ -21,7 +21,7 @@ import java.awt.Cursor;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
-public class Super_Home extends JFrame {
+public class ViewUser_Home extends JFrame {
 	
 	private JPanel contentPane;
 	
@@ -29,7 +29,7 @@ public class Super_Home extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Super_Home(String loginUser) {
+	public ViewUser_Home(String loginUser) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
@@ -55,26 +55,13 @@ public class Super_Home extends JFrame {
 			greetingStr =  "Good Evening";
 		}
 		
-		JLabel lblGreetings = new JLabel(greetingStr+", ");
-		lblGreetings.setHorizontalAlignment(SwingConstants.RIGHT);
+		JLabel lblGreetings = new JLabel("View existing account or Create new account");
+		lblGreetings.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGreetings.setFont(new Font("Candara", Font.ITALIC, 25));
 		lblGreetings.setForeground(Color.BLACK);
-		lblGreetings.setBounds(40, 20, 247, 35);
+		lblGreetings.setBounds(0, 20, 566, 35);
 		greetingPanel.add(lblGreetings);
-		
-		String firstName = null;
-		firstName = loginUser;
-		
-		JLabel lblUserName = new JLabel(firstName);
-		lblUserName.setFont(new Font("Candara", Font.BOLD | Font.ITALIC, 25));
-		lblUserName.setBounds(297, 20, 184, 35);
-		greetingPanel.add(lblUserName);
-		
-		JLabel label = new JLabel("");
-		label.setBounds(0, 0, 566, 70);
 		Image greetingImg = new ImageIcon(Login_View.class.getResource("greeting_background.png")).getImage().getScaledInstance(566, 70, Image.SCALE_SMOOTH);
-		label.setIcon(new ImageIcon(greetingImg));
-		greetingPanel.add(label);
 		
 		JPanel selectPanel = new JPanel();
 		selectPanel.setBackground(Color.WHITE);
@@ -82,24 +69,25 @@ public class Super_Home extends JFrame {
 		contentPane.add(selectPanel);
 		selectPanel.setLayout(null);
 		
-		JPanel shopBtnPanel = new JPanel();
-		shopBtnPanel.setBackground(Color.WHITE);
-		shopBtnPanel.setBorder(new LineBorder(Color_navy, 4, true));
-		shopBtnPanel.setBounds(10, 40, 168, 87);
-		selectPanel.add(shopBtnPanel);
-		shopBtnPanel.setLayout(null);
+		JPanel modifyBtnPanel = new JPanel();
+		modifyBtnPanel.setBackground(Color.WHITE);
+		modifyBtnPanel.setBorder(new LineBorder(Color_navy, 4, true));
+		modifyBtnPanel.setBounds(61, 40, 190, 87);
+		selectPanel.add(modifyBtnPanel);
+		modifyBtnPanel.setLayout(null);
 		
-		JButton btnShopping = new JButton("Modify User");
-		btnShopping.addMouseListener(new MouseAdapter() {
+		JButton btnModify = new JButton("Edit Account");
+		btnModify.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnModify.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				btnShopping.setBackground(Color_navy);
-				btnShopping.setForeground(Color.white);
+				btnModify.setBackground(Color_navy);
+				btnModify.setForeground(Color.white);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				btnShopping.setBackground(Color.white);
-				btnShopping.setForeground(Color_navy);
+				btnModify.setBackground(Color.white);
+				btnModify.setForeground(Color_navy);
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -108,23 +96,24 @@ public class Super_Home extends JFrame {
 				dispose();
 			}
 		});
-		btnShopping.setBorderPainted(false);
-		btnShopping.setBackground(Color.WHITE);
-		btnShopping.setFont(new Font("Courier New", Font.BOLD, 17));
-		btnShopping.setForeground(Color_navy);
-		btnShopping.setFocusable(false);
-		btnShopping.setBounds(5, 6, 158, 75);
-		shopBtnPanel.add(btnShopping);
+		btnModify.setBorderPainted(false);
+		btnModify.setBackground(Color.WHITE);
+		btnModify.setFont(new Font("Courier New", Font.BOLD, 16));
+		btnModify.setForeground(Color_navy);
+		btnModify.setFocusable(false);
+		btnModify.setBounds(5, 6, 180, 75);
+		modifyBtnPanel.add(btnModify);
 		
 		JPanel bankBtnPanel = new JPanel();
 		bankBtnPanel.setLayout(null);
 		bankBtnPanel.setBorder(new LineBorder(Color_navy, 4, true));
 		bankBtnPanel.setBackground(Color.WHITE);
-		bankBtnPanel.setBounds(190, 40, 163, 87);
+		bankBtnPanel.setBounds(314, 40, 190, 87);
 		selectPanel.add(bankBtnPanel);
 		
-		JButton btnBanking = new JButton("Create User");
-		btnBanking.setBounds(6, 6, 152, 75);
+		JButton btnBanking = new JButton("Create Account");
+		btnBanking.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnBanking.setBounds(6, 6, 178, 75);
 		bankBtnPanel.add(btnBanking);
 		btnBanking.addMouseListener(new MouseAdapter() {
 			@Override
@@ -145,41 +134,10 @@ public class Super_Home extends JFrame {
 			}
 		});
 		btnBanking.setForeground(Color_navy);
-		btnBanking.setFont(new Font("Courier New", Font.BOLD, 17));
+		btnBanking.setFont(new Font("Courier New", Font.BOLD, 16));
 		btnBanking.setFocusable(false);
 		btnBanking.setBorderPainted(false);
 		btnBanking.setBackground(Color.WHITE);
-		
-		JPanel panel = new JPanel();
-		panel.setLayout(null);
-		panel.setBorder(new LineBorder(Color_navy, 4, true));
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(370, 40, 186, 87);
-		selectPanel.add(panel);
-		
-		JButton newCard = new JButton("Apply New Card");
-		newCard.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				newCard.setBackground(Color_navy);
-				newCard.setForeground(Color.white);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				newCard.setBackground(Color.white);
-				newCard.setForeground(Color_navy);
-			}
-		});
-		newCard.setForeground(Color_navy);
-		newCard.setFont(new Font("Courier New", Font.BOLD, 16));
-		newCard.setFocusable(false);
-		newCard.setBorderPainted(false);
-		newCard.setBackground(Color.WHITE);
-		newCard.setBounds(6, 6, 175, 75);
-		panel.add(newCard);
 		
 		
 		String username = null;
@@ -203,8 +161,8 @@ public class Super_Home extends JFrame {
 	    renderer.setPreferredSize(new Dimension(125, 30));
 	    comboBox.setRenderer(renderer);
 	    
-		comboBox.setLocation(451, 10);
-		comboBox.setSize(125, 30);
+		comboBox.setLocation(424, 10);
+		comboBox.setSize(152, 30);
 		comboBox.setForeground(Color.WHITE);
 		comboBox.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
 		comboBox.setBackground(new Color(29,132,199));
@@ -270,5 +228,23 @@ public class Super_Home extends JFrame {
 					.addComponent(lblTwo, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
 		);
 		logoPanel.setLayout(gl_logoPanel);
+		
+		JButton button = new JButton("< Back");
+		button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				SuperHome_View back = new SuperHome_View(loginUser);
+				back.setVisible(true);
+				dispose();
+			}
+		});
+		button.setBorder(new LineBorder(new Color(0, 73, 118), 2, true));
+		button.setForeground(Color_navy);
+		button.setContentAreaFilled(false);
+		button.setFocusable(false);
+		button.setFont(new Font("Arial", Font.PLAIN, 20));
+		button.setBounds(10, 10, 107, 30);
+		contentPane.add(button);
 	}
 }

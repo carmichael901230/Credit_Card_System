@@ -206,7 +206,7 @@ public class SearchUser_View extends JFrame {
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Super_Home back = new Super_Home(loginUser);
+				ViewUser_Home back = new ViewUser_Home(loginUser);
 				back.setVisible(true);
 				dispose();
 			}

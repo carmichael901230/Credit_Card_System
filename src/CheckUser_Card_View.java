@@ -62,16 +62,15 @@ public class CheckUser_Card_View extends JFrame {
 	public CheckUser_Card_View(ResultSet customer, String loginUser) {
 		contentPane = new JPanel();
 
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 600);
+		setBounds(100, 100, 800, 650);
 		contentPane.setBackground(Color.WHITE);
 		setContentPane(contentPane);
 		SpringLayout springLayout = new SpringLayout();
-		SpringLayout sl_contentPane = new SpringLayout();
-		contentPane.setLayout(sl_contentPane);
+		contentPane.setLayout(null);
 		
 		JPanel brandPanel = new JPanel();
+		brandPanel.setBounds(280, 0, 226, 50);
 		brandPanel.setBackground(Color.WHITE);
 		contentPane.add(brandPanel);
 		
@@ -113,9 +112,8 @@ public class CheckUser_Card_View extends JFrame {
 		brandPanel.setLayout(gl_brandPanel);
 		
 		JPanel infoPanel = new JPanel();
+		infoPanel.setBounds(50, 66, 686, 100);
 		infoPanel.setBackground(Color.WHITE);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, infoPanel, 66, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, infoPanel, 166, SpringLayout.NORTH, contentPane);
 		contentPane.add(infoPanel);
 		infoPanel.setLayout(null);
 		
@@ -206,14 +204,9 @@ public class CheckUser_Card_View extends JFrame {
 		
 		
 		JPanel cardPanel = new JPanel();
-		sl_contentPane.putConstraint(SpringLayout.WEST, infoPanel, 0, SpringLayout.WEST, cardPanel);
-		sl_contentPane.putConstraint(SpringLayout.EAST, infoPanel, 0, SpringLayout.EAST, cardPanel);
+		cardPanel.setBounds(50, 183, 686, 370);
 		cardPanel.setBackground(Color.WHITE);
-		cardPanel.setLayout(new GridLayout(2, 2, 10, 10)); 
-		sl_contentPane.putConstraint(SpringLayout.NORTH, cardPanel, 183, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, cardPanel, -10, SpringLayout.SOUTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, cardPanel, 50, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, cardPanel, -50, SpringLayout.EAST, contentPane);
+		cardPanel.setLayout(new GridLayout(2, 2, 10, 10));
 		Image greetingImg = new ImageIcon(Login_View.class.getResource("greeting_background.png")).getImage().getScaledInstance(776, 100, Image.SCALE_SMOOTH);
 		contentPane.add(cardPanel);
 		
@@ -227,10 +220,7 @@ public class CheckUser_Card_View extends JFrame {
 				new JSeparator(JSeparator.HORIZONTAL),
 				"<html><strong>Sign Out<strong></html>"};
 		JComboBox comboBox = new JComboBox(choice);
-		sl_contentPane.putConstraint(SpringLayout.EAST, brandPanel, -77, SpringLayout.WEST, comboBox);
-		sl_contentPane.putConstraint(SpringLayout.EAST, comboBox, 40, SpringLayout.EAST, cardPanel);
-		sl_contentPane.putConstraint(SpringLayout.WEST, comboBox, -153, SpringLayout.EAST, cardPanel);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, comboBox, 54, SpringLayout.NORTH, contentPane);
+		comboBox.setBounds(583, 20, 193, 34);
 		comboBox.setForeground(Color.WHITE);
 		comboBox.setFont(new Font("Arial", Font.PLAIN, 20));
 		comboBox.setBackground(new Color(29, 132, 199));
@@ -255,14 +245,11 @@ public class CheckUser_Card_View extends JFrame {
 				}
 			}
 		});
-		
-		sl_contentPane.putConstraint(SpringLayout.NORTH, comboBox, 20, SpringLayout.NORTH, contentPane);
 		contentPane.add(comboBox);
 		
 		JButton btnBack = new JButton("< Back");
+		btnBack.setBounds(24, 8, 131, 32);
 		btnBack.setForeground(Color_navy);
-		sl_contentPane.putConstraint(SpringLayout.EAST, btnBack, -631, SpringLayout.EAST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, brandPanel, 125, SpringLayout.EAST, btnBack);
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -272,9 +259,6 @@ public class CheckUser_Card_View extends JFrame {
 			}
 		});
 		btnBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		sl_contentPane.putConstraint(SpringLayout.NORTH, btnBack, 8, SpringLayout.NORTH, brandPanel);
-		sl_contentPane.putConstraint(SpringLayout.WEST, btnBack, 24, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnBack, -10, SpringLayout.SOUTH, brandPanel);
 		btnBack.setOpaque(false);
 		btnBack.setFont(new Font("Arial", Font.PLAIN, 25));
 		btnBack.setFocusable(false);
@@ -282,6 +266,22 @@ public class CheckUser_Card_View extends JFrame {
 		btnBack.setBorder(new LineBorder(Color_navy, 2, true));
 		btnBack.setBackground(Color.WHITE);
 		contentPane.add(btnBack);
+		
+		JButton btnNewCard = new JButton("New Card");
+		btnNewCard.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				NewCard_View newCard = new NewCard_View(customer, loginUser);
+				newCard.setVisible(true);
+				dispose();
+			}
+		});
+		btnNewCard.setBackground(Color_navy);
+		btnNewCard.setForeground(Color.WHITE);
+		btnNewCard.setFont(new Font("Arial", Font.PLAIN, 20));
+		btnNewCard.setBounds(309, 563, 152, 40);
+		btnNewCard.setFocusable(false);
+		contentPane.add(btnNewCard);
 		
 		// display all credit card on cardPanel (dynamically)
 		ArrayList<JPanel> cardList = new ArrayList<>();

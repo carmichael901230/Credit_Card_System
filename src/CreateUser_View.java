@@ -292,7 +292,7 @@ public class CreateUser_View extends JFrame{
 				if(allCase) {
 					writeDataIntoDatabase();
 					clean();
-					Super_Home openFrame = new Super_Home(name);
+					ViewUser_Home openFrame = new ViewUser_Home(name);
 					openFrame.setVisible(true);
 					frame.dispose();
 				}
@@ -314,7 +314,7 @@ public class CreateUser_View extends JFrame{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				clean();
-				Super_Home openFrame = new Super_Home(name);
+				ViewUser_Home openFrame = new ViewUser_Home(name);
 				openFrame.setVisible(true);
 				frame.dispose();
 			}
@@ -513,7 +513,7 @@ public class CreateUser_View extends JFrame{
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC", "root", "19990520vA");
+					"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC", "root", "wang87067835");
 			Statement stmt = con.createStatement();
 			String password = this.passwordString;
 			String firstName = this.firstNameString;
@@ -546,17 +546,23 @@ public class CreateUser_View extends JFrame{
 			if (cardRes.next()) {}
 			stmt.executeUpdate("INSERT INTO `credit_card_system`.`credit_cards` (`securityCode`, `creditLimit`, `remainCredit`, `expireDate`, `cardHolder`) VALUES "
 																							 + "('"+securityCode+"', '"+creditLine+"', '"+creditLine+"', '"+expDate+"', '"+newId+"')");
-			
+			Statement newCardStmt = con.createStatement();
+			ResultSet newCardRes = cardStmt.executeQuery("SELECT cardNumber FROM credit_cards WHERE cardHolder ='" +newId + "' ORDER BY createDate DESC" );
+			String lastId = null;
+			if (newCardRes.next()) {
+				lastId = newCardRes.getString("cardNumber");
+				lastId = String.format("%04d", Integer.parseInt(lastId));
+			}
 //			cardNumber = String.format("%04d", Integer.parseInt(cardNumber));
 //			System.out.println(cardNumber);
-			 String answer = prefix + "\n"
-				        + "Exprie Date: "+ expDate + "\n"
-				        + firstName + " " + lastName + "\n"
-				        + "Security Code: " + securityCode ;
+			 String answer = prefix+lastId + "\n"
+				        + "Exprie Date: "+ expDate.substring(0,7) + "\n"
+				        + "Name: "+firstName + " " + lastName + "\n"
+				        + "CCV: " + securityCode ;
 			 
 			 JOptionPane.showMessageDialog(null, answer); 
 		} catch(SQLIntegrityConstraintViolationException e) {
-			JOptionPane.showMessageDialog(null, "有重复信�?");
+			JOptionPane.showMessageDialog(null, "Duplicated Info in our record");
 			userNameTF.requestFocus();
 			return 0;
 		 } 
