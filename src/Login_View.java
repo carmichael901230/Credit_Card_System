@@ -39,6 +39,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import java.awt.Cursor;
 
 public class Login_View extends JFrame {
 	private Color Color_navy = new Color(0,73,118);
@@ -105,6 +106,7 @@ public class Login_View extends JFrame {
 		String username = usernameTextField.getText();
 		String password = new String(passwordTextField.getPassword());
 		String hashedPW = hashMD5(password);
+		String superUser = null;
 		
 		try {
 			// System.out.println("Connect");
@@ -117,17 +119,31 @@ public class Login_View extends JFrame {
 			
 			// get DB password
 			String dbPW = null;
-			if (res.next())
+			if (res.next()) {
 				dbPW = res.getString("password");
+				superUser = res.getString("superuser");
+			}
 			if (dbPW != null) {
 				if (hashedPW.equals(dbPW)) {
 					// qualified
-					lblUsernameErr.setVisible(false);
-					lblPasswordErr.setVisible(false);
-					// System.out.println("Qualified");
-					Bank_View openFrame = new Bank_View(res);
-					openFrame.setVisible(true);
-					dispose();
+					if(superUser.equals("1")){
+						// super user
+						lblUsernameErr.setVisible(false);
+						lblPasswordErr.setVisible(false);
+						// System.out.println("Qualified");
+						Super_Home openFrame = new Super_Home(username);
+						openFrame.setVisible(true);
+						dispose();
+					}
+					else {
+						// normal user
+						lblUsernameErr.setVisible(false);
+						lblPasswordErr.setVisible(false);
+						// System.out.println("Qualified");
+						Bank_View openFrame = new Bank_View(res);
+						openFrame.setVisible(true);
+						dispose();
+					}
 				}
 				else {
 					// incorrect password
@@ -286,14 +302,24 @@ public class Login_View extends JFrame {
 		});
 		
 		
-		JLabel lblForgetPassword = new JLabel("<html><U>Forget password?</U></html>");
-		lblForgetPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		sl_loginPanel.putConstraint(SpringLayout.NORTH, btnSignin, 37, SpringLayout.SOUTH, lblForgetPassword);
-		sl_loginPanel.putConstraint(SpringLayout.EAST, lblForgetPassword, 145, SpringLayout.WEST, lblUsername);
-		sl_loginPanel.putConstraint(SpringLayout.NORTH, lblForgetPassword, 17, SpringLayout.SOUTH, passwordPanel);
+		JLabel lblForgetPassword = new JLabel("<html><U>Forgot Username or Password?</U></html>");
+		sl_loginPanel.putConstraint(SpringLayout.NORTH, btnSignin, 36, SpringLayout.SOUTH, lblForgetPassword);
+		sl_loginPanel.putConstraint(SpringLayout.EAST, lblForgetPassword, 231, SpringLayout.WEST, lblUsername);
+		lblForgetPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblForgetPassword.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Security_View account_reset = new Security_View();
+				account_reset.setVisible(true);
+				dispose();
+			}
+		});
+		sl_loginPanel.putConstraint(SpringLayout.NORTH, lblForgetPassword, 6, SpringLayout.SOUTH, passwordPanel);
 		sl_loginPanel.putConstraint(SpringLayout.WEST, lblForgetPassword, 0, SpringLayout.WEST, lblUsername);
+		sl_loginPanel.putConstraint(SpringLayout.SOUTH, lblForgetPassword, 38, SpringLayout.SOUTH, passwordPanel);
+		lblForgetPassword.setHorizontalAlignment(SwingConstants.LEFT);
 		lblForgetPassword.setForeground(Color.BLUE);
-		lblForgetPassword.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
+		lblForgetPassword.setFont(new Font("Bahnschrift", Font.PLAIN, 15));
 		loginPanel.add(lblForgetPassword);
 		
 		lblUsernameErr = new JLabel("Username doesn't exist");
@@ -365,6 +391,7 @@ public class Login_View extends JFrame {
 		logoPanel.setLayout(gl_logoPanel);
 		
 		JButton btnBack = new JButton("< Back");
+		btnBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

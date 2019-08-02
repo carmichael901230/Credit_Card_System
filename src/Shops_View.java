@@ -29,6 +29,7 @@ import java.awt.event.MouseEvent;
 public class Shops_View extends JFrame {
 
 	private Color Color_marsh = new Color(155, 146, 60);
+	private Color Color_green = new Color(0, 188, 65);
 	
 	private JPanel contentPane;
 
@@ -60,33 +61,37 @@ public class Shops_View extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setLayout(null);
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(170, 10, 246, 55);
-		contentPane.add(panel);
-		
-		JLabel lblLogo = new JLabel("");
-		lblLogo.setBounds(0, 0, 55, 55);
-		lblLogo.setAlignmentY(Component.TOP_ALIGNMENT);
+		JPanel logoPanel = new JPanel();
+		logoPanel.setLayout(null);
+		logoPanel.setBackground(Color.WHITE);
+		logoPanel.setBounds(170, 10, 246, 55);
+		contentPane.add(logoPanel);
 		Image logo = new ImageIcon(Login_View.class.getResource("shoank_logo.png")).getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT);
-		lblLogo.setIcon(new ImageIcon(logo));
-		panel.add(lblLogo);
 		
-		JLabel lblShoank = new JLabel("S H O A N K");
+		JLabel lblShoank = new JLabel("R I K I B U Y");
 		lblShoank.setVerticalAlignment(SwingConstants.TOP);
 		lblShoank.setHorizontalAlignment(SwingConstants.CENTER);
-		lblShoank.setForeground(new Color(155, 146, 60));
-		lblShoank.setFont(new Font("Ink Free", Font.PLAIN, 25));
+		lblShoank.setForeground(Color_green);
+		lblShoank.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 25));
 		lblShoank.setBounds(53, 0, 183, 24);
-		panel.add(lblShoank);
+		logoPanel.add(lblShoank);
 		
-		JLabel lblSlogan = new JLabel("Shop & Bank Two in One");
+		JLabel lblSlogan = new JLabel("BUY All You Wanna Buy");
 		lblSlogan.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSlogan.setForeground(new Color(155, 146, 60));
-		lblSlogan.setFont(new Font("Arial", Font.ITALIC, 15));
-		lblSlogan.setBounds(60, 30, 186, 25);
-		panel.add(lblSlogan);
+		lblSlogan.setForeground(Color_green);
+		lblSlogan.setFont(new Font("Franklin Gothic Medium", Font.ITALIC, 15));
+		lblSlogan.setBounds(60, 30, 176, 25);
+		logoPanel.add(lblSlogan);
+		
+		JLabel lblR = new JLabel("R");
+		lblR.setOpaque(true);
+		lblR.setBackground(Color_green);
+		lblR.setForeground(Color.WHITE);
+		lblR.setHorizontalAlignment(SwingConstants.CENTER);
+		lblR.setFont(new Font("Arial Black", Font.BOLD, 45));
+		lblR.setAlignmentY(0.0f);
+		lblR.setBounds(0, 0, 55, 55);
+		logoPanel.add(lblR);
 		
 		JPanel shopsPanel = new JPanel();
 		shopsPanel.setBackground(Color.WHITE);
@@ -147,9 +152,9 @@ public class Shops_View extends JFrame {
 		btnBack.setFocusable(false);
 		btnBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnBack.setContentAreaFilled(false);
-		btnBack.setBorder(new LineBorder(Color_marsh, 2, true));
+		btnBack.setBorder(new LineBorder(Color_green, 2, true));
 		btnBack.setBackground(Color.WHITE);
-		btnBack.setForeground(Color_marsh);
+		btnBack.setForeground(Color_green);
 		btnBack.setFont(new Font("Arial", Font.PLAIN, 25));
 		btnBack.setBounds(15, 15, 120, 35);
 		contentPane.add(btnBack);

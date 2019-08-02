@@ -33,7 +33,7 @@ import java.awt.event.ItemEvent;
 import javax.swing.border.LineBorder;
 import java.awt.Cursor;
 
-public class Bank_View extends JFrame {
+public class CheckUser_Card_View extends JFrame {
 
 	private Color Color_navy = new Color(0,73,118);
 	
@@ -59,7 +59,7 @@ public class Bank_View extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Bank_View(ResultSet loginUser) {
+	public CheckUser_Card_View(ResultSet customer, String loginUser) {
 		contentPane = new JPanel();
 
 		
@@ -112,64 +112,114 @@ public class Bank_View extends JFrame {
 		);
 		brandPanel.setLayout(gl_brandPanel);
 		
-		JPanel welcomPanel = new JPanel();
-		sl_contentPane.putConstraint(SpringLayout.NORTH, welcomPanel, 66, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, welcomPanel, 0, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, welcomPanel, 0, SpringLayout.EAST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, welcomPanel, 166, SpringLayout.NORTH, contentPane);
-		contentPane.add(welcomPanel);
-		SpringLayout sl_welcomPanel = new SpringLayout();
-		welcomPanel.setLayout(sl_welcomPanel);
+		JPanel infoPanel = new JPanel();
+		infoPanel.setBackground(Color.WHITE);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, infoPanel, 66, SpringLayout.NORTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, infoPanel, 166, SpringLayout.NORTH, contentPane);
+		contentPane.add(infoPanel);
+		infoPanel.setLayout(null);
 		
-		// greeting message depending on time
-		JLabel lblGreeting = new JLabel("place holder");
-		sl_welcomPanel.putConstraint(SpringLayout.NORTH, lblGreeting, 45, SpringLayout.NORTH, welcomPanel);
-		sl_welcomPanel.putConstraint(SpringLayout.EAST, lblGreeting, -270, SpringLayout.EAST, welcomPanel);
-		lblGreeting.setForeground(Color.BLACK);
-		lblGreeting.setFont(new Font("Calibri Light", Font.PLAIN, 25));
-		Calendar c = Calendar.getInstance();
-		int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
-		String greetingStr = null;
-		if(timeOfDay >= 3 && timeOfDay < 12){
-		    greetingStr = "Good Morning";      
-		}else if(timeOfDay >= 12 && timeOfDay < 17){
-			greetingStr = "Good Afternoon";
-		}else{
-			greetingStr =  "Good Evening";
-		}
-		String firstName= null;
-		String username = null;
+		String firstName = null;
+		String lastName = null;
+		String dob = null;
+		String addr = null;
+		String custUsername = null;
+		String userID = null;
+				
 		try {
-			firstName = loginUser.getString("firstName");
-			username = loginUser.getString("accountID");
-			lblGreeting.setText(greetingStr+", "+firstName);
-		} catch (SQLException e) {
+			firstName = customer.getString("firstName");
+			lastName = customer.getString("lastName");
+			dob = customer.getString("DOB").substring(0,10);
+			addr = customer.getString("billAddr");
+			custUsername = customer.getString("accountID");
+			userID = customer.getString("id");
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
-		welcomPanel.add(lblGreeting);
+		
+		JLabel lblUserName = new JLabel("Username: ");
+		lblUserName.setBounds(0, 0, 111, 29);
+		lblUserName.setForeground(Color_navy);
+		lblUserName.setFont(new Font("Arial", Font.PLAIN, 20));
+		infoPanel.add(lblUserName);
+		
+		JLabel lblUsername = new JLabel(custUsername);
+		lblUsername.setBounds(121, 0, 219, 29);
+		lblUsername.setFont(new Font("Arial", Font.PLAIN, 20));
+		infoPanel.add(lblUsername);
+		
+		JLabel lblUserId = new JLabel("User ID:");
+		lblUserId.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblUserId.setBounds(350, 0, 88, 29);
+		lblUserId.setForeground(Color_navy);
+		infoPanel.add(lblUserId);
+		
+		JLabel valUserid = new JLabel(userID);
+		valUserid.setFont(new Font("Arial", Font.PLAIN, 20));
+		valUserid.setBounds(440, 0, 111, 29);
+		infoPanel.add(valUserid);
+		
+		JLabel lblDOB = new JLabel("Date of Birth:");
+		lblDOB.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblDOB.setBounds(0, 71, 125, 29);
+		lblDOB.setForeground(Color_navy);
+		infoPanel.add(lblDOB);
+		
+		JLabel lblDateofBirth = new JLabel(dob);
+		lblDateofBirth.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblDateofBirth.setBounds(121, 71, 170, 29);
+		infoPanel.add(lblDateofBirth);
+		
+		JLabel lblAddr = new JLabel("Address:");
+		lblAddr.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblAddr.setBounds(350, 71, 105, 29);
+		lblAddr.setForeground(Color_navy);
+		infoPanel.add(lblAddr);
+		
+		JLabel lblAddress = new JLabel(addr);
+		lblAddress.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblAddress.setBounds(450, 71, 236, 29);
+		infoPanel.add(lblAddress);
+		
+		JLabel lblLN = new JLabel("Last Name:");
+		lblLN.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblLN.setBounds(0, 35, 111, 29);
+		lblLN.setForeground(Color_navy);;
+		infoPanel.add(lblLN);
+		
+		JLabel lblLastname = new JLabel(lastName);
+		lblLastname.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblLastname.setBounds(121, 35, 125, 32);
+		infoPanel.add(lblLastname);
+		
+		JLabel lblFN = new JLabel("First Name:");
+		lblFN.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblFN.setBounds(350, 35, 111, 29);
+		lblFN.setForeground(Color_navy);
+		infoPanel.add(lblFN);
+		
+		JLabel lblLastname_1 = new JLabel(firstName);
+		lblLastname_1.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblLastname_1.setBounds(465, 35, 125, 29);
+		infoPanel.add(lblLastname_1);
+		
 		
 		JPanel cardPanel = new JPanel();
+		sl_contentPane.putConstraint(SpringLayout.WEST, infoPanel, 0, SpringLayout.WEST, cardPanel);
+		sl_contentPane.putConstraint(SpringLayout.EAST, infoPanel, 0, SpringLayout.EAST, cardPanel);
 		cardPanel.setBackground(Color.WHITE);
 		cardPanel.setLayout(new GridLayout(2, 2, 10, 10)); 
 		sl_contentPane.putConstraint(SpringLayout.NORTH, cardPanel, 183, SpringLayout.NORTH, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, cardPanel, -10, SpringLayout.SOUTH, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.WEST, cardPanel, 50, SpringLayout.WEST, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.EAST, cardPanel, -50, SpringLayout.EAST, contentPane);
-		
-		JLabel lblgreetingBackground = new JLabel();
 		Image greetingImg = new ImageIcon(Login_View.class.getResource("greeting_background.png")).getImage().getScaledInstance(776, 100, Image.SCALE_SMOOTH);
-		lblgreetingBackground.setIcon(new ImageIcon(greetingImg));
-		
-		sl_welcomPanel.putConstraint(SpringLayout.NORTH, lblgreetingBackground, 0, SpringLayout.NORTH, welcomPanel);
-		sl_welcomPanel.putConstraint(SpringLayout.WEST, lblgreetingBackground, 0, SpringLayout.WEST, welcomPanel);
-		sl_welcomPanel.putConstraint(SpringLayout.SOUTH, lblgreetingBackground, 0, SpringLayout.SOUTH, welcomPanel);
-		sl_welcomPanel.putConstraint(SpringLayout.EAST, lblgreetingBackground, 0, SpringLayout.EAST, welcomPanel);
-		welcomPanel.add(lblgreetingBackground);
 		contentPane.add(cardPanel);
 		
 		// drop down menu
 		Object choice[] = {
-				username,
+				loginUser,
 				new JSeparator(JSeparator.HORIZONTAL),
 				"<html><strong>Profile</strong></html>", 
 				new JSeparator(JSeparator.HORIZONTAL),
@@ -216,8 +266,8 @@ public class Bank_View extends JFrame {
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Index_View back = new Index_View();
-				back.frame.setVisible(true);
+				Search_View back = new Search_View(loginUser);
+				back.setVisible(true);
 				dispose();
 			}
 		});
@@ -236,7 +286,6 @@ public class Bank_View extends JFrame {
 		// display all credit card on cardPanel (dynamically)
 		ArrayList<JPanel> cardList = new ArrayList<>();
 		try {
-			String userID = loginUser.getString("id");
 			// DataBase connect
 			Class.forName("com.mysql.cj.jdbc.Driver"); 
 			Connection con=DriverManager.getConnection(  
@@ -262,7 +311,7 @@ public class Bank_View extends JFrame {
 							err.printStackTrace();
 						}
 						finally {
-							Account_View acc_view = new Account_View(loginUser, cardNum);
+							Account_View acc_view = new Account_View(customer, cardNum);
 							acc_view.setVisible(true);
 							dispose();
 						}

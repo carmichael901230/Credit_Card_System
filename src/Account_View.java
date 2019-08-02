@@ -287,7 +287,7 @@ public class Account_View extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.NORTH, comboBox, 21, SpringLayout.NORTH, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.WEST, comboBox, -204, SpringLayout.EAST, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, comboBox, -5, SpringLayout.SOUTH, brandPanel);
-		sl_contentPane.putConstraint(SpringLayout.EAST, comboBox, -47, SpringLayout.EAST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, comboBox, 0, SpringLayout.EAST, panel);
 		comboBox.setForeground(Color.WHITE);
 		comboBox.setFont(new Font("Arial", Font.PLAIN, 20));
 		comboBox.setBackground(Color_navy);
@@ -341,6 +341,7 @@ public class Account_View extends JFrame {
 		table.setFont(new Font("Arial", Font.PLAIN, 17));
 		
 		JButton btnBack = new JButton("< Back");
+		btnBack.setForeground(Color_navy);
 		btnBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
@@ -352,7 +353,7 @@ public class Account_View extends JFrame {
 			}
 		});
 		btnBack.setOpaque(false);
-		btnBack.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		btnBack.setBorder(new LineBorder(Color_navy, 2, true));
 		btnBack.setBackground(Color.WHITE);
 		btnBack.setFont(new Font("Arial", Font.PLAIN, 25));
 		btnBack.setContentAreaFilled(false);
