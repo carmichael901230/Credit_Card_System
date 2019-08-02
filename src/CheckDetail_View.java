@@ -203,15 +203,17 @@ public class CheckDetail_View extends JFrame {
 					Statement InsertStmt = con.createStatement();
 					Statement userStmt = con.createStatement();
 					ResultSet getRes = getStmt.executeQuery("SELECT * FROM credit_cards WHERE cardNumber = '"+cardNumber+"'");
-					ResultSet userRes = userStmt.executeQuery("SELECT * FROM users WHERE accountID = '"+loginUser+"'");
 					String loginUserStr = null;
-					if (userRes.next()) {
-						loginUserStr = userRes.getString("accoundID");
-					}
 					int success = 0;
-					double curLimit = Double.parseDouble(getRes.getString("creditLimit"));
-					double curRemain = Double.parseDouble(getRes.getString("remainCredit"));
-					double newRemain = Double.parseDouble(newLimit)-curLimit+curRemain;
+					double curLimit = 0;
+					double curRemain = 0;
+					double newRemain = 0;
+					loginUserStr = loginUser.getString("accountID");
+					if (getRes.next()) {
+						curLimit = Double.parseDouble(getRes.getString("creditLimit"));
+						curRemain = Double.parseDouble(getRes.getString("remainCredit"));
+						newRemain = Double.parseDouble(newLimit)-curLimit+curRemain;
+					}
 					if (Double.parseDouble(newLimit) < curLimit-curRemain ) {
 						JOptionPane.showMessageDialog(null, "User own $"+(curLimit-curRemain)+"\nNew credit line $"+newLimit);
 					}
