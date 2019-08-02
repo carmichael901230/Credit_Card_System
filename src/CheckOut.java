@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.awt.event.ActionEvent;
 
 public class CheckOut extends vendor {
@@ -16,6 +17,7 @@ public class CheckOut extends vendor {
   public int amount[];
   public double realCost=0;
   String shopName;
+  private Calendar s;
   public String firstName;
   public String lastName;
   public String security;
@@ -32,10 +34,11 @@ public class CheckOut extends vendor {
 	/**
 	 * Launch the application.
 	 */
-	public CheckOut(double cost[],int[] amount,String shopName) {
+	public CheckOut(double cost[],int[] amount,String shopName,Calendar x) {
 		this.cost=cost;
 		this.amount=amount;
 		this.shopName=shopName;
+		s=x;
 		for(int i=0;i<cost.length;i++)
 		   realCost+=cost[i]*amount[i];
 		initialize();
@@ -95,22 +98,22 @@ public class CheckOut extends vendor {
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(shopName.contains("banana")) {
-					bananabee next= new bananabee(amount);
+					bananabee next= new bananabee(amount,s);
 					next.frame.setVisible(true);
 					frame.dispose();
 					}
 					if(shopName.contains("valmart")) {
-						valmart next= new valmart(amount);
+						valmart next= new valmart(amount,s);
 						next.frame.setVisible(true);
 						frame.dispose();
 						}
 					if(shopName.contains("groundfood")) {
-						groundfood next= new groundfood(amount);
+						groundfood next= new groundfood(amount,s);
 						next.frame.setVisible(true);
 						frame.dispose();
 						}
 					if(shopName.contains("housedepot")) {
-						housedepot next= new housedepot(amount);
+						housedepot next= new housedepot(amount,s);
 						next.frame.setVisible(true);
 						frame.dispose();
 						}
@@ -140,7 +143,7 @@ public class CheckOut extends vendor {
 						if(result==-1)
 							output="insufficient fund,try another card or press cancel";
 						else if(result==1) {
-							confirm next = new confirm();
+							confirm next = new confirm(s);
 						    next.setVisible(true);
 						    frame.dispose();
 						}
