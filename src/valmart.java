@@ -347,7 +347,7 @@ public class valmart extends vendor{
 		JButton btnChangeStore = new JButton("change store");
 		btnChangeStore.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ShopsInterface next= new ShopsInterface(s);
+				Shops_View next= new Shops_View(s);
 				next.setVisible(true);
 				frame.dispose();
 			}

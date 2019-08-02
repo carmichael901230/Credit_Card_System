@@ -18,6 +18,7 @@ import java.awt.Image;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.ResultSet;
+import java.util.Calendar;
 
 import javax.swing.SwingConstants;
 import java.awt.GridLayout;
@@ -52,7 +53,7 @@ public class Shops_View extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Shops_View() {
+	public Shops_View(Calendar s) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 565, 450);
 		contentPane = new JPanel();
@@ -100,6 +101,14 @@ public class Shops_View extends JFrame {
 		shopsPanel.setLayout(new GridLayout(2, 2, 10, 10));
 		
 		JPanel valmartPanel = new JPanel();
+		valmartPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				valmart next = new valmart(s);
+				next.frame.setVisible(true);
+				dispose();
+			}
+		});
 		valmartPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		valmartPanel.setBackground(Color.WHITE);
 		shopsPanel.add(valmartPanel);
@@ -112,6 +121,14 @@ public class Shops_View extends JFrame {
 		valmartPanel.add(lblValmart);
 		
 		JPanel housedepotPanel = new JPanel();
+		housedepotPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				housedepot next = new housedepot(s);
+				next.frame.setVisible(true);
+				dispose();
+			}
+		});
 		housedepotPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		housedepotPanel.setBackground(Color.WHITE);
 		shopsPanel.add(housedepotPanel);
@@ -124,6 +141,14 @@ public class Shops_View extends JFrame {
 		housedepotPanel.add(lblHousedepot);
 		
 		JPanel bananaBeesPanel = new JPanel();
+		bananaBeesPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				bananabee next = new bananabee(s);
+				next.frame.setVisible(true);
+				dispose();
+			}
+		});
 		bananaBeesPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bananaBeesPanel.setBackground(Color.WHITE);
 		shopsPanel.add(bananaBeesPanel);

@@ -34,6 +34,8 @@ public class Index_View{
 	public JFrame frame;
 	
 	private Color Color_marsh = new Color(155, 146, 60);
+	
+	private Calendar start = null;
 
 	/**
 	 * Launch the application.
@@ -55,6 +57,8 @@ public class Index_View{
 	 * Create the frame.
 	 */
 	public Index_View() {
+		
+		start = Calendar.getInstance();
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 600, 401);
@@ -143,7 +147,7 @@ public class Index_View{
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Shops_View shop = new Shops_View();
+				Shops_View shop = new Shops_View(start);
 				shop.setVisible(true);
 				frame.dispose();
 			}

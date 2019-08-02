@@ -323,7 +323,7 @@ public class CheckDetail_View extends JFrame {
 		});
 		contentPane.add(comboBox);
 		
-		String columns[] = {"Date", "Description", "Amout"};
+		String columns[] = {"Date", "Description", "Amount"};
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -340,7 +340,7 @@ public class CheckDetail_View extends JFrame {
 		for (int i=0; i<transData.size(); i ++) {
 			arrData[i] = transData.get(i);
 		}
-		
+
 		table = new AlterColor_JTable(arrData, columns);
 		table.setGridColor(Color.WHITE);
 		table.setColumnSelectionAllowed(true);
