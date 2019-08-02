@@ -7,10 +7,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.awt.event.ActionEvent;
 
 public class confirm extends JFrame {
-    
+ 
 	private JPanel contentPane;
 
 	/**
@@ -21,7 +22,7 @@ public class confirm extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public confirm() {
+	public confirm(Calendar s) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 368, 208);
 		contentPane = new JPanel();
@@ -36,26 +37,9 @@ public class confirm extends JFrame {
 		JButton btnNewButton = new JButton("confirm");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(shopName.contains("banana")) {
-				bananabee next= new bananabee();
-				next.frame.setVisible(true);
+				ShopsInterface next =new ShopsInterface(s);
+				next.setVisible(true);
 				dispose();
-				}
-				if(shopName.contains("valmart")) {
-					valmart next= new valmart();
-					next.frame.setVisible(true);
-					dispose();
-					}
-				if(shopName.contains("groundfood")) {
-					groundfood next= new groundfood();
-					next.frame.setVisible(true);
-					dispose();
-					}
-				if(shopName.contains("housedepot")) {
-					housedepot next= new housedepot();
-					next.frame.setVisible(true);
-					dispose();
-					}
 			}
 		});
 		btnNewButton.setBounds(52, 107, 205, 29);
