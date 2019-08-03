@@ -187,7 +187,7 @@ public class Shops_View extends JFrame {
 		lblFood.setBounds(126, 36, 95, 68);
 		groundFoodPanel.add(lblFood);
 		
-		JLabel lblImg = new JLabel("img");
+		JLabel lblImg = new JLabel();
 		Image groundFood_logo = new ImageIcon(Login_View.class.getResource("groundfood_logo.png")).getImage().getScaledInstance(29, 30, Image.SCALE_SMOOTH);
 		lblImg.setIcon(new ImageIcon(groundFood_logo));
 		lblImg.setBounds(146, 51, 30, 37);
