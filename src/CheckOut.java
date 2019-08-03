@@ -41,18 +41,18 @@ public class CheckOut extends vendor {
 		   realCost+=cost[i]*amount[i];
 		initialize();
 	}
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					CheckOut window = new CheckOut();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					CheckOut window = new CheckOut();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the application.
@@ -137,8 +137,7 @@ public class CheckOut extends vendor {
 				cardNumber=CN.getText();
 				try {
 					if(check(cardNumber,lastName,firstName,security)) {
-						System.out.println(cardNumber+" "+lastName+" "+firstName+" "+security);
-						int result = charge(cardNumber,realCost,"abc");
+						int result = charge(cardNumber,realCost,shopName,s);
 						if(result==-1)
 							output="insufficient fund,try another card or press cancel";
 						else if(result==1) {

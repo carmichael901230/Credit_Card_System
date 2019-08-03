@@ -37,14 +37,14 @@ public class VendorTransData extends JFrame {
 	 */
 	public VendorTransData(String shopName) throws ClassNotFoundException, SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 543, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(6, 74, 444, 198);
+		scrollPane.setBounds(6, 74, 531, 198);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -95,7 +95,7 @@ public class VendorTransData extends JFrame {
 					dispose();
 				}
 			});
-			btnNewButton.setBounds(325, 12, 87, 29);
+			btnNewButton.setBounds(450, 12, 87, 29);
 			contentPane.add(btnNewButton);
 			
 			JButton btnNewButton_1 = new JButton("Home");
@@ -106,7 +106,7 @@ public class VendorTransData extends JFrame {
 					dispose();
 				}
 			});
-			btnNewButton_1.setBounds(325, 46, 87, 29);
+			btnNewButton_1.setBounds(450, 44, 87, 29);
 			contentPane.add(btnNewButton_1);
 		  
 	}

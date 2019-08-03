@@ -37,7 +37,7 @@ public class confirm extends JFrame {
 		JButton btnNewButton = new JButton("confirm");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ShopsInterface next =new ShopsInterface(s);
+				Shops_View next=new Shops_View(s);
 				next.setVisible(true);
 				dispose();
 			}
