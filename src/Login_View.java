@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -47,7 +48,7 @@ public class Login_View extends JFrame {
 	private Color Color_marsh = new Color(155, 146, 60);
 	
 	private JPanel contentPane;
-	
+	Calendar s;
 	// interactive components
 	private JTextField usernameTextField;
 	private JPasswordField passwordTextField;
@@ -110,9 +111,8 @@ public class Login_View extends JFrame {
 		
 		try {
 			// System.out.println("Connect");
-			Class.forName("com.mysql.cj.jdbc.Driver"); 
-			Connection con=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");  
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC","root","chuhui1026");
 			Statement stmt = con.createStatement();
 			// Query get result
 			ResultSet res = stmt.executeQuery("SELECT * FROM users WHERE accountID = '"+username+"'");
@@ -131,7 +131,7 @@ public class Login_View extends JFrame {
 						lblUsernameErr.setVisible(false);
 						lblPasswordErr.setVisible(false);
 						// System.out.println("Qualified");
-						SuperHome_View openFrame = new SuperHome_View(username);
+						SuperHome_View openFrame = new SuperHome_View(username,s);
 						openFrame.setVisible(true);
 						dispose();
 					}
@@ -140,7 +140,7 @@ public class Login_View extends JFrame {
 						lblUsernameErr.setVisible(false);
 						lblPasswordErr.setVisible(false);
 						// System.out.println("Qualified");
-						Bank_View openFrame = new Bank_View(res);
+						Bank_View openFrame = new Bank_View(res,s);
 						openFrame.setVisible(true);
 						dispose();
 					}
@@ -166,7 +166,8 @@ public class Login_View extends JFrame {
 	/**
 	 * Create the application.
 	 */
-	public Login_View() {
+	public Login_View(Calendar s) {
+		this.s=s;
 		initialize();
 	}
 
@@ -309,7 +310,7 @@ public class Login_View extends JFrame {
 		lblForgetPassword.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Security_View account_reset = new Security_View();
+				Security_View account_reset = new Security_View(s);
 				account_reset.setVisible(true);
 				dispose();
 			}
@@ -395,7 +396,7 @@ public class Login_View extends JFrame {
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Index_View back = new Index_View();
+				Index_View back = new Index_View(s);
 				back.frame.setVisible(true);
 				dispose();
 			}

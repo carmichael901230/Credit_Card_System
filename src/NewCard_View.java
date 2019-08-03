@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JTextField;
@@ -25,7 +26,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class NewCard_View extends JFrame {
-
+	private Calendar s;
 	private JPanel contentPane;
 	private JTextField creditLineTF;
 	private JTextField securityCodeTF;
@@ -37,9 +38,10 @@ public class NewCard_View extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public NewCard_View(ResultSet res, String loginUser) {
+	public NewCard_View(ResultSet res, String loginUser,Calendar s) {
 		this.loginUser = loginUser;
 		this.res = res;
+		this.s=s;
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 400, 355);
@@ -104,7 +106,7 @@ public class NewCard_View extends JFrame {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				CheckUser_Card_View back = new CheckUser_Card_View(res, loginUser);
+				CheckUser_Card_View back = new CheckUser_Card_View(res, loginUser,s);
 				back.setVisible(true);
 				dispose();
 			}
@@ -145,7 +147,7 @@ public class NewCard_View extends JFrame {
 			String cardNumber = "542418131000";
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC", "root", "wang87067835");
+					"jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC", "root", "chuhui1026");
 			Statement stmt = con.createStatement();
 			if (res != null) { userId = res.getString("id"); }
 			
@@ -162,7 +164,7 @@ public class NewCard_View extends JFrame {
 			String information = "Card Number: "+ cardNumber + "\n"
 								+"Expire Date:    " + expDate.substring(0,7)+"    "+"\n";
 			JOptionPane.showMessageDialog(null, information);
-			CheckUser_Card_View back = new CheckUser_Card_View(res, loginUser);
+			CheckUser_Card_View back = new CheckUser_Card_View(res, loginUser,s);
 			back.setVisible(true);
 			dispose();
 		} 

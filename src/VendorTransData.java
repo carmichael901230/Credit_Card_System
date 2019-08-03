@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -35,7 +36,7 @@ public class VendorTransData extends JFrame {
 	 * @throws ClassNotFoundException 
 	 * @throws SQLException 
 	 */
-	public VendorTransData(String shopName) throws ClassNotFoundException, SQLException {
+	public VendorTransData(String shopName,Calendar s,String loginUser) throws ClassNotFoundException, SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 543, 300);
 		contentPane = new JPanel();
@@ -90,7 +91,7 @@ public class VendorTransData extends JFrame {
 			JButton btnNewButton = new JButton("Back");
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					VendorTransMenu next = new VendorTransMenu();
+					VendorTransMenu next = new VendorTransMenu(loginUser,s);
 					next.setVisible(true);
 					dispose();
 				}
@@ -101,7 +102,7 @@ public class VendorTransData extends JFrame {
 			JButton btnNewButton_1 = new JButton("Home");
 			btnNewButton_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					Index_View next = new Index_View();
+					Index_View next = new Index_View(s);
 					next.frame.setVisible(true);
 					dispose();
 				}

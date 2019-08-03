@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -40,8 +41,6 @@ import java.awt.Cursor;
 import javax.swing.JTable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class CheckDetail_View extends JFrame {
 
@@ -70,7 +69,7 @@ public class CheckDetail_View extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CheckDetail_View(ResultSet loginUser, ResultSet customer, int cardNumber) {
+	public CheckDetail_View(ResultSet loginUser, ResultSet customer, int cardNumber,Calendar s) {
 		contentPane = new JPanel();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -189,7 +188,7 @@ public class CheckDetail_View extends JFrame {
 		lblCredit.setBounds(325, 110, 129, 23);
 		infoPanel.add(lblCredit);
 		
-		JButton btnIncrease = new JButton("Change Line");
+		JButton btnIncrease = new JButton("Increase Line");
 		btnIncrease.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -200,7 +199,7 @@ public class CheckDetail_View extends JFrame {
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection con = DriverManager.getConnection(
-							"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC", "root", "wang87067835");
+							"jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC", "root", "chuhui1026");
 					Statement getStmt = con.createStatement();
 					Statement InsertStmt = con.createStatement();
 					Statement userStmt = con.createStatement();
@@ -224,7 +223,7 @@ public class CheckDetail_View extends JFrame {
 					}
 					if (success == 1) {
 						JOptionPane.showMessageDialog(null, "Credit Line is changed to $"+newLimit+"\nRemaining credit is $"+newRemain);
-						CheckUser_Card_View back = new CheckUser_Card_View(customer, loginUserStr);
+						CheckUser_Card_View back = new CheckUser_Card_View(customer, loginUserStr,s);
 						back.setVisible(true);
 						dispose();
 					}
@@ -247,35 +246,6 @@ public class CheckDetail_View extends JFrame {
 		btnIncrease.setContentAreaFilled(false);
 		
 		JButton btnClose = new JButton("Close Account");
-		btnClose.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				int input = JOptionPane.showConfirmDialog(null, "Closing the account");
-				if (input == 0) {
-					String loginStr;
-					try {
-						// System.out.println("Connect");
-						Class.forName("com.mysql.cj.jdbc.Driver"); 
-						Connection con=DriverManager.getConnection(  
-								"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");  
-						Statement stmt = con.createStatement();
-						int success = stmt.executeUpdate("UPDATE `credit_card_system`.`credit_cards` SET `cardHolder` = '0' WHERE (`cardNumber` = '"+cardNumber+"');");
-						loginStr = loginUser.getString("accountID");
-						CheckUser_Card_View back = new CheckUser_Card_View(customer, loginStr);
-						back.setVisible(true);
-						dispose();
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					} catch (ClassNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					
-					
-				}
-				
-			}
-		});
 		btnClose.setForeground(Color.WHITE);
 		btnClose.setFont(new Font("Arial", Font.BOLD, 18));
 		btnClose.setFocusable(false);
@@ -385,7 +355,7 @@ public class CheckDetail_View extends JFrame {
 						System.out.println("Go to Security");
 					}
 					else if (((String)e.getItem()).contains("Sign Out")) {
-						Login_View back = new Login_View();
+						Login_View back = new Login_View(s);
 						back.setVisible(true);
 						dispose();
 						
@@ -430,7 +400,8 @@ public class CheckDetail_View extends JFrame {
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Bank_View back = new Bank_View(loginUser);
+				
+				Bank_View back = new Bank_View(loginUser,s);
 				back.setVisible(true);
 				dispose();
 			}

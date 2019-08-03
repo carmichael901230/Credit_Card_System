@@ -21,6 +21,7 @@ import javax.swing.JPasswordField;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.awt.event.ItemEvent;
 import javax.swing.JButton;
 import java.awt.Cursor;
@@ -59,7 +60,7 @@ public class Security_View extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Security_View() {
+	public Security_View(Calendar s) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 524);
 		contentPane = new JPanel();
@@ -253,7 +254,7 @@ public class Security_View extends JFrame {
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Login_View back = new Login_View();
+				Login_View back = new Login_View(s);
 				back.setVisible(true);
 				dispose();
 			}

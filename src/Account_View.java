@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -66,7 +67,7 @@ public class Account_View extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Account_View(ResultSet loginUser, int cardNumber) {
+	public Account_View(ResultSet loginUser, int cardNumber,Calendar s) {
 		contentPane = new JPanel();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -239,7 +240,7 @@ public class Account_View extends JFrame {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver"); 
 			Connection con=DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");  
+					"jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC","root","chuhui1026");  
 			Statement transStmt = con.createStatement();
 			Statement cardStmt = con.createStatement();
 			Statement userStmt = con.createStatement();
@@ -301,7 +302,7 @@ public class Account_View extends JFrame {
 						System.out.println("Go to Security");
 					}
 					else if (((String)e.getItem()).contains("Sign Out")) {
-						Login_View back = new Login_View();
+						Login_View back = new Login_View(s);
 						back.setVisible(true);
 						dispose();
 						
@@ -347,7 +348,7 @@ public class Account_View extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				Bank_View back = new Bank_View(loginUser);
+				Bank_View back = new Bank_View(loginUser,s);
 				back.setVisible(true);
 				dispose();
 			}
