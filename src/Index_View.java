@@ -96,7 +96,7 @@ public class Index_View{
 		
 		JPanel greetingPanel = new JPanel();
 		greetingPanel.setBackground(Color.WHITE);
-		greetingPanel.setBounds(10, 96, 566, 55);
+		greetingPanel.setBounds(10, 96, 566, 98);
 		frame.getContentPane().add(greetingPanel);
 		greetingPanel.setLayout(null);
 		
@@ -112,28 +112,32 @@ public class Index_View{
 		}
 		
 		JLabel lblGreetings = new JLabel(greetingStr);
+		lblGreetings.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblGreetings.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGreetings.setFont(new Font("Candara", Font.ITALIC, 25));
-		lblGreetings.setForeground(Color.BLACK);
-		lblGreetings.setBounds(165, 7, 247, 25);
+		lblGreetings.setFont(new Font("Candara", Font.BOLD | Font.ITALIC, 25));
+		lblGreetings.setForeground(new Color(47, 77, 45));
+		lblGreetings.setBounds(165, 10, 247, 33);
 		greetingPanel.add(lblGreetings);
 		
 		JLabel lblThankYouFor = new JLabel("Thank you for choosing SHOANK");
-		lblThankYouFor.setFont(new Font("Candara", Font.ITALIC, 18));
-		lblThankYouFor.setBounds(165, 30, 253, 25);
+		lblThankYouFor.setVerticalAlignment(SwingConstants.TOP);
+		lblThankYouFor.setHorizontalAlignment(SwingConstants.CENTER);
+		lblThankYouFor.setFont(new Font("Candara", Font.ITALIC, 20));
+		lblThankYouFor.setBounds(144, 45, 290, 43);
+		lblThankYouFor.setForeground(new Color(47, 77, 45));
 		greetingPanel.add(lblThankYouFor);
 
 		
 		JPanel selectPanel = new JPanel();
 		selectPanel.setBackground(Color.WHITE);
-		selectPanel.setBounds(10, 161, 566, 192);
+		selectPanel.setBounds(10, 204, 566, 149);
 		frame.getContentPane().add(selectPanel);
 		selectPanel.setLayout(null);
 		
 		JPanel shopBtnPanel = new JPanel();
 		shopBtnPanel.setBackground(Color.WHITE);
 		shopBtnPanel.setBorder(new LineBorder(new Color(155, 146, 60), 4, true));
-		shopBtnPanel.setBounds(10, 59, 257, 87);
+		shopBtnPanel.setBounds(10, 10, 257, 87);
 		selectPanel.add(shopBtnPanel);
 		shopBtnPanel.setLayout(null);
 		
@@ -168,7 +172,7 @@ public class Index_View{
 		bankBtnPanel.setLayout(null);
 		bankBtnPanel.setBorder(new LineBorder(new Color(155, 146, 60), 4, true));
 		bankBtnPanel.setBackground(Color.WHITE);
-		bankBtnPanel.setBounds(299, 59, 257, 87);
+		bankBtnPanel.setBounds(299, 10, 257, 87);
 		selectPanel.add(bankBtnPanel);
 		
 		JButton btnBanking = new JButton("Banking");

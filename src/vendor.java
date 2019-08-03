@@ -33,7 +33,7 @@ public class vendor {
 		  else {
 			  newBalance=availableBalance-amount;
 			  statement.executeUpdate("UPDATE credit_cards set remainCredit = '"+ newBalance+"' WHERE cardNumber='"+cardNumber+"'");
-			  statement.executeUpdate("INSERT INTO transaction (`cost`,`cardNumber`,`paidTo`) Values( '" +amount+  "' , '"+cardNumber+"' , '"+shopName+"' )");
+			  statement.executeUpdate("INSERT INTO transactions (`cost`,`cardNumber`,`paidTo`) Values( '" +amount+  "' , '"+cardNumber+"' , '"+shopName+"' )");
 			  return  1;
 		  }
 	  }
@@ -50,7 +50,7 @@ public class vendor {
 	 try { 
 		 String id;
 		 Class.forName("com.mysql.cj.jdbc.Driver");
-	  Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC","root","chuhui1026");
+	  Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");
 	  Statement statement =con.createStatement();
 	  
 	  ResultSet data = statement.executeQuery("SELECT id from users WHERE firstName= '"+firstName+"' AND lastName='"+lastName+"'");
@@ -62,8 +62,9 @@ public class vendor {
 	      while(data.next()) {
 	    	  if(data.getString("cardNumber").equals(cardNumber)&&data.getString("securityCode").equals(security))
 	    		  return true;
-	    	  return false;
-	  	}
+	    	  
+	  	  }
+
 	 }
 	 }
   catch(Exception e) {
