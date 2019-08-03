@@ -29,7 +29,7 @@ public class ViewUser_Home extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ViewUser_Home(String loginUser) {
+	public ViewUser_Home(String loginUser,Calendar s) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
@@ -91,7 +91,7 @@ public class ViewUser_Home extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				SearchUser_View shop = new SearchUser_View(loginUser);
+				SearchUser_View shop = new SearchUser_View(loginUser,s);
 				shop.setVisible(true);
 				dispose();
 			}
@@ -128,7 +128,7 @@ public class ViewUser_Home extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CreateUser_View openFrame = new CreateUser_View(loginUser);
+				CreateUser_View openFrame = new CreateUser_View(loginUser,s);
 				openFrame.frame.setVisible(true);
 				dispose();
 			}
@@ -172,7 +172,7 @@ public class ViewUser_Home extends JFrame {
 						System.out.println("Go to Security");
 					}
 					else if (((String)e.getItem()).contains("Sign Out")) {
-						Login_View back = new Login_View();
+						Login_View back = new Login_View(s);
 						back.setVisible(true);
 						dispose();
 						
@@ -230,7 +230,7 @@ public class ViewUser_Home extends JFrame {
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				SuperHome_View back = new SuperHome_View(loginUser);
+				SuperHome_View back = new SuperHome_View(loginUser,s);
 				back.setVisible(true);
 				dispose();
 			}

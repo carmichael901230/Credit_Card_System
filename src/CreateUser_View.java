@@ -6,6 +6,8 @@ import javax.swing.JLabel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+
+import java.util.Calendar;
 import java.util.Date;
 import java.awt.Color;
 import javax.swing.JTextField;
@@ -80,7 +82,7 @@ public class CreateUser_View extends JFrame{
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	public CreateUser_View(String name) {
+	public CreateUser_View(String name,Calendar s) {
 		frame = new JFrame("Create User");
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.getContentPane().setForeground(Color.WHITE);
@@ -292,7 +294,7 @@ public class CreateUser_View extends JFrame{
 				if(allCase) {
 					writeDataIntoDatabase();
 					clean();
-					ViewUser_Home openFrame = new ViewUser_Home(name);
+					ViewUser_Home openFrame = new ViewUser_Home(name,s);
 					openFrame.setVisible(true);
 					frame.dispose();
 				}
@@ -314,7 +316,7 @@ public class CreateUser_View extends JFrame{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				clean();
-				ViewUser_Home openFrame = new ViewUser_Home(name);
+				ViewUser_Home openFrame = new ViewUser_Home(name,s);
 				openFrame.setVisible(true);
 				frame.dispose();
 			}
@@ -513,7 +515,7 @@ public class CreateUser_View extends JFrame{
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC", "root", "wang87067835");
+					"jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC", "root", "chuhui1026");
 			Statement stmt = con.createStatement();
 			String password = this.passwordString;
 			String firstName = this.firstNameString;

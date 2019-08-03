@@ -1,6 +1,5 @@
 
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -21,23 +21,12 @@ public class VendorTransMenu extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VendorTransMenu frame = new VendorTransMenu();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame.
 	 */
-	public VendorTransMenu() {
+	public VendorTransMenu(String loginUser,Calendar s) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -50,7 +39,7 @@ public class VendorTransMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				VendorTransData next;
 				try {
-					next = new VendorTransData("bananabees");
+					next = new VendorTransData("bananabees",s,loginUser);
 					next.setVisible(true);
 					dispose();
 				} catch (ClassNotFoundException | SQLException e1) {
@@ -71,7 +60,7 @@ public class VendorTransMenu extends JFrame {
 			public void mousePressed(MouseEvent e) {
 				VendorTransData next;
 				try {
-					next = new VendorTransData("groundfood");
+					next = new VendorTransData("groundfood",s,loginUser);
 					next.setVisible(true);
 					dispose();
 				} catch (ClassNotFoundException | SQLException e1) {
@@ -87,7 +76,7 @@ public class VendorTransMenu extends JFrame {
 			public void mousePressed(MouseEvent e) {
 				VendorTransData next;
 				try {
-					next = new VendorTransData("thehousedepot");
+					next = new VendorTransData("thehousedepot",s,loginUser);
 					next.setVisible(true);
 					dispose();
 				} catch (ClassNotFoundException | SQLException e1) {
@@ -110,7 +99,7 @@ public class VendorTransMenu extends JFrame {
 			public void mousePressed(MouseEvent e) {
 				VendorTransData next;
 				try {
-					next = new VendorTransData("valmart");
+					next = new VendorTransData("valmart",s,loginUser);
 					next.setVisible(true);
 					dispose();
 				} catch (ClassNotFoundException | SQLException e1) {
@@ -121,6 +110,23 @@ public class VendorTransMenu extends JFrame {
 		});
 		btnNewButton_3.setBounds(60, 145, 293, 29);
 		contentPane.add(btnNewButton_3);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SuperHome_View next= new SuperHome_View(loginUser, s);
+				
+			}
+		});
+		btnBack.setBounds(278, 217, 75, 29);
+		contentPane.add(btnBack);
+		
+		JButton btnNewButton_4 = new JButton("Home");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_4.setBounds(354, 217, 75, 29);
+		contentPane.add(btnNewButton_4);
 	}
-
 }

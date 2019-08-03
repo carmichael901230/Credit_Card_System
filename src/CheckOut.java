@@ -255,8 +255,7 @@ public class CheckOut extends vendor {
 				cardNumber = cardInt+"";
 				try {
 					if(check(cardNumber,lastName,firstName,security)) {
-						// System.out.println(cardNumber+" "+lastName+" "+firstName+" "+security);
-						int result = charge(cardNumber,realCost,shopName);
+						int result = charge(cardNumber,realCost,shopName,s);
 						if(result==-1)
 							output="Insufficient Fund";
 						else if(result==1) {

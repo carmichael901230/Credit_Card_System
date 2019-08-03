@@ -59,7 +59,7 @@ public class Bank_View extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Bank_View(ResultSet loginUser) {
+	public Bank_View(ResultSet loginUser,Calendar s) {
 		contentPane = new JPanel();
 
 		
@@ -193,7 +193,7 @@ public class Bank_View extends JFrame {
 						//System.out.println("Go to Security");
 					}
 					else if (((String)e.getItem()).contains("Sign Out")) {
-						Login_View back = new Login_View();
+						Login_View back = new Login_View(s);
 						back.setVisible(true);
 						dispose();
 						
@@ -212,7 +212,7 @@ public class Bank_View extends JFrame {
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Index_View back = new Index_View();
+				Index_View back = new Index_View(s);
 				back.frame.setVisible(true);
 				dispose();
 			}
@@ -236,7 +236,7 @@ public class Bank_View extends JFrame {
 			// DataBase connect
 			Class.forName("com.mysql.cj.jdbc.Driver"); 
 			Connection con=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");  
+					"jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC","root","chuhui1026");  
 			Statement stmt = con.createStatement();
 			ResultSet cardRes = stmt.executeQuery("SELECT * FROM credit_cards WHERE cardHolder = "+userID);
 			
@@ -258,7 +258,7 @@ public class Bank_View extends JFrame {
 							err.printStackTrace();
 						}
 						finally {
-							Account_View acc_view = new Account_View(loginUser, cardNum);
+							Account_View acc_view = new Account_View(loginUser, cardNum,s);
 							acc_view.setVisible(true);
 							dispose();
 						}

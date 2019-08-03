@@ -25,6 +25,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
 import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
 import javax.swing.GroupLayout;
@@ -63,7 +64,7 @@ public class SearchUser_View extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SearchUser_View(String loginUser) {
+	public SearchUser_View(String loginUser,Calendar s) {
 		setForeground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 530, 453);
@@ -206,7 +207,7 @@ public class SearchUser_View extends JFrame {
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				ViewUser_Home back = new ViewUser_Home(loginUser);
+				ViewUser_Home back = new ViewUser_Home(loginUser,s);
 				back.setVisible(true);
 				dispose();
 			}
@@ -227,7 +228,7 @@ public class SearchUser_View extends JFrame {
 				try {	
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection con = DriverManager.getConnection(
-							"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC", "root", "wang87067835");
+							"jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC", "root", "chuhui1026");
 					char[] ssn1 = ssn1TextField.getPassword();
 					char[] ssn2 = ssn2TextField.getPassword();
 					char[] ssn3 = ssn3TextField.getPassword();
@@ -247,8 +248,8 @@ public class SearchUser_View extends JFrame {
 					Statement custStmt = con.createStatement();
 					ResultSet custRes = custStmt.executeQuery("SELECT * FROM users WHERE SSN ='" +ssn + "' AND firstName = '"+firstName+"' AND lastName = '"+lastName+"'");
 					if (custRes.next()) {
-						//System.out.println(loginUser);
-						CheckUser_Card_View newFrame = new CheckUser_Card_View(custRes, loginUser);
+						System.out.println(loginUser);
+						CheckUser_Card_View newFrame = new CheckUser_Card_View(custRes, loginUser,s);
 						newFrame.setVisible(true);
 						dispose();
 					}

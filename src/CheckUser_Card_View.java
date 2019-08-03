@@ -59,7 +59,7 @@ public class CheckUser_Card_View extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CheckUser_Card_View(ResultSet customer, String loginUser) {
+	public CheckUser_Card_View(ResultSet customer, String loginUser,Calendar s) {
 		contentPane = new JPanel();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -233,7 +233,7 @@ public class CheckUser_Card_View extends JFrame {
 						//System.out.println("Go to Security");
 					}
 					else if (((String)e.getItem()).contains("Sign Out")) {
-						Login_View back = new Login_View();
+						Login_View back = new Login_View(s);
 						back.setVisible(true);
 						dispose();
 						
@@ -249,7 +249,7 @@ public class CheckUser_Card_View extends JFrame {
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				SearchUser_View back = new SearchUser_View(loginUser);
+				SearchUser_View back = new SearchUser_View(loginUser,s);
 				back.setVisible(true);
 				dispose();
 			}
@@ -267,7 +267,7 @@ public class CheckUser_Card_View extends JFrame {
 		btnNewCard.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				NewCard_View newCard = new NewCard_View(customer, loginUser);
+				NewCard_View newCard = new NewCard_View(customer, loginUser,s);
 				newCard.setVisible(true);
 				dispose();
 			}
@@ -285,7 +285,7 @@ public class CheckUser_Card_View extends JFrame {
 			// DataBase connect
 			Class.forName("com.mysql.cj.jdbc.Driver"); 
 			Connection con=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");  
+					"jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC","root","chuhui1026");  
 			Statement cardStmt = con.createStatement();
 			Statement loginStmt = con.createStatement();
 			ResultSet cardRes = cardStmt.executeQuery("SELECT * FROM credit_cards WHERE cardHolder = "+userID);
@@ -299,7 +299,7 @@ public class CheckUser_Card_View extends JFrame {
 				panel_1.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						CheckDetail_View acc_view = new CheckDetail_View(loginRes, customer, cardNum);
+						CheckDetail_View acc_view = new CheckDetail_View(loginRes, customer, cardNum,s);
 						acc_view.setVisible(true);
 						dispose();
 					}

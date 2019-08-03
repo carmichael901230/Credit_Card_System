@@ -160,45 +160,16 @@ public class Shops_View extends JFrame {
 		lblBananaBees.setBounds(0, 26, 231, 90);
 		bananaBeesPanel.add(lblBananaBees);
 		
-		JPanel groundFoodPanel = new JPanel();
-		groundFoodPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		groundFoodPanel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				groundfood newF = new groundfood(s);
-				newF.frame.setVisible(true);
-				dispose();
-			}
-		});
-		groundFoodPanel.setBackground(Color.WHITE);
-		shopsPanel.add(groundFoodPanel);
-		groundFoodPanel.setLayout(null);
-		
-		JLabel lblGround = new JLabel("ground");
-		lblGround.setForeground(new Color(113, 62, 45));
-		lblGround.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblGround.setFont(new Font("Arial", Font.PLAIN, 35));
-		lblGround.setBounds(15, 36, 108, 68);
-		groundFoodPanel.add(lblGround);
-		
-		JLabel lblFood = new JLabel("F   od");
-		lblFood.setForeground(new Color(0, 143, 67));
-		lblFood.setFont(new Font("Arial", Font.BOLD, 35));
-		lblFood.setBounds(126, 36, 95, 68);
-		groundFoodPanel.add(lblFood);
-		
-		JLabel lblImg = new JLabel();
-		Image groundFood_logo = new ImageIcon(Login_View.class.getResource("groundfood_logo.png")).getImage().getScaledInstance(29, 30, Image.SCALE_SMOOTH);
-		lblImg.setIcon(new ImageIcon(groundFood_logo));
-		lblImg.setBounds(146, 51, 30, 37);
-		groundFoodPanel.add(lblImg);
+		JPanel panel_4 = new JPanel();
+		shopsPanel.add(panel_4);
+		panel_4.setLayout(null);
 
 		
 		JButton btnBack = new JButton("< Back");
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Index_View back = new Index_View();
+				Index_View back = new Index_View(s);
 				back.frame.setVisible(true);
 				dispose();
 			}

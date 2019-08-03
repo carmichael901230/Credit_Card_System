@@ -29,7 +29,7 @@ public class SuperHome_View extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SuperHome_View(String loginUser) {
+	public SuperHome_View(String loginUser,Calendar s) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
@@ -104,7 +104,7 @@ public class SuperHome_View extends JFrame {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				ViewUser_Home account_view = new ViewUser_Home(loginUser);
+				ViewUser_Home account_view = new ViewUser_Home(loginUser,s);
 				account_view.setVisible(true);
 				dispose();
 			}
@@ -142,7 +142,7 @@ public class SuperHome_View extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO shop transation
-				VendorTransMenu next = new VendorTransMenu();
+				VendorTransMenu next = new VendorTransMenu(loginUser,s);
 				next.setVisible(true);
 				dispose();
 			}
@@ -186,7 +186,7 @@ public class SuperHome_View extends JFrame {
 						System.out.println("Go to Security");
 					}
 					else if (((String)e.getItem()).contains("Sign Out")) {
-						Login_View back = new Login_View();
+						Login_View back = new Login_View(s);
 						back.setVisible(true);
 						dispose();
 						

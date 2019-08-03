@@ -45,7 +45,7 @@ public class confirm extends JFrame {
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Shops_View next =new Shops_View(s);
+				Shops_View next=new Shops_View(s);
 				next.setVisible(true);
 				dispose();
 			}
