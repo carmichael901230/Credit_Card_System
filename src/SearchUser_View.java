@@ -218,7 +218,7 @@ public class SearchUser_View extends JFrame {
 		btnBack.setFocusable(false);
 		btnBack.setContentAreaFilled(false);
 		btnBack.setBorder(new LineBorder(new Color(0, 73, 118), 2, true));
-		btnBack.setBounds(10, 10, 106, 40);
+		btnBack.setBounds(10, 10, 100, 40);
 		contentPane.add(btnBack);
 		
 		JButton btnSearch = new JButton("Search");
@@ -228,7 +228,7 @@ public class SearchUser_View extends JFrame {
 				try {	
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection con = DriverManager.getConnection(
-							"jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC", "root", "chuhui1026");
+							"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC", "root", "wang87067835");
 					char[] ssn1 = ssn1TextField.getPassword();
 					char[] ssn2 = ssn2TextField.getPassword();
 					char[] ssn3 = ssn3TextField.getPassword();

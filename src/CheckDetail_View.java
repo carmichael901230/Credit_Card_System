@@ -199,7 +199,7 @@ public class CheckDetail_View extends JFrame {
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection con = DriverManager.getConnection(
-							"jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC", "root", "chuhui1026");
+							"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC", "root", "wang87067835");
 					Statement getStmt = con.createStatement();
 					Statement InsertStmt = con.createStatement();
 					Statement userStmt = con.createStatement();
@@ -257,12 +257,26 @@ public class CheckDetail_View extends JFrame {
 						Class.forName("com.mysql.cj.jdbc.Driver"); 
 						Connection con=DriverManager.getConnection(  
 								"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");  
-						Statement stmt = con.createStatement();
-						int success = stmt.executeUpdate("UPDATE `credit_card_system`.`credit_cards` SET `cardHolder` = '0' WHERE (`cardNumber` = '"+cardNumber+"');");
-						loginStr = loginUser.getString("accountID");
-						CheckUser_Card_View back = new CheckUser_Card_View(customer, loginStr);
-						back.setVisible(true);
-						dispose();
+						Statement checkStmt = con.createStatement();
+						ResultSet res = checkStmt.executeQuery("SELECT * FROM credit_cards WHERE cardNumber = '"+cardNumber+"'");
+						if(res.next()) {
+							String remain = res.getString("remainCredit");
+							String limit = res.getString("creditLimit");
+							double own = Double.parseDouble(limit)-Double.parseDouble(remain);
+							if (own>0) {
+								JOptionPane.showMessageDialog(null,"Can't close credit card \nDue to: unpaid Blance: $ "+own); 
+							}
+							else {
+								Statement stmt = con.createStatement();
+								int success = stmt.executeUpdate("UPDATE `credit_card_system`.`credit_cards` SET `cardHolder` = '0' WHERE (`cardNumber` = '"+cardNumber+"');");
+								loginStr = loginUser.getString("accountID");
+								CheckUser_Card_View back = new CheckUser_Card_View(customer, loginStr, s);
+								back.setVisible(true);
+								dispose();
+							}
+						}
+						
+						
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					} catch (ClassNotFoundException e1) {
@@ -435,7 +449,7 @@ public class CheckDetail_View extends JFrame {
 				catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				CheckUser_Card_View back = new CheckUser_Card_View(customer, loginStr);
+				CheckUser_Card_View back = new CheckUser_Card_View(customer, loginStr, s);
 				back.setVisible(true);
 				dispose();
 			}

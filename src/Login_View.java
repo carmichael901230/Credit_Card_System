@@ -112,7 +112,7 @@ public class Login_View extends JFrame {
 		try {
 			// System.out.println("Connect");
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC","root","chuhui1026");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");
 			Statement stmt = con.createStatement();
 			// Query get result
 			ResultSet res = stmt.executeQuery("SELECT * FROM users WHERE accountID = '"+username+"'");
@@ -281,7 +281,7 @@ public class Login_View extends JFrame {
 		
 		btnSignin.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				login();
 			}
 		});
@@ -310,7 +310,7 @@ public class Login_View extends JFrame {
 		lblForgetPassword.setVisible(false);
 		lblForgetPassword.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				Security_View account_reset = new Security_View(s);
 				account_reset.setVisible(true);
 				dispose();
@@ -396,7 +396,7 @@ public class Login_View extends JFrame {
 		btnBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				Index_View back = new Index_View(s);
 				back.frame.setVisible(true);
 				dispose();

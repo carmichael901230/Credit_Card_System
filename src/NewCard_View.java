@@ -200,7 +200,7 @@ public class NewCard_View extends JFrame {
 			String cardNumber = "542418131000";
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC", "root", "chuhui1026");
+					"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC", "root", "wang87067835");
 			Statement stmt = con.createStatement();
 			if (res != null) { userId = res.getString("id"); }
 			

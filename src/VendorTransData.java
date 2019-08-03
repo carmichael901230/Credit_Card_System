@@ -47,30 +47,26 @@ public class VendorTransData extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(6, 74, 531, 198);
 		contentPane.add(scrollPane);
-		
-		table = new JTable();
-		scrollPane.setColumnHeaderView(table);
 		ArrayList<String> temp = new ArrayList<>();
 		String[][] ACdata;
-		String [] header= {"transactionID","cost","DATE","cardNumber","paidTo"};
+		String [] header= {"transactionID","cost","DATE","cardNumber"};
 		 Class.forName("com.mysql.cj.jdbc.Driver");
 		 System.out.println(4);
-		  Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC","root","chuhui1026");
+		  Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");
 		  Statement statement =con.createStatement();
 		  System.out.println(2);
-		  ResultSet data=statement.executeQuery("SELECT * FROM transaction WHERE paidTo ='"+ shopName +"' ");
+		  ResultSet data=statement.executeQuery("SELECT * FROM transactions WHERE paidTo ='"+ shopName +"' ");
 		  while(data.next()) {
 			  temp.add(data.getString("paidTo"));
 		  }
-		  ACdata=new String[temp.size()][5];
+		  ACdata=new String[temp.size()][4];
 		  int i=0;
-		  data=statement.executeQuery("SELECT * FROM transaction WHERE paidTo ='"+ shopName +"' ");
+		  data=statement.executeQuery("SELECT * FROM transactions WHERE paidTo ='"+ shopName +"' ");
 		  while(data.next()) {
 			  ACdata[i][0]=data.getString("transactionID");
-			  ACdata[i][1]=data.getString("cost");
-			  ACdata[i][2]=data.getString("DATE");
-			  ACdata[i][3]=data.getString("cardNumber");
-			  ACdata[i][4]=data.getString("paidTo");
+			  ACdata[i][1]="$ "+data.getString("cost");
+			  ACdata[i][2]=data.getString("DATE").substring(0,10);
+			  ACdata[i][3]=String.format("%04d", Integer.parseInt(data.getString("cardNumber")));
 			  i++;
 		  }
 		  table = new AlterColor_JTable(ACdata, header);

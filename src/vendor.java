@@ -36,7 +36,7 @@ public class vendor {
 	  double newBalance;
 	 try { 
 		 Class.forName("com.mysql.cj.jdbc.Driver");
-	  Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC","root","chuhui1026");
+	  Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");
 	  Statement statement =con.createStatement();
 	  ResultSet data = statement.executeQuery("SELECT expireDate,remainCredit FROM credit_cards WHERE cardNumber='"+cardNumber+"'");
 	  data.next();
@@ -51,7 +51,7 @@ public class vendor {
 		  else {
 			  newBalance=availableBalance-amount;
 			  statement.executeUpdate("UPDATE credit_cards set remainCredit = '"+ newBalance+"' WHERE cardNumber='"+cardNumber+"'");
-			  statement.executeUpdate("INSERT INTO transaction (`cost`,`DATE`,`cardNumber`,`paidTo`) Values( '" +amount+  "' , ' "+inputDate+"' , '"+cardNumber+"' , '"+shopName+"' )");
+			  statement.executeUpdate("INSERT INTO transactions (`cost`,`DATE`,`cardNumber`,`paidTo`) Values( '" +amount+  "' , ' "+inputDate+"' , '"+cardNumber+"' , '"+shopName+"' )");
 			  return  1;
 		  }
 	  }
@@ -68,7 +68,7 @@ public class vendor {
 	 try { 
 		 String id;
 		 Class.forName("com.mysql.cj.jdbc.Driver");
-	  Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC","root","chuhui1026");
+	  Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");
 	  Statement statement =con.createStatement();
 	  
 	  ResultSet data = statement.executeQuery("SELECT id from users WHERE firstName= '"+firstName+"' AND lastName='"+lastName+"'");

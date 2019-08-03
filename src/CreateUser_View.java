@@ -515,7 +515,7 @@ public class CreateUser_View extends JFrame{
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC", "root", "chuhui1026");
+					"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC", "root", "wang87067835");
 			Statement stmt = con.createStatement();
 			String password = this.passwordString;
 			String firstName = this.firstNameString;
@@ -557,7 +557,7 @@ public class CreateUser_View extends JFrame{
 			}
 //			cardNumber = String.format("%04d", Integer.parseInt(cardNumber));
 //			System.out.println(cardNumber);
-			 String answer = prefix+lastId + "\n"
+			 String answer = "Card Number: "+ prefix+lastId + "\n"
 				        + "Exprie Date: "+ expDate.substring(0,7) + "\n"
 				        + "Name: "+firstName + " " + lastName + "\n"
 				        + "CCV: " + securityCode ;

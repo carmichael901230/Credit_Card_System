@@ -285,7 +285,7 @@ public class CheckUser_Card_View extends JFrame {
 			// DataBase connect
 			Class.forName("com.mysql.cj.jdbc.Driver"); 
 			Connection con=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC","root","chuhui1026");  
+					"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");  
 			Statement cardStmt = con.createStatement();
 			Statement loginStmt = con.createStatement();
 			ResultSet cardRes = cardStmt.executeQuery("SELECT * FROM credit_cards WHERE cardHolder = "+userID);

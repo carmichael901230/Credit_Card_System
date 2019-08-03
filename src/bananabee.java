@@ -111,7 +111,7 @@ public class bananabee extends vendor{
 				reset();
 			}
 		});
-		btnNewButton_2.setBounds(429, 450, 75, 50);
+		btnNewButton_2.setBounds(429, 450, 100, 50);
 		frame.getContentPane().add(btnNewButton_2);
 		
 		JPanel panel = new JPanel();

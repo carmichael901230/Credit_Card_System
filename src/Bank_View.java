@@ -211,7 +211,7 @@ public class Bank_View extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.WEST, brandPanel, 125, SpringLayout.EAST, btnBack);
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				Index_View back = new Index_View(s);
 				back.frame.setVisible(true);
 				dispose();
@@ -236,7 +236,7 @@ public class Bank_View extends JFrame {
 			// DataBase connect
 			Class.forName("com.mysql.cj.jdbc.Driver"); 
 			Connection con=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC","root","chuhui1026");  
+					"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");  
 			Statement stmt = con.createStatement();
 			ResultSet cardRes = stmt.executeQuery("SELECT * FROM credit_cards WHERE cardHolder = "+userID);
 			
@@ -248,7 +248,7 @@ public class Bank_View extends JFrame {
 				panel_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 				panel_1.addMouseListener(new MouseAdapter() {
 					@Override
-					public void mouseClicked(MouseEvent e) {
+					public void mousePressed(MouseEvent e) {
 						try {
 							cardRes.close();
 							stmt.close();

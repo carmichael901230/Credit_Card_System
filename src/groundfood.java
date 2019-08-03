@@ -68,9 +68,9 @@ public class groundfood extends vendor{
 		s=x;
 		initialize();
 	}
-    public groundfood(int [] amount,Calendar x) {
+    public groundfood(int [] amount,Calendar s) {
     	this.amount=amount;
-    	s=x;
+    	this.s=s;
     	initialize();
     }
 	public groundfood() {
@@ -113,7 +113,7 @@ public class groundfood extends vendor{
 				reset();
 			}
 		});
-		btnNewButton_2.setBounds(429, 450, 75, 50);
+		btnNewButton_2.setBounds(429, 450, 100, 50);
 		frame.getContentPane().add(btnNewButton_2);
 		
 		

@@ -139,11 +139,11 @@ public class Account_View extends JFrame {
 		lblCurrent.setFont(new Font("Arial", Font.BOLD, 18));
 		infoPanel.add(lblCurrent);
 		
-		JLabel lblCreditCard = new JLabel("Credit Card");
-		lblCreditCard.setBounds(10, 10, 190, 41);
-		lblCreditCard.setForeground(Color.WHITE);
-		infoPanel.add(lblCreditCard);
-		lblCreditCard.setFont(new Font("Arial", Font.PLAIN, 35));
+		JLabel lblcredit_card_system = new JLabel("Credit Card");
+		lblcredit_card_system.setBounds(10, 10, 190, 41);
+		lblcredit_card_system.setForeground(Color.WHITE);
+		infoPanel.add(lblcredit_card_system);
+		lblcredit_card_system.setFont(new Font("Arial", Font.PLAIN, 35));
 		
 		JLabel lblBackgroundImg = new JLabel("");
 		lblBackgroundImg.setBounds(0, 0, 776, 157);
@@ -192,7 +192,7 @@ public class Account_View extends JFrame {
 		JButton btnMakePayment = new JButton("Make a Payment");
 		btnMakePayment.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				Payment_View payWindow = new Payment_View(loginUser, cardNumber);
 				payWindow.setVisible(true);
 			}
@@ -243,7 +243,7 @@ public class Account_View extends JFrame {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver"); 
 			Connection con=DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC","root","chuhui1026");  
+					"jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");  
 			Statement transStmt = con.createStatement();
 			Statement cardStmt = con.createStatement();
 			Statement userStmt = con.createStatement();
@@ -347,7 +347,7 @@ public class Account_View extends JFrame {
 		btnBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				
 				Bank_View back = new Bank_View(loginUser,s);
 				back.setVisible(true);
