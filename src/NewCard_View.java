@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Image;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -23,9 +24,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 public class NewCard_View extends JFrame {
-
+	private Color Color_navy = new Color(0,73,118);
 	private JPanel contentPane;
 	private JTextField creditLineTF;
 	private JTextField securityCodeTF;
@@ -42,7 +48,7 @@ public class NewCard_View extends JFrame {
 		this.res = res;
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 400, 355);
+		setBounds(100, 100, 432, 395);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -51,7 +57,7 @@ public class NewCard_View extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(6, 72, 388, 247);
+		panel.setBounds(6, 72, 402, 276);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -81,12 +87,12 @@ public class NewCard_View extends JFrame {
 				}
 			}
 		});
-		createBTN.setBounds(10, 197, 376, 40);
+		createBTN.setBounds(124, 226, 200, 40);
 		createBTN.setOpaque(true);
 		createBTN.setForeground(Color.WHITE);
 		createBTN.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		createBTN.setBorderPainted(false);
-		createBTN.setBackground(Color.CYAN);
+		createBTN.setBackground(Color_navy);
 		panel.add(createBTN);
 		
 		JLabel lblSecurityCode = new JLabel("Security Code:");
@@ -101,6 +107,9 @@ public class NewCard_View extends JFrame {
 		panel.add(securityCodeTF);
 		
 		JButton btnNewButton = new JButton("< Back");
+		btnNewButton.setForeground(Color_navy);
+		btnNewButton.setBorder(new LineBorder(Color_navy, 2, true));
+		btnNewButton.setContentAreaFilled(false);
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -109,10 +118,53 @@ public class NewCard_View extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton.setBackground(Color.RED);
+		btnNewButton.setBackground(Color.WHITE);
 		btnNewButton.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		btnNewButton.setBounds(10, 10, 120, 50);
+		btnNewButton.setBounds(10, 20, 100, 35);
 		contentPane.add(btnNewButton);
+		
+		JPanel logoPanel = new JPanel();
+		logoPanel.setBackground(Color.WHITE);
+		logoPanel.setBounds(126, 10, 220, 50);
+		contentPane.add(logoPanel);
+		
+		JLabel label = new JLabel("");
+		label.setAlignmentY(0.0f);
+		Image bankLogo = new ImageIcon(Login_View.class.getResource("bankLogo.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		label.setIcon(new ImageIcon(bankLogo));
+		
+		JLabel label_1 = new JLabel("Capital");
+		label_1.setForeground(new Color(0, 73, 118));
+		label_1.setFont(new Font("Arial Black", Font.BOLD | Font.ITALIC, 25));
+		
+		JLabel label_2 = new JLabel("Two");
+		label_2.setVerticalAlignment(SwingConstants.TOP);
+		label_2.setForeground(new Color(0, 73, 118));
+		label_2.setFont(new Font("Gabriola", Font.ITALIC, 30));
+		GroupLayout gl_logoPanel = new GroupLayout(logoPanel);
+		gl_logoPanel.setHorizontalGroup(
+			gl_logoPanel.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 220, Short.MAX_VALUE)
+				.addComponent(label)
+				.addGroup(gl_logoPanel.createSequentialGroup()
+					.addGap(47)
+					.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_logoPanel.createSequentialGroup()
+					.addGap(153)
+					.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_logoPanel.setVerticalGroup(
+			gl_logoPanel.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 50, Short.MAX_VALUE)
+				.addComponent(label)
+				.addGroup(gl_logoPanel.createSequentialGroup()
+					.addGap(10)
+					.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_logoPanel.createSequentialGroup()
+					.addGap(21)
+					.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
+		);
+		logoPanel.setLayout(gl_logoPanel);
 	}
 	
 	public boolean checkSecurityCode(String s) {

@@ -306,6 +306,7 @@ public class Login_View extends JFrame {
 		sl_loginPanel.putConstraint(SpringLayout.NORTH, btnSignin, 36, SpringLayout.SOUTH, lblForgetPassword);
 		sl_loginPanel.putConstraint(SpringLayout.EAST, lblForgetPassword, 231, SpringLayout.WEST, lblUsername);
 		lblForgetPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblForgetPassword.setVisible(false);
 		lblForgetPassword.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

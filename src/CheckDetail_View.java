@@ -267,7 +267,6 @@ public class CheckDetail_View extends JFrame {
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					} catch (ClassNotFoundException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					
@@ -379,10 +378,10 @@ public class CheckDetail_View extends JFrame {
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == 1) {
 					if (((String)e.getItem()).contains("Profile")) {
-						System.out.println("Go to Profile");
+						//System.out.println("Go to Profile");
 					}
 					else if (((String)e.getItem()).contains("Security")) {
-						System.out.println("Go to Security");
+						//System.out.println("Go to Security");
 					}
 					else if (((String)e.getItem()).contains("Sign Out")) {
 						Login_View back = new Login_View();
@@ -430,7 +429,14 @@ public class CheckDetail_View extends JFrame {
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Bank_View back = new Bank_View(loginUser);
+				String loginStr = null;
+				try {
+					loginStr = loginUser.getString("accountId");
+				}
+				catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				CheckUser_Card_View back = new CheckUser_Card_View(customer, loginStr);
 				back.setVisible(true);
 				dispose();
 			}

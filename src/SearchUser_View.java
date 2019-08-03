@@ -243,11 +243,11 @@ public class SearchUser_View extends JFrame {
 					for (int i=0; i<ssn3.length; i++) {
 						ssn.append(ssn3[i]);
 					}
-					System.out.println(ssn.toString()+" "+firstName + " " + lastName);
+					//System.out.println(ssn.toString()+" "+firstName + " " + lastName);
 					Statement custStmt = con.createStatement();
 					ResultSet custRes = custStmt.executeQuery("SELECT * FROM users WHERE SSN ='" +ssn + "' AND firstName = '"+firstName+"' AND lastName = '"+lastName+"'");
 					if (custRes.next()) {
-						System.out.println(loginUser);
+						//System.out.println(loginUser);
 						CheckUser_Card_View newFrame = new CheckUser_Card_View(custRes, loginUser);
 						newFrame.setVisible(true);
 						dispose();
@@ -255,7 +255,7 @@ public class SearchUser_View extends JFrame {
 					else {
 						showMessage("Sorry, we can not find this customer"); 
 					}
-					System.out.println("ends");
+					//System.out.println("ends");
 				}
 				catch (SQLException e1) { 
 					showMessage("Sorry, we can not find this customer"); 

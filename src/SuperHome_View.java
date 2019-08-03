@@ -164,10 +164,6 @@ public class SuperHome_View extends JFrame {
 		Object choice[] = {
 				loginUser,
 				new JSeparator(JSeparator.HORIZONTAL),
-				"<html><strong>Profile</strong></html>", 
-				new JSeparator(JSeparator.HORIZONTAL),
-				"<html><strong>Security</strong></html>", 
-				new JSeparator(JSeparator.HORIZONTAL),
 				"<html><strong>Sign Out<strong></html>"};
 		JComboBox<Object> comboBox = new JComboBox<Object>(choice);
 		comboBox.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));

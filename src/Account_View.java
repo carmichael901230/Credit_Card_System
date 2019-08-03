@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.border.EmptyBorder;
 import javax.swing.SpringLayout;
 import java.awt.Color;
@@ -35,6 +36,8 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 import javax.swing.border.LineBorder;
 import java.awt.Cursor;
+import java.awt.Dimension;
+
 import javax.swing.JTable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -277,10 +280,8 @@ public class Account_View extends JFrame {
 		}
 		
 		// drop down menu
-		String choice[] = {
+		Object choice[] = {
 				username,
-				"<html><strong>Profile</strong><br>Edit Info</html>", 
-				"<html><strong>Security</strong><br>Login Setting</html>", 
 				"<html><strong>Sign Out<strong></html>"};
 		JComboBox comboBox = new JComboBox(choice);
 		
@@ -290,15 +291,15 @@ public class Account_View extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.EAST, comboBox, 0, SpringLayout.EAST, panel);
 		comboBox.setForeground(Color.WHITE);
 		comboBox.setFont(new Font("Arial", Font.PLAIN, 20));
-		comboBox.setBackground(Color_navy);
+		comboBox.setBackground(new Color(29, 132, 199));
 		comboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == 1) {
 					if (((String)e.getItem()).contains("Profile")) {
-						System.out.println("Go to Profile");
+						//System.out.println("Go to Profile");
 					}
 					else if (((String)e.getItem()).contains("Security")) {
-						System.out.println("Go to Security");
+						//System.out.println("Go to Security");
 					}
 					else if (((String)e.getItem()).contains("Sign Out")) {
 						Login_View back = new Login_View();

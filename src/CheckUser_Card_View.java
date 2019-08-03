@@ -214,10 +214,6 @@ public class CheckUser_Card_View extends JFrame {
 		Object choice[] = {
 				loginUser,
 				new JSeparator(JSeparator.HORIZONTAL),
-				"<html><strong>Profile</strong></html>", 
-				new JSeparator(JSeparator.HORIZONTAL),
-				"<html><strong>Security</strong></html>", 
-				new JSeparator(JSeparator.HORIZONTAL),
 				"<html><strong>Sign Out<strong></html>"};
 		JComboBox comboBox = new JComboBox(choice);
 		comboBox.setBounds(583, 20, 193, 34);
@@ -231,10 +227,10 @@ public class CheckUser_Card_View extends JFrame {
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == 1) {
 					if (((String)e.getItem()).contains("Profile")) {
-						System.out.println("Go to Profile");
+						//System.out.println("Go to Profile");
 					}
 					else if (((String)e.getItem()).contains("Security")) {
-						System.out.println("Go to Security");
+						//System.out.println("Go to Security");
 					}
 					else if (((String)e.getItem()).contains("Sign Out")) {
 						Login_View back = new Login_View();
