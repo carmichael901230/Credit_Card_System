@@ -142,6 +142,9 @@ public class SuperHome_View extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO shop transation
+				VendorTransMenu next = new VendorTransMenu();
+				next.setVisible(true);
+				dispose();
 			}
 		});
 		btnShop.setForeground(Color_navy);
