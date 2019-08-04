@@ -198,7 +198,7 @@ public class housedepot extends vendor{
 		tabsBTN.setBounds(110, 87, 50, 50);
 		panel_1.add(tabsBTN);
 		
-		tabslable = new JLabel(""+amount[5]);
+		tabslable = new JLabel(""+amount[4]);
 		tabslable.setFont(new Font("Cambria Math", Font.BOLD, 20));
 		tabslable.setHorizontalAlignment(SwingConstants.CENTER);
 		tabslable.setBounds(57, 86, 50, 50);
@@ -247,7 +247,7 @@ public class housedepot extends vendor{
 		dryBTNjian.setBounds(6, 87, 50, 50);
 		panel_2.add(dryBTNjian);
 		
-		drylable = new JLabel(""+amount[4]);
+		drylable = new JLabel(""+amount[5]);
 		drylable.setFont(new Font("Cambria Math", Font.BOLD, 20));
 		drylable.setHorizontalAlignment(SwingConstants.CENTER);
 		drylable.setBounds(57, 86, 50, 50);
