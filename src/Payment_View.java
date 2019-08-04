@@ -13,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
 
 import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
@@ -26,6 +27,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import java.awt.Cursor;
+import javax.swing.border.LineBorder;
 
 public class Payment_View extends JFrame {
 	private Color Color_darkGreen = new Color(18, 128, 32);
@@ -59,7 +61,7 @@ public class Payment_View extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Payment_View(ResultSet loginUser, int cardNumber) {
+	public Payment_View(ResultSet loginUser, int cardNumber, Calendar s) {
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(150, 150, 400, 400);
@@ -84,13 +86,13 @@ public class Payment_View extends JFrame {
 		JRadioButton rdbtnCurrentBal = new JRadioButton("Current Balance");
 		rdbtnCurrentBal.setBackground(Color.WHITE);
 		rdbtnCurrentBal.setFont(new Font("Arial", Font.PLAIN, 20));
-		rdbtnCurrentBal.setBounds(6, 34, 180, 23);
+		rdbtnCurrentBal.setBounds(6, 44, 180, 23);
 		rdbtnCurrentBal.setFocusable(false);
 		panel.add(rdbtnCurrentBal);
 		
 		JLabel lblYourCurr = new JLabel("Your current balance is  $");
 		lblYourCurr.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblYourCurr.setBounds(53, 65, 188, 15);
+		lblYourCurr.setBounds(53, 75, 188, 15);
 		panel.add(lblYourCurr);
 		
 		JRadioButton rdbtnCustomAmt = new JRadioButton("Custom Amout");
@@ -141,7 +143,7 @@ public class Payment_View extends JFrame {
 				// process paymeny amount
 				boolean validAmt = false;
 				double payAmt = 0;
-				if (rdbtnCurrentBal.isSelected()) {
+				if (rdbtnCurrentBal.isSelected() && balance > 0) {
 					payAmt = balance;
 					validAmt = true;
 				}
@@ -181,6 +183,8 @@ public class Payment_View extends JFrame {
 //							System.out.println("db update successfully");
 							dispose();
 							JOptionPane.showMessageDialog(null, "Thank you for your payment!");
+							Bank_View paid = new Bank_View(loginUser, s);
+							paid.setVisible(true);
 						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
@@ -201,15 +205,32 @@ public class Payment_View extends JFrame {
 		
 		JLabel lblBalance = new JLabel("balance");
 		lblBalance.setFont(new Font("Arial", Font.BOLD, 20));
-		lblBalance.setBounds(240, 60, 85, 24);
+		lblBalance.setBounds(240, 70, 85, 24);
 		panel.add(lblBalance);
 		
 		lblInvalidAmount = new JLabel("Invalid Amount");
 		lblInvalidAmount.setForeground(Color.RED);
-		lblInvalidAmount.setFont(new Font("Arial", Font.PLAIN, 15));
-		lblInvalidAmount.setBounds(180, 103, 104, 15);
+		lblInvalidAmount.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblInvalidAmount.setBounds(110, 10, 139, 28);
 		lblInvalidAmount.setVisible(false);
 		panel.add(lblInvalidAmount);
+		
+		JButton button = new JButton("< Back");
+		button.setFocusable(false);
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Account_View back = new Account_View(loginUser, cardNumber, s);
+				back.setVisible(true);
+				dispose();
+			}
+		});
+		button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		button.setContentAreaFilled(false);
+		button.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		button.setFont(new Font("Arial", Font.BOLD, 15));
+		button.setBounds(10, 15, 80, 35);
+		contentPane.add(button);
 		
 		// connect db
 		try {

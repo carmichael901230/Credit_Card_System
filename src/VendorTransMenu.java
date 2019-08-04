@@ -119,6 +119,7 @@ public class VendorTransMenu extends JFrame {
 		shopListPanel.setLayout(new GridLayout(2, 2, 5, 5));
 		
 		JButton btnNewButton = new JButton("BananaBee's");
+		btnNewButton.setFocusable(false);
 		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton.setForeground(Color_green);
 		btnNewButton.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
@@ -127,6 +128,7 @@ public class VendorTransMenu extends JFrame {
 		shopListPanel.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Groundfood");
+		btnNewButton_1.setFocusable(false);
 		btnNewButton_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton_1.setForeground(Color_brown);
 		btnNewButton_1.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
@@ -134,6 +136,7 @@ public class VendorTransMenu extends JFrame {
 		btnNewButton_1.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		shopListPanel.add(btnNewButton_1);
 		JButton btnNewButton_2 = new JButton("HouseDepot");
+		btnNewButton_2.setFocusable(false);
 		btnNewButton_2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton_2.setForeground(Color_orange);
 		btnNewButton_2.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
@@ -142,6 +145,7 @@ public class VendorTransMenu extends JFrame {
 		shopListPanel.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 =new JButton("Valmart");
+		btnNewButton_3.setFocusable(false);
 		btnNewButton_3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton_3.setForeground(Color_blue);
 		btnNewButton_3.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));

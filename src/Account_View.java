@@ -193,8 +193,9 @@ public class Account_View extends JFrame {
 		btnMakePayment.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Payment_View payWindow = new Payment_View(loginUser, cardNumber);
+				Payment_View payWindow = new Payment_View(loginUser, cardNumber, s);
 				payWindow.setVisible(true);
+				dispose();
 			}
 		});
 		btnMakePayment.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -272,7 +273,7 @@ public class Account_View extends JFrame {
 					String transRow[] = new String[3];
 					transRow[0] = transRes.getString("date");
 					transRow[1] = transRes.getString("paidTo");
-					transRow[2] = "$"+transRes.getString("cost");
+					transRow[2] = "$"+String.format("%.2f", Double.parseDouble(transRes.getString("cost")));
 					transData.add(transRow);
 				} while (transRes.next());
 			}

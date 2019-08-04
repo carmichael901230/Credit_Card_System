@@ -27,7 +27,7 @@ public class valmart extends vendor{
    double cost[]= {2.3,4.5,6.5,10.0,12.0,12.5};
    int    amount[]= {0,0,0,0,0,0};
    double total=0.0;
-   String shopName="bananabee's";
+   String shopName="valmart";
    Calendar s;
    public JFrame frame;
 	private final Action action = new SwingAction();
