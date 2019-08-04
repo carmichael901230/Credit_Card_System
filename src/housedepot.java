@@ -111,9 +111,11 @@ public class housedepot extends vendor{
 		btnNewButton_1.setBorderPainted(false);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(total>1) {
 				CheckOut temp = new CheckOut(cost,amount,shopName,s);
 				temp.frame.setVisible(true);
 				frame.dispose();
+				}
 			}
 		});
 		frame.getContentPane().setLayout(null);
@@ -642,8 +644,8 @@ public class housedepot extends vendor{
 			
 		
 
-			double temp = (double)Math.round(((amount[0]*cost[0])+(amount[3]*cost[3])+(amount[1]*cost[1])+(amount[4]*cost[4])+(amount[2]*cost[2])+(amount[5]*cost[5]))*100)/100;
-			totalCost.setText("$ "+ temp);
+			total = (double)Math.round(((amount[0]*cost[0])+(amount[3]*cost[3])+(amount[1]*cost[1])+(amount[4]*cost[4])+(amount[2]*cost[2])+(amount[5]*cost[5]))*100)/100;
+			totalCost.setText("$ "+ total);
 	}
 	public void reset(){
 		for(int i=0;i<cost.length;i++)
