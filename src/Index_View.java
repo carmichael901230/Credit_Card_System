@@ -61,7 +61,6 @@ public class Index_View{
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 600, 401);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		SpringLayout springLayout = new SpringLayout();
 		frame.getContentPane().setLayout(null);
 		
 		
@@ -141,6 +140,7 @@ public class Index_View{
 		shopBtnPanel.setLayout(null);
 		
 		JButton btnShopping = new JButton("Shopping");
+		btnShopping.setBorderPainted(false);
 		btnShopping.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -159,7 +159,6 @@ public class Index_View{
 				frame.dispose();
 			}
 		});
-		btnShopping.setBorderPainted(false);
 		btnShopping.setBackground(Color.WHITE);
 		btnShopping.setFont(new Font("Courier New", Font.BOLD, 30));
 		btnShopping.setForeground(Color_marsh);
@@ -175,6 +174,7 @@ public class Index_View{
 		selectPanel.add(bankBtnPanel);
 		
 		JButton btnBanking = new JButton("Banking");
+		btnBanking.setBorderPainted(false);
 		btnBanking.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -196,7 +196,6 @@ public class Index_View{
 		btnBanking.setForeground(new Color(155, 146, 60));
 		btnBanking.setFont(new Font("Courier New", Font.BOLD, 30));
 		btnBanking.setFocusable(false);
-		btnBanking.setBorderPainted(false);
 		btnBanking.setBackground(Color.WHITE);
 		btnBanking.setBounds(5, 6, 246, 75);
 		bankBtnPanel.add(btnBanking);

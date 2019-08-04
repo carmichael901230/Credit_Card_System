@@ -91,6 +91,8 @@ public class bananabee extends vendor{
 		JButton btnNewButton_1 = new JButton("Check Out");
 		btnNewButton_1.setForeground(Color.WHITE);
 		btnNewButton_1.setBackground(Color.BLACK);
+		btnNewButton_1.setOpaque(true);
+		btnNewButton_1.setBorderPainted(false);
 		btnNewButton_1.setFont(new Font("Arial", Font.BOLD, 15));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -99,12 +101,15 @@ public class bananabee extends vendor{
 				frame.dispose();
 			}
 		});
+		btnNewButton_1.setOpaque(true);
 		btnNewButton_1.setBounds(539, 450, 120, 50);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("reset");
 		btnNewButton_2.setForeground(Color.WHITE);
+		btnNewButton_2.setBorderPainted(false);
 		btnNewButton_2.setBackground(Color.BLACK);
+		btnNewButton_2.setOpaque(true);
 		btnNewButton_2.setFont(new Font("Arial", Font.BOLD, 15));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -274,6 +274,7 @@ public class Login_View extends JFrame {
 		sl_loginPanel.putConstraint(SpringLayout.SOUTH, btnSignin, -41, SpringLayout.SOUTH, loginPanel);
 		sl_loginPanel.putConstraint(SpringLayout.EAST, btnSignin, -49, SpringLayout.EAST, loginPanel);
 		btnSignin.setBackground(Color_navy);
+		btnSignin.setOpaque(true);
 		btnSignin.setForeground(Color.WHITE);
 		btnSignin.setFocusable(false);
 		btnSignin.setFont(new Font("Arial", Font.BOLD, 20));

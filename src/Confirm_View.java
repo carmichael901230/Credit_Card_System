@@ -13,7 +13,7 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-public class confirm extends JFrame {
+public class Confirm_View extends JFrame {
  
 	private JPanel contentPane;
 
@@ -25,7 +25,7 @@ public class confirm extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public confirm(Calendar s) {
+	public Confirm_View(Calendar s) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 350, 300);
 		contentPane = new JPanel();
@@ -41,6 +41,9 @@ public class confirm extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton btnNewButton = new JButton("Continue Shopping");
+		btnNewButton.setBorderPainted(false);
+		btnNewButton.setOpaque(true);
+		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 15));
 		btnNewButton.setBackground(new Color(0, 188, 65));
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.addActionListener(new ActionListener() {

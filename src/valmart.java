@@ -100,6 +100,7 @@ public class valmart extends vendor{
 		}
 		
 		JButton btnNewButton_1 = new JButton("Check Out");
+		btnNewButton_1.setBorderPainted(false);
 		btnNewButton_1.setForeground(Color.WHITE);
 		btnNewButton_1.setBackground(Color.BLUE);
 		btnNewButton_1.setFont(new Font("Arial", Font.BOLD, 15));
@@ -110,12 +111,15 @@ public class valmart extends vendor{
 				frame.dispose();
 			}
 		});
+		btnNewButton_1.setOpaque(true);
 		btnNewButton_1.setBounds(539, 450, 126, 50);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Reset");
+		btnNewButton_2.setBorderPainted(false);
 		btnNewButton_2.setBackground(Color.BLUE);
 		btnNewButton_2.setForeground(Color.WHITE);
+		btnNewButton_2.setOpaque(true);
 		btnNewButton_2.setFont(new Font("Arial", Font.BOLD, 15));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -511,8 +515,8 @@ public class valmart extends vendor{
 			public void actionPerformed(ActionEvent e) {
 				amount[2]++;
 				refresh();
-				System.out.println(amount[2]);
-				System.out.println(cost[2]);
+//				System.out.println(amount[2]);
+//				System.out.println(cost[2]);
 			}
 		});
 		presharpenedBNT.addActionListener(new ActionListener() {

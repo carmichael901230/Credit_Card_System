@@ -272,6 +272,7 @@ public class CheckUser_Card_View extends JFrame {
 				dispose();
 			}
 		});
+		btnNewCard.setOpaque(true);
 		btnNewCard.setBackground(Color_navy);
 		btnNewCard.setForeground(Color.WHITE);
 		btnNewCard.setFont(new Font("Arial", Font.PLAIN, 20));

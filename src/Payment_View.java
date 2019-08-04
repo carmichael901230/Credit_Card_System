@@ -137,6 +137,7 @@ public class Payment_View extends JFrame {
 		custAmtTextField.setColumns(10);
 		
 		JButton btnPayNow = new JButton("Pay Now");
+		btnPayNow.setBorderPainted(false);
 		btnPayNow.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

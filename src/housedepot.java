@@ -94,6 +94,7 @@ public class housedepot extends vendor{
 		}
 		
 		JButton btnNewButton_1 = new JButton("Check Out");
+		btnNewButton_1.setBorderPainted(false);
 		btnNewButton_1.setFocusable(false);
 		btnNewButton_1.setFont(new Font("Arial", Font.BOLD, 15));
 		btnNewButton_1.setForeground(Color.WHITE);
@@ -110,6 +111,7 @@ public class housedepot extends vendor{
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Reset");
+		btnNewButton_2.setBorderPainted(false);
 		btnNewButton_2.setFocusable(false);
 		btnNewButton_2.setFont(new Font("Arial", Font.BOLD, 15));
 		btnNewButton_2.setBackground(Color.ORANGE);

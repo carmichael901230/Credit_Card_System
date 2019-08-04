@@ -232,14 +232,18 @@ public class CheckOut extends vendor {
 		panel_2.add(lblValTotal);
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setBorderPainted(false);
 		btnCancel.setBackground(Color_green);
+		btnCancel.setOpaque(true);
 		btnCancel.setForeground(Color.WHITE);
 		btnCancel.setFont(new Font("Arial", Font.BOLD, 20));
 		btnCancel.setBounds(296, 363, 120, 35);
 		frame.getContentPane().add(btnCancel);
 		
 		JButton btnPay = new JButton("Pay");
+		btnPay.setBorderPainted(false);
 		btnPay.setBackground(Color_green);
+		btnPay.setOpaque(true);
 		btnPay.setForeground(Color.WHITE);
 		btnPay.setFont(new Font("Arial", Font.BOLD, 20));
 		btnPay.setBounds(426, 363, 100, 35);
@@ -259,7 +263,7 @@ public class CheckOut extends vendor {
 						if(result==-1)
 							output="Insufficient Fund";
 						else if(result==1) {
-							confirm next = new confirm(s);
+							Confirm_View next = new Confirm_View(s);
 						    next.setVisible(true);
 						    frame.dispose();
 						}
