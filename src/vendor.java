@@ -41,10 +41,13 @@ public class vendor {
 		 Class.forName("com.mysql.cj.jdbc.Driver");
 	  Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC","root","chuhui1026");
 	  Statement statement =con.createStatement();
-	  ResultSet data = statement.executeQuery("SELECT expireDate,remainCredit,password FROM credit_cards WHERE cardNumber='"+cardNumber+"'");
+	  ResultSet data = statement.executeQuery("SELECT expireDate,remainCreditFROM credit_cards WHERE cardNumber='"+cardNumber+"'");
+	  Statement s2=con.createStatement();
+	  ResultSet pdd=s2.executeQuery("SELECT password FROM users WHERE cardNumber='"+cardNumber+"'");
 	  data.next();
+	  pdd.next();
 	  edate=data.getString("expireDate");
-	  String pd=data.getString("password");
+	  String pd=pdd.getString("password");
 	 exdate.set(Integer.parseInt(edate.substring(0,4)),Integer.parseInt(edate.substring(5, 7))-1
 			 ,Integer.parseInt(edate.substring(8,10)));
 	 if(today.before(exdate)) {
