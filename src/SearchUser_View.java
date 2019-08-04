@@ -255,11 +255,19 @@ public class SearchUser_View extends JFrame {
 					}
 					else {
 						showMessage("Sorry, we can not find this customer"); 
+						ssn1TextField.setText("");
+						ssn2TextField.setText("");
+						ssn3TextField.setText("");
+						ssn1TextField.requestFocus();
 					}
 					//System.out.println("ends");
 				}
 				catch (SQLException e1) { 
 					showMessage("Sorry, we can not find this customer"); 
+					ssn1TextField.setText("");
+					ssn2TextField.setText("");
+					ssn3TextField.setText("");
+					ssn1TextField.requestFocus();
 				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (Exception e2) {

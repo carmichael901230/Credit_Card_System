@@ -129,7 +129,11 @@ public class CreateUser_View extends JFrame{
 		ssn1TF = new JPasswordField();
 		ssn1TF.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
-			public void insertUpdate(DocumentEvent e) {if (ssn1TF.getPassword().length == 3) { ssn2TF.requestFocus(); } }
+			public void insertUpdate(DocumentEvent e) {
+				if (ssn1TF.getPassword().length == 3) { 
+					ssn2TF.requestFocus();
+				} 
+			}
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {}
@@ -145,7 +149,9 @@ public class CreateUser_View extends JFrame{
 		ssn2TF.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				if (ssn2TF.getPassword().length == 2) {ssn3TF.requestFocus();}
+				if (ssn2TF.getPassword().length == 2) {
+					ssn3TF.requestFocus();
+				}
 			}
 			@Override
 			public void removeUpdate(DocumentEvent e) {	}
@@ -277,6 +283,9 @@ public class CreateUser_View extends JFrame{
 				}
 				else if(ssnString==null || ssnString.length() !=9 || !checkIsInteger(ssnString)) {
 					JOptionPane.showMessageDialog(null, "Please enter your society security number correctly");
+					ssn1TF.setText("");
+					ssn2TF.setText("");
+					ssn3TF.setText("");
 					ssn1TF.requestFocus();	
 					allCase = false;
 				}
@@ -289,6 +298,12 @@ public class CreateUser_View extends JFrame{
 				else if(passwordString == null) {
 					JOptionPane.showMessageDialog(null, "Please enter your password");
 					passwordTF.requestFocus();	
+					allCase = false;
+				}
+				else if (month.getSelectedItem().equals("Month") || 
+						 day.getSelectedItem().equals("Day") ||
+						 year.getSelectedItem().equals("Year")) {
+					JOptionPane.showMessageDialog(null, "Invalide Day of Birth");
 					allCase = false;
 				}
 				if(allCase) {
