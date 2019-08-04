@@ -116,7 +116,7 @@ public class VendorTransMenu extends JFrame {
 		shopListPanel.setBackground(Color.WHITE);
 		shopListPanel.setBounds(48, 87, 389, 234);
 		contentPane.add(shopListPanel);
-		shopListPanel.setLayout(new GridLayout(2, 2, 5, 5));
+		shopListPanel.setLayout(new GridLayout(4, 1, 5, 5));
 		
 		JButton btnNewButton = new JButton("BananaBee's");
 		btnNewButton.setBorderPainted(false);

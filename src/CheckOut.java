@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -120,10 +121,10 @@ public class CheckOut extends vendor {
 		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblCardNumber = new JLabel("Card Number");
+		JLabel lblCardNumber = new JLabel("Card Number (last 4 digits)");
 		lblCardNumber.setHorizontalAlignment(SwingConstants.LEFT);
 		lblCardNumber.setFont(new Font("Arial", Font.PLAIN, 15));
-		lblCardNumber.setBounds(0, 130, 100, 15);
+		lblCardNumber.setBounds(0, 130, 183, 15);
 		panel_1.add(lblCardNumber);
 		
 		JLabel lblSecuritCode = new JLabel("CCV");
@@ -255,6 +256,10 @@ public class CheckOut extends vendor {
 				lastName=LN.getText();
 				security=SC.getText();
 				String cardStr = CN.getText();
+				if (cardStr.length()<4) {
+					// TODO
+					JOptionPane.showMessageDialog(null,"Incorrect card number");
+				}
 				int cardInt = Integer.parseInt(cardStr.substring(cardStr.length()-4));
 				cardNumber = cardInt+"";
 				try {

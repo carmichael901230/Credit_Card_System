@@ -188,7 +188,7 @@ public class CheckDetail_View extends JFrame {
 		lblCredit.setBounds(325, 110, 129, 23);
 		infoPanel.add(lblCredit);
 		
-		JButton btnIncrease = new JButton("Increase Line");
+		JButton btnIncrease = new JButton("Change Line");
 		btnIncrease.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -211,12 +211,18 @@ public class CheckDetail_View extends JFrame {
 					double newRemain = 0;
 					loginUserStr = loginUser.getString("accountID");
 					if (getRes.next()) {
-						curLimit = Double.parseDouble(getRes.getString("creditLimit"));
-						curRemain = Double.parseDouble(getRes.getString("remainCredit"));
-						newRemain = Double.parseDouble(newLimit)-curLimit+curRemain;
+						try {
+							curLimit = Double.parseDouble(getRes.getString("creditLimit"));
+							curRemain = Double.parseDouble(getRes.getString("remainCredit"));
+							newRemain = Double.parseDouble(newLimit)-curLimit+curRemain;
+						} 
+						catch (NumberFormatException e1) {
+							JOptionPane.showMessageDialog(null, "Invalid credit limit");
+							return;
+						}
 					}
 					if (Double.parseDouble(newLimit) < curLimit-curRemain ) {
-						JOptionPane.showMessageDialog(null, "User own $"+(curLimit-curRemain)+"\nNew credit line $"+newLimit);
+						JOptionPane.showMessageDialog(null, "Can't change line to $"+newLimit+" \nDue to unpaid balance $ "+(curLimit-curRemain));
 					}
 					else {
 						success += InsertStmt.executeUpdate("UPDATE `credit_card_system`.`credit_cards` SET `creditLimit` = '"+newLimit+"', `remainCredit` = '"+newRemain+"' WHERE (`cardNumber` = '"+cardNumber+"');");
@@ -246,6 +252,7 @@ public class CheckDetail_View extends JFrame {
 		btnIncrease.setContentAreaFilled(false);
 		
 		JButton btnClose = new JButton("Close Account");
+		btnClose.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnClose.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {

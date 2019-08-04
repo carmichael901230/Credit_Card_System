@@ -98,7 +98,7 @@ public class Shops_View extends JFrame {
 		shopsPanel.setBackground(Color.WHITE);
 		shopsPanel.setBounds(39, 109, 473, 294);
 		contentPane.add(shopsPanel);
-		shopsPanel.setLayout(new GridLayout(2, 2, 10, 10));
+		shopsPanel.setLayout(new GridLayout(2, 1, 10, 10));
 		
 		JPanel valmartPanel = new JPanel();
 		valmartPanel.addMouseListener(new MouseAdapter() {

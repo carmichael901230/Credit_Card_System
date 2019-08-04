@@ -22,14 +22,13 @@ public class vendor {
 	  if(today.get(today.DATE)+Math.abs(today.get(today.MINUTE)-x.get(x.MINUTE))+1<=10)
 		  date="0"+(today.get(today.DATE)+Math.abs(today.get(today.MINUTE)-x.get(x.MINUTE))/+1);
 	  else {
-		  System.out.println(1);
 		  date=""+(today.get(today.DATE)+Math.abs(today.get(today.MINUTE)-x.get(x.MINUTE))/+1);
 	  }
 	  String inputDate=year+"-"+month+"-"+date+" 00:00:00";
-	  System.out.println(year);
-	  System.out.println(month);
-	  System.out.println(date);
-	  System.out.println(inputDate);
+//	  System.out.println(year);
+//	  System.out.println(month);
+//	  System.out.println(date);
+//	  System.out.println(inputDate);
 	  String  edate;
 	  Calendar exdate =  Calendar.getInstance();
 	  double availableBalance;

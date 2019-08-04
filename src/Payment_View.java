@@ -141,7 +141,7 @@ public class Payment_View extends JFrame {
 		btnPayNow.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// process paymeny amount
+				// process payment amount
 				boolean validAmt = false;
 				double payAmt = 0;
 				if (rdbtnCurrentBal.isSelected() && balance > 0) {
@@ -174,12 +174,29 @@ public class Payment_View extends JFrame {
 				// pay successfully, update remainCredit, add new transaction
 				if (validAmt) {
 //					System.out.println("Valid input amount");
+					Calendar today = Calendar.getInstance();
+					String month;
+					String date;
+					String year = ""+today.get(today.YEAR);
+					if(today.get(today.MONTH)+1<=10)
+						month="0"+(today.get(today.MONTH)+1);
+					else
+						month=""+(today.get(today.MONTH)+1); 
+					  
+					if(today.get(today.DATE)+Math.abs(today.get(today.MINUTE)-s.get(s.MINUTE))+1<=10)
+						date="0"+(today.get(today.DATE)+Math.abs(today.get(today.MINUTE)-s.get(s.MINUTE))/+1);
+					else {
+						date=""+(today.get(today.DATE)+Math.abs(today.get(today.MINUTE)-s.get(s.MINUTE))/+1);
+					}
+					String inputDate=year+"-"+month+"-"+date+" 00:00:00";
+					System.out.println(inputDate);
+					// 2019-08-03 19:42:57
 					try {
 						int dbSuccess = 0;
 						dbSuccess += cardStmt.executeUpdate("UPDATE credit_cards SET remainCredit = "+(remainCredit+payAmt)+"WHERE cardNumber = "+cardNumber);
 						Statement transStmt = con.createStatement();
 						if (dbSuccess==1)
-							dbSuccess += transStmt.executeUpdate("INSERT INTO transactions (`cost`, `cardNumber`, `paidTo`) VALUES ("+(-1*payAmt)+", "+cardNumber+", 'Payment')");
+							dbSuccess += transStmt.executeUpdate("INSERT INTO transactions (`cost`, `date`, `cardNumber`, `paidTo`) VALUES ('"+(-1*payAmt)+"', '" +inputDate+"', '"+cardNumber+"', 'Payment')");
 						if (dbSuccess == 2) {
 //							System.out.println("db update successfully");
 							dispose();

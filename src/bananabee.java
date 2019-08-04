@@ -565,7 +565,7 @@ public class bananabee extends vendor{
 		
 		lbti84.setText("Shrimp Fajitas x "+amount[0]);
 		
-		lbdry.setText("Nachos Beef x"+amount[4]) ;
+		lbdry.setText("Nachos Beef x "+amount[4]) ;
 		
 	    lbpresharpened.setText("Chicken Fajitas x "+amount[2]) ;
 		
@@ -573,20 +573,20 @@ public class bananabee extends vendor{
 		
 		lbcollege.setText("Classic Combo  x "+amount[5]) ;
 		
-		lbtabs.setText("Taco Queso&Chips	 x "+amount[3]) ;
+		lbtabs.setText("Taco Queso&Chips x "+amount[3]) ;
 		
 		
 	     ti84costlb.setText("$ "+((double)Math.round(amount[0]*cost[0]*100)/100));
 			
 			tabscostlb.setText("$ "+((double)Math.round(amount[5]*cost[5]*100)/100));
 			
-			presharcostlb.setText("$ "+((double)Math.round(amount[1]*cost[1]*100)/100));
+			presharcostlb.setText("$ "+((double)Math.round(amount[3]*cost[3]*100)/100));
 			
 			drycostlb.setText("$ "+((double)Math.round(amount[4]*cost[4]*100)/100));
 			
 			collegecostlb.setText("$ "+((double)Math.round(amount[2]*cost[2]*100)/100)) ;
 			
-			fileFoldercostlb.setText("$ "+((double)Math.round(amount[3]*cost[3]*100)/100)) ;
+			fileFoldercostlb.setText("$ "+((double)Math.round(amount[1]*cost[1]*100)/100)) ;
 			
 			double temp = (double)Math.round(((amount[0]*cost[0])+(amount[3]*cost[3])+(amount[1]*cost[1])+(amount[4]*cost[4])+(amount[2]*cost[2])+(amount[5]*cost[5]))*100)/100;
 			totalCost.setText("$ "+ temp);

@@ -271,7 +271,7 @@ public class Account_View extends JFrame {
 			if (transRes.next()) {
 				do {
 					String transRow[] = new String[3];
-					transRow[0] = transRes.getString("date");
+					transRow[0] = transRes.getString("date").substring(0,10);
 					transRow[1] = transRes.getString("paidTo");
 					transRow[2] = "$"+String.format("%.2f", Double.parseDouble(transRes.getString("cost")));
 					transData.add(transRow);

@@ -397,7 +397,7 @@ public class valmart extends vendor{
 		lbti84.setBounds(6, 37, 171, 35);
 		panel_6.add(lbti84);
 		
-		lbFileFolder = new JLabel("File Folder x "+amount[1]);
+		lbFileFolder = new JLabel("File Folder x "+amount[3]);
 		lbFileFolder.setBackground(Color.WHITE);
 		lbFileFolder.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lbFileFolder.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -422,7 +422,7 @@ public class valmart extends vendor{
 		ti84costlb.setBounds(183, 38, 96, 35);
 		panel_6.add(ti84costlb);
 		
-		fileFoldercostlb = new JLabel("$ "+(cost[1]*amount[1]));
+		fileFoldercostlb = new JLabel("$ "+(cost[2]*amount[2]));
 		fileFoldercostlb.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		fileFoldercostlb.setHorizontalAlignment(SwingConstants.CENTER);
 		fileFoldercostlb.setBounds(183, 226, 96, 35);
@@ -440,7 +440,7 @@ public class valmart extends vendor{
 		totalCost.setBounds(183, 322, 96, 35);
 		panel_6.add(totalCost);
 		
-		lbpresharpened = new JLabel("Presharpened x "+amount[3]);
+		lbpresharpened = new JLabel("Presharpened x "+amount[1]);
 		lbpresharpened.setBounds(6, 84, 171, 35);
 		panel_6.add(lbpresharpened);
 		lbpresharpened.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -452,14 +452,14 @@ public class valmart extends vendor{
 		lbdry.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lbdry.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbdry.setHorizontalAlignment(SwingConstants.RIGHT);
-		
+		 	
 		lbtabs = new JLabel("Easy Dispenser x "+amount[5]);
 		lbtabs.setBounds(6, 225, 171, 35);
 		panel_6.add(lbtabs);
 		lbtabs.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lbtabs.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		presharcostlb = new JLabel("$ "+(cost[3]*amount[3]));
+		presharcostlb = new JLabel("$ "+(cost[1]*amount[1]));
 		presharcostlb.setBounds(183, 84, 96, 35);
 		panel_6.add(presharcostlb);
 		presharcostlb.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -471,7 +471,7 @@ public class valmart extends vendor{
 		drycostlb.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		drycostlb.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		tabscostlb = new JLabel("$ "+(cost[3]*amount[3]));
+		tabscostlb = new JLabel("$ "+(cost[5]*amount[5]));
 		tabscostlb.setBounds(183, 132, 96, 35);
 		panel_6.add(tabscostlb);
 		tabscostlb.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
