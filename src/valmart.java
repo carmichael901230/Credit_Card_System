@@ -24,8 +24,15 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 public class valmart extends vendor{
-   double cost[]= {2.3,4.5,6.5,10.0,12.0,12.5};
+   double cost[]= {23.00,42.5,16.5,15.0,12.0,17.28};
    int    amount[]= {0,0,0,0,0,0};
+   String[] ItemsName= {"<html>Texas Instruments<br>TI-84 Plus Graphing Calculator<br> 10-Digit LCD</html>",
+		  "<html>#2 Soft<br>Yellow - Presharpened<br> 30 ct</html>",
+		  "<html>Student's Guide to Writing College<br>Papers : Fourth Edition</html>",
+		  "<html>Smead Manila File Folder<br>1/3 Tab, Letter Size<br></html>",
+		  "<html>Post-it Tabs with Easy Dispenser<br>1in. Tabs<br>Assorted Colors</html>",
+		  "<html>EXPO Low Odor Dry Erase Markers<br>Chisel Tip<br>Assorted Colors</html>"
+};
    double total=0.0;
    String shopName="valmart";
    Calendar s;
@@ -101,6 +108,7 @@ public class valmart extends vendor{
 		
 		JButton btnNewButton_1 = new JButton("Check Out");
 		btnNewButton_1.setBorderPainted(false);
+		btnNewButton_1.setOpaque(true);
 		btnNewButton_1.setForeground(Color.WHITE);
 		btnNewButton_1.setBackground(Color.BLUE);
 		btnNewButton_1.setFont(new Font("Arial", Font.BOLD, 15));
@@ -111,15 +119,14 @@ public class valmart extends vendor{
 				frame.dispose();
 			}
 		});
-		btnNewButton_1.setOpaque(true);
 		btnNewButton_1.setBounds(539, 450, 126, 50);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Reset");
+		btnNewButton_2.setOpaque(true);
 		btnNewButton_2.setBorderPainted(false);
 		btnNewButton_2.setBackground(Color.BLUE);
 		btnNewButton_2.setForeground(Color.WHITE);
-		btnNewButton_2.setOpaque(true);
 		btnNewButton_2.setFont(new Font("Arial", Font.BOLD, 15));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -136,7 +143,7 @@ public class valmart extends vendor{
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel label = new JLabel("<html>Texas Instruments<br>TI-84 Plus Graphing Calculator<br> 10-Digit LCD</html>\n\n");
+		JLabel label = new JLabel(ItemsName[0]);
 		label.setFont(new Font("Arial", Font.PLAIN, 13));
 		label.setBounds(6, 5, 154, 65);
 		panel.add(label);
@@ -176,7 +183,7 @@ public class valmart extends vendor{
 		panel_1.setBounds(20, 370, 166, 143);
 		frame.getContentPane().add(panel_1);
 		
-		JLabel lblpostitTabsWith = new JLabel("<html>Post-it Tabs with Easy Dispenser<br>1in. Tabs<br>Assorted Colors</html>");
+		JLabel lblpostitTabsWith = new JLabel( ItemsName[4]);
 		lblpostitTabsWith.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblpostitTabsWith.setHorizontalAlignment(SwingConstants.LEFT);
 		lblpostitTabsWith.setBounds(6, 6, 154, 64);
@@ -190,7 +197,7 @@ public class valmart extends vendor{
 		tabsBTN.setBounds(110, 87, 50, 50);
 		panel_1.add(tabsBTN);
 		
-		tabslable = new JLabel(""+amount[3]);
+		tabslable = new JLabel(""+amount[4]);
 		tabslable.setFont(new Font("Cambria Math", Font.BOLD, 20));
 		tabslable.setHorizontalAlignment(SwingConstants.CENTER);
 		tabslable.setBounds(57, 86, 50, 50);
@@ -204,14 +211,14 @@ public class valmart extends vendor{
 		tabsBTNjian.setBounds(6, 87, 50, 50);
 		panel_1.add(tabsBTNjian);
 		
-		JLabel label_3 = new JLabel("$"+cost[3]);
+		JLabel label_3 = new JLabel("$"+cost[4]);
 		label_3.setFont(new Font("Arial", Font.BOLD, 15));
 		label_3.setBounds(99, 71, 61, 16);
 		panel_1.add(label_3);
 		tabsBTNjian.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(amount[3]>0)
-					amount[3]--;
+				if(amount[4]>0)
+					amount[4]--;
 				    refresh();
 			}
 		});
@@ -223,7 +230,7 @@ public class valmart extends vendor{
 		panel_2.setBounds(198, 370, 166, 143);
 		frame.getContentPane().add(panel_2);
 		
-		JLabel lblexpoLowOdor = new JLabel("<html>EXPO Low Odor Dry Erase Markers<br>Chisel Tip<br>Assorted Colors</html>");
+		JLabel lblexpoLowOdor = new JLabel(ItemsName[5]);
 		lblexpoLowOdor.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblexpoLowOdor.setHorizontalAlignment(SwingConstants.LEFT);
 		lblexpoLowOdor.setBounds(6, 6, 154, 64);
@@ -237,7 +244,7 @@ public class valmart extends vendor{
 		dryBTNjian.setBounds(6, 87, 50, 50);
 		panel_2.add(dryBTNjian);
 		
-		drylable = new JLabel(""+amount[4]);
+		drylable = new JLabel(""+amount[5]);
 		drylable.setFont(new Font("Cambria Math", Font.BOLD, 20));
 		drylable.setHorizontalAlignment(SwingConstants.CENTER);
 		drylable.setBounds(57, 86, 50, 50);
@@ -252,7 +259,7 @@ public class valmart extends vendor{
 		dryBTN.setBounds(110, 87, 50, 50);
 		panel_2.add(dryBTN);
 		
-		JLabel label_5 = new JLabel("$"+cost[4]);
+		JLabel label_5 = new JLabel("$"+cost[5]);
 		label_5.setFont(new Font("Arial", Font.BOLD, 15));
 		label_5.setBounds(99, 73, 61, 16);
 		panel_2.add(label_5);
@@ -272,7 +279,7 @@ public class valmart extends vendor{
 		collegeBTNjian.setBounds(6, 87, 50, 50);
 		panel_3.add(collegeBTNjian);
 		
-		collegelable = new JLabel(""+amount[5]);
+		collegelable = new JLabel(""+amount[2]);
 		collegelable.setFont(new Font("Cambria Math", Font.BOLD, 20));
 		collegelable.setBounds(58, 86, 50, 50);
 		panel_3.add(collegelable);
@@ -286,14 +293,14 @@ public class valmart extends vendor{
 		collegeBNT.setBounds(110, 87, 50, 50);
 		panel_3.add(collegeBNT);
 		
-		JLabel lblstudentsGuideTo = new JLabel("<html>Student's Guide to Writing College<br>Papers : Fourth Edition</html>");
+		JLabel lblstudentsGuideTo = new JLabel(ItemsName[2]);
 		lblstudentsGuideTo.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblstudentsGuideTo.setVerticalAlignment(SwingConstants.TOP);
 		lblstudentsGuideTo.setBounds(6, 6, 130, 81);
 		panel_3.add(lblstudentsGuideTo);
 		lblstudentsGuideTo.setHorizontalAlignment(SwingConstants.LEFT);
 		
-		JLabel label_4 = new JLabel("$"+cost[5]);
+		JLabel label_4 = new JLabel("$"+cost[2]);
 		label_4.setFont(new Font("Arial", Font.BOLD, 15));
 		label_4.setBounds(99, 71, 61, 16);
 		panel_3.add(label_4);
@@ -332,7 +339,7 @@ public class valmart extends vendor{
 		label_1.setBounds(110, 66, 61, 16);
 		panel_4.add(label_1);
 		
-		JLabel lblSoftyellow = new JLabel("<html>#2 Soft<br>Yellow - Presharpened<br> 30 ct</html>");
+		JLabel lblSoftyellow = new JLabel(ItemsName[1]);
 		lblSoftyellow.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblSoftyellow.setBounds(6, 6, 154, 65);
 		panel_4.add(lblSoftyellow);
@@ -361,20 +368,20 @@ public class valmart extends vendor{
 		fileFolderBTNjian.setBounds(6, 87, 50, 50);
 		panel_5.add(fileFolderBTNjian);
 		
-		fileFolderlable = new JLabel(""+amount[2]);
+		fileFolderlable = new JLabel(""+amount[3]);
 		fileFolderlable.setFont(new Font("Cambria Math", Font.BOLD, 20));
 		fileFolderlable.setBounds(59, 86, 50, 50);
 		panel_5.add(fileFolderlable);
 		fileFolderlable.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JLabel lblsmeadManilaFile = new JLabel("<html>Smead Manila File Folder<br>1/3 Tab, Letter Size<br></html>");
+		JLabel lblsmeadManilaFile = new JLabel(ItemsName[3]);
 		lblsmeadManilaFile.setVerticalAlignment(SwingConstants.TOP);
 		lblsmeadManilaFile.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblsmeadManilaFile.setBounds(6, 6, 150, 76);
 		panel_5.add(lblsmeadManilaFile);
 		lblsmeadManilaFile.setHorizontalAlignment(SwingConstants.LEFT);
 		
-		JLabel label_2 = new JLabel("$"+cost[2]);
+		JLabel label_2 = new JLabel("$"+cost[3]);
 		label_2.setFont(new Font("Arial", Font.BOLD, 15));
 		label_2.setBounds(111, 73, 61, 16);
 		panel_5.add(label_2);
@@ -422,13 +429,13 @@ public class valmart extends vendor{
 		ti84costlb.setBounds(183, 38, 96, 35);
 		panel_6.add(ti84costlb);
 		
-		fileFoldercostlb = new JLabel("$ "+(cost[2]*amount[2]));
+		fileFoldercostlb = new JLabel("$ "+(cost[4]*amount[4]));
 		fileFoldercostlb.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		fileFoldercostlb.setHorizontalAlignment(SwingConstants.CENTER);
 		fileFoldercostlb.setBounds(183, 226, 96, 35);
 		panel_6.add(fileFoldercostlb);
 		
-		collegecostlb = new JLabel("$ "+(cost[2]*amount[2]));
+		collegecostlb = new JLabel("$ "+(cost[3]*amount[3]));
 		collegecostlb.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		collegecostlb.setHorizontalAlignment(SwingConstants.CENTER);
 		collegecostlb.setBounds(183, 179, 96, 35);
@@ -446,14 +453,14 @@ public class valmart extends vendor{
 		lbpresharpened.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lbpresharpened.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		lbdry = new JLabel("Dry Erase Markers x "+amount[4]);
+		lbdry = new JLabel("Dry Erase Markers x "+amount[5]);
 		lbdry.setBounds(6, 272, 171, 35);
 		panel_6.add(lbdry);
 		lbdry.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lbdry.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbdry.setHorizontalAlignment(SwingConstants.RIGHT);
-		 	
-		lbtabs = new JLabel("Easy Dispenser x "+amount[5]);
+		
+		lbtabs = new JLabel("Easy Dispenser x "+amount[4]);
 		lbtabs.setBounds(6, 225, 171, 35);
 		panel_6.add(lbtabs);
 		lbtabs.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -471,7 +478,7 @@ public class valmart extends vendor{
 		drycostlb.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		drycostlb.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		tabscostlb = new JLabel("$ "+(cost[5]*amount[5]));
+		tabscostlb = new JLabel("$ "+(cost[2]*amount[2]));
 		tabscostlb.setBounds(183, 132, 96, 35);
 		panel_6.add(tabscostlb);
 		tabscostlb.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -506,17 +513,15 @@ public class valmart extends vendor{
 		});
 		fileFolderBTNjian.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(amount[2]>0)
-					amount[2]--;
+				if(amount[3]>0)
+					amount[3]--;
 				    refresh();
 			}
 		});
 		fileFolderBTN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				amount[2]++;
+				amount[3]++;
 				refresh();
-//				System.out.println(amount[2]);
-//				System.out.println(cost[2]);
 			}
 		});
 		presharpenedBNT.addActionListener(new ActionListener() {
@@ -534,33 +539,33 @@ public class valmart extends vendor{
 		});
 		collegeBNT.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				amount[5]++;
+				amount[2]++;
 				refresh();
 			}
 		});
 		collegeBTNjian.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(amount[2]>0)
+					amount[2]--;
+				    refresh();
+			}
+		});
+		dryBTN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				amount[5]++;
+				refresh();
+			}
+		});
+		dryBTNjian.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(amount[5]>0)
 					amount[5]--;
 				    refresh();
 			}
 		});
-		dryBTN.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				amount[4]++;
-				refresh();
-			}
-		});
-		dryBTNjian.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(amount[4]>0)
-					amount[4]--;
-				    refresh();
-			}
-		});
 		tabsBTN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				amount[3]++;
+				amount[4]++;
 				refresh();
 			}
 		});
@@ -585,40 +590,46 @@ public class valmart extends vendor{
 	public  void refresh() {
 		ti84lable.setText(""+amount[0]);
 		
-		tabslable.setText(""+amount[3]);
-		
 		presharpenedlable.setText(""+amount[1]);
+	
+		collegelable.setText(""+amount[2]) ;
 		
-		drylable.setText(""+amount[4]);
+		fileFolderlable.setText(""+amount[3]) ;
 		
-		collegelable.setText(""+amount[5]) ;
+		tabslable.setText(""+amount[4]);
 		
-		fileFolderlable.setText(""+amount[2]) ;
+		
+		
+		drylable.setText(""+amount[5]);
+		
+
+		
+	
 		
 		lbti84.setText("Graphing Calculator x "+amount[0]);
 		
-		lbdry.setText("Dry Erase Markers x "+amount[4]) ;
+		lbdry.setText("Dry Erase Markers x "+amount[5]) ;
 		
 	    lbpresharpened.setText("Presharpened x "+amount[1]) ;
 		
-		lbFileFolder.setText("File Folder x "+amount[2]) ;
+		lbFileFolder.setText("File Folder x "+amount[3]) ;
 		
-		lbcollege.setText("Writing College  x "+amount[5]) ;
+		lbcollege.setText("Writing College  x "+amount[2]) ;
 		
-		lbtabs.setText("Easy Dispenser x "+amount[3]) ;
+		lbtabs.setText("Easy Dispenser x "+amount[4]) ;
 		
 		
 	     ti84costlb.setText("$ "+((double)Math.round(amount[0]*cost[0]*100)/100));
 			
-			tabscostlb.setText("$ "+((double)Math.round(amount[5]*cost[5]*100)/100));
+			tabscostlb.setText("$ "+((double)Math.round(amount[2]*cost[2]*100)/100));
 			
 			presharcostlb.setText("$ "+((double)Math.round(amount[1]*cost[1]*100)/100));
 			
-			drycostlb.setText("$ "+((double)Math.round(amount[4]*cost[4]*100)/100));
+			drycostlb.setText("$ "+((double)Math.round(amount[5]*cost[5]*100)/100));
 			
-			collegecostlb.setText("$ "+((double)Math.round(amount[2]*cost[2]*100)/100)) ;
+			collegecostlb.setText("$ "+((double)Math.round(amount[3]*cost[3]*100)/100)) ;
 			
-			fileFoldercostlb.setText("$ "+((double)Math.round(amount[3]*cost[3]*100)/100)) ;
+			fileFoldercostlb.setText("$ "+((double)Math.round(amount[4]*cost[4]*100)/100)) ;
 			
 			double temp = (double)Math.round(((amount[0]*cost[0])+(amount[3]*cost[3])+(amount[1]*cost[1])+(amount[4]*cost[4])+(amount[2]*cost[2])+(amount[5]*cost[5]))*100)/100;
 			totalCost.setText("$ "+ temp);

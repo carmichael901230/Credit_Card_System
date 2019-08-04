@@ -20,6 +20,14 @@ public class groundfood extends vendor{
 	
    double cost[]= {.68,.98,3.88,.38,1.48,1.68};
    int    amount[]= {0,0,0,0,0,0};
+   String ItemsName[]= {
+		   "Tomato",
+		   "Celery",
+		   "Beef Rib",
+		   "Cabage",
+		   "Guava",
+		   "<html>Chicken<br>Breast</html>"
+   };
    double total=0.0;
    String shopName="groundfood";
    Calendar s;
@@ -91,6 +99,7 @@ public class groundfood extends vendor{
 		}
 		
 		JButton btnNewButton_1 = new JButton("Check Out");
+		btnNewButton_1.setOpaque(true);
 		btnNewButton_1.setBorderPainted(false);
 		btnNewButton_1.setForeground(Color.WHITE);
 		btnNewButton_1.setBackground(Color_green);
@@ -106,6 +115,7 @@ public class groundfood extends vendor{
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Reset");
+		btnNewButton_2.setOpaque(true);
 		btnNewButton_2.setBorderPainted(false);
 		btnNewButton_2.setBackground(Color_green);
 		btnNewButton_2.setForeground(Color.WHITE);
@@ -187,7 +197,7 @@ public class groundfood extends vendor{
 		tabsBTNjian.setBounds(6, 87, 50, 50);
 		panel_1.add(tabsBTNjian);
 		
-		JLabel label_5 = new JLabel("$ "+cost[5]);
+		JLabel label_5 = new JLabel("$ "+cost[4]);
 		label_5.setFont(new Font("Arial", Font.BOLD, 15));
 		label_5.setBounds(105, 71, 61, 16);
 		panel_1.add(label_5);
@@ -198,8 +208,8 @@ public class groundfood extends vendor{
 		collegelable.setHorizontalAlignment(SwingConstants.CENTER);
 		tabsBTNjian.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(amount[5]>0)
-					amount[5]--;
+				if(amount[4]>0)
+					amount[4]--;
 				    refresh();
 			}
 		});
@@ -239,7 +249,7 @@ public class groundfood extends vendor{
 		dryBTN.setBounds(110, 87, 50, 50);
 		panel_2.add(dryBTN);
 		
-		JLabel label_4 = new JLabel("$ "+cost[4]);
+		JLabel label_4 = new JLabel("$ "+cost[5]);
 		label_4.setFont(new Font("Arial", Font.BOLD, 15));
 		label_4.setBounds(110, 72, 61, 16);
 		panel_2.add(label_4);
@@ -373,20 +383,20 @@ public class groundfood extends vendor{
 		lblNewLabel_6.setBounds(10, 6, 269, 25);
 		panel_6.add(lblNewLabel_6);
 		
-		lbti84 = new JLabel("Tomato x 0");
+		lbti84 = new JLabel("Tomato x "+amount[0]);
 		lbti84.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lbti84.setHorizontalAlignment(SwingConstants.RIGHT);
 		lbti84.setBounds(6, 37, 171, 35);
 		panel_6.add(lbti84);
 		
-		lbFileFolder = new JLabel("Celery x 0");
+		lbFileFolder = new JLabel("Cabage x "+amount[3]);
 		lbFileFolder.setBackground(Color.WHITE);
 		lbFileFolder.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lbFileFolder.setHorizontalAlignment(SwingConstants.RIGHT);
 		lbFileFolder.setBounds(6, 178, 171, 35);
 		panel_6.add(lbFileFolder);
 		
-		lbcollege = new JLabel("Guava  x 0");
+		lbcollege = new JLabel("Beef Rib x "+amount[3]);
 		lbcollege.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lbcollege.setHorizontalAlignment(SwingConstants.RIGHT);
 		lbcollege.setBounds(6, 131, 171, 35);
@@ -422,20 +432,20 @@ public class groundfood extends vendor{
 		totalCost.setBounds(183, 322, 96, 35);
 		panel_6.add(totalCost);
 		
-		lbpresharpened = new JLabel("Beef Rib x 0");
+		lbpresharpened = new JLabel("Celery x "+amount[1]);
 		lbpresharpened.setBounds(6, 84, 171, 35);
 		panel_6.add(lbpresharpened);
 		lbpresharpened.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lbpresharpened.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		lbdry = new JLabel("Chicken Breast x 0");
+		lbdry = new JLabel("Chicken Breast x "+amount[5]);
 		lbdry.setBounds(6, 272, 171, 35);
 		panel_6.add(lbdry);
 		lbdry.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lbdry.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbdry.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		lbtabs = new JLabel("Cabage x 0");
+		lbtabs = new JLabel("Guava x "+amount[4]);
 		lbtabs.setBounds(6, 225, 171, 35);
 		panel_6.add(lbtabs);
 		lbtabs.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -541,20 +551,20 @@ public class groundfood extends vendor{
 		});
 		dryBTN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				amount[4]++;
+				amount[5]++;
 				refresh();
 			}
 		});
 		dryBTNjian.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(amount[4]>0)
-					amount[4]--;
+				if(amount[5]>0)
+					amount[5]--;
 				    refresh();
 			}
 		});
 		tabsBTN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				amount[5]++;
+				amount[4]++;
 				refresh();
 			}
 		});
@@ -578,44 +588,51 @@ public class groundfood extends vendor{
 	//refresh
 	public  void refresh() {
 		ti84lable.setText(""+amount[0]);
+			
+			presharpenedlable.setText(""+amount[3]);
 		
-		tabslable.setText(""+amount[2]);
+			collegelable.setText(""+amount[4]) ;
+			
+			fileFolderlable.setText(""+amount[1]) ;
+			
+			tabslable.setText(""+amount[2]);
+			
+			drylable.setText(""+amount[5]);
+			
+
+			
 		
-		presharpenedlable.setText(""+amount[3]);
-		
-		drylable.setText(""+amount[4]);
-		
-		collegelable.setText(""+amount[5]) ;
-		
-		fileFolderlable.setText(""+amount[1]) ;
-		
-		lbti84.setText("Tomato x "+amount[0]);
-		
-		lbdry.setText("Chicken Breast x"+amount[4]) ;
-		
-	    lbpresharpened.setText("Beef Rib x "+amount[2]) ;
-		
-		lbFileFolder.setText("Celery x "+amount[1]) ;
-		
-		lbcollege.setText("Guava x "+amount[5]) ;
-		
-		lbtabs.setText("Cabage x "+amount[3]) ;
-		
-        ti84costlb.setText("$ "+((double)Math.round(amount[0]*cost[0]*100)/100));
-		
-		tabscostlb.setText("$ "+((double)Math.round(amount[5]*cost[5]*100)/100));
-		
-		presharcostlb.setText("$ "+((double)Math.round(amount[1]*cost[1]*100)/100));
-		
-		drycostlb.setText("$ "+((double)Math.round(amount[4]*cost[4]*100)/100));
-		
-		collegecostlb.setText("$ "+((double)Math.round(amount[2]*cost[2]*100)/100)) ;
-		
-		fileFoldercostlb.setText("$ "+((double)Math.round(amount[3]*cost[3]*100)/100)) ;
-		
-		double temp = (double)Math.round(((amount[0]*cost[0])+(amount[3]*cost[3])+(amount[1]*cost[1])+(amount[4]*cost[4])+(amount[2]*cost[2])+(amount[5]*cost[5]))*100)/100;
-		totalCost.setText("$ "+ temp);
-	}
+			
+			lbti84.setText("Tomato x "+amount[0]);
+			
+			lbdry.setText("Chicken Breast x "+amount[5]) ;
+			
+		    lbpresharpened.setText("Celery x "+amount[1]) ;
+			
+			lbFileFolder.setText("Cabage x "+amount[3]) ;
+			
+			lbcollege.setText("Beef Rib x "+amount[2]) ;
+			
+			lbtabs.setText("Guava x "+amount[4]) ;
+			
+			
+		     ti84costlb.setText("$ "+((double)Math.round(amount[0]*cost[0]*100)/100));
+				
+				tabscostlb.setText("$ "+((double)Math.round(amount[2]*cost[2]*100)/100));
+				
+				presharcostlb.setText("$ "+((double)Math.round(amount[3]*cost[3]*100)/100));
+				
+				drycostlb.setText("$ "+((double)Math.round(amount[5]*cost[5]*100)/100));
+				
+				collegecostlb.setText("$ "+((double)Math.round(amount[1]*cost[1]*100)/100)) ;
+				
+				fileFoldercostlb.setText("$ "+((double)Math.round(amount[4]*cost[4]*100)/100)) ;
+				
+			
+
+				double temp = (double)Math.round(((amount[0]*cost[0])+(amount[3]*cost[3])+(amount[1]*cost[1])+(amount[4]*cost[4])+(amount[2]*cost[2])+(amount[5]*cost[5]))*100)/100;
+				totalCost.setText("$ "+ temp);
+		}
 	public void reset(){
 		for(int i=0;i<cost.length;i++)
 		   amount[i]=0;

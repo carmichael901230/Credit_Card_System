@@ -23,6 +23,14 @@ import javax.swing.border.MatteBorder;
 public class housedepot extends vendor{
 	private Color Color_orange = new Color(255, 151, 0);
    double cost[]= {52,501.5,34,22.5,35,86.5};
+   String ItemsName[]= {
+		   "<html>Farrow Brown<br>Accent Ottoman<br></html>",
+		   "<html>Elements Sillicone<br>Tool<br>(set of 8)</html>",
+		   "<html>Chocolate Champion and<br>Motion Loveseat</html>",
+		   "<html>450 Thread Count<br>Fitted Sheet<br></html>",
+		   "<html>Foldable Storage<br>Cube/Ottoman<br>Charcoal Gary</html>",
+		   "<html>Pflster Brea 3-Piece<br>Bath Accessory Kit<br>in Brushed Nickel</html>"
+   };
    int    amount[]= {0,0,0,0,0,0};
    double total=0.0;
    String shopName="thehousedepot";
@@ -94,12 +102,13 @@ public class housedepot extends vendor{
 		}
 		
 		JButton btnNewButton_1 = new JButton("Check Out");
-		btnNewButton_1.setBorderPainted(false);
 		btnNewButton_1.setFocusable(false);
 		btnNewButton_1.setFont(new Font("Arial", Font.BOLD, 15));
 		btnNewButton_1.setForeground(Color.WHITE);
 		btnNewButton_1.setBackground(Color.ORANGE);
 		btnNewButton_1.setBounds(539, 449, 126, 50);
+		btnNewButton_1.setOpaque(true);
+		btnNewButton_1.setBorderPainted(false);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CheckOut temp = new CheckOut(cost,amount,shopName,s);
@@ -111,11 +120,12 @@ public class housedepot extends vendor{
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Reset");
-		btnNewButton_2.setBorderPainted(false);
 		btnNewButton_2.setFocusable(false);
 		btnNewButton_2.setFont(new Font("Arial", Font.BOLD, 15));
 		btnNewButton_2.setBackground(Color.ORANGE);
 		btnNewButton_2.setForeground(Color.WHITE);
+		btnNewButton_2.setOpaque(true);
+		btnNewButton_2.setBorderPainted(false);
 		btnNewButton_2.setBounds(429, 450, 100, 50);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -209,8 +219,8 @@ public class housedepot extends vendor{
 		panel_1.add(label_5);
 		tabsBTNjian.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(amount[5]>0)
-					amount[5]--;
+				if(amount[4]>0)
+					amount[4]--;
 				    refresh();
 			}
 		});
@@ -402,14 +412,14 @@ public class housedepot extends vendor{
 		lbti84.setBounds(6, 37, 171, 35);
 		panel_6.add(lbti84);
 		
-		lbFileFolder = new JLabel("Fitted Sheet x "+amount[1]);
+		lbFileFolder = new JLabel("Fitted Sheet x "+amount[3]);
 		lbFileFolder.setBackground(Color.WHITE);
 		lbFileFolder.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lbFileFolder.setHorizontalAlignment(SwingConstants.RIGHT);
 		lbFileFolder.setBounds(47, 179, 130, 35);
 		panel_6.add(lbFileFolder);
 		
-		lbcollege = new JLabel("Motion Loveseat  x "+amount[2]);
+		lbcollege = new JLabel("Motion Loveseat x 0");
 		lbcollege.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lbcollege.setHorizontalAlignment(SwingConstants.RIGHT);
 		lbcollege.setBounds(6, 131, 171, 35);
@@ -445,26 +455,26 @@ public class housedepot extends vendor{
 		totalCost.setBounds(183, 322, 96, 35);
 		panel_6.add(totalCost);
 		
-		lbpresharpened = new JLabel("Sillicone Tool x "+amount[3]);
+		lbpresharpened = new JLabel("Sillicone Tool x "+amount[1]);
 		lbpresharpened.setBounds(6, 84, 171, 35);
 		panel_6.add(lbpresharpened);
 		lbpresharpened.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lbpresharpened.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		lbdry = new JLabel("Bath Accessory Kit x "+amount[4]);
+		lbdry = new JLabel("Bath Accessory Kit x "+amount[5]);
 		lbdry.setBounds(6, 272, 171, 35);
 		panel_6.add(lbdry);
 		lbdry.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lbdry.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbdry.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		lbtabs = new JLabel("Storage Cube x "+amount[5]);
+		lbtabs = new JLabel("Storage Cube x "+amount[4]);
 		lbtabs.setBounds(6, 225, 171, 35);
 		panel_6.add(lbtabs);
 		lbtabs.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lbtabs.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		presharcostlb = new JLabel("$ "+(cost[3]*amount[3]));
+		presharcostlb = new JLabel("$ "+(cost[1]*amount[1]));
 		presharcostlb.setBounds(183, 84, 96, 35);
 		panel_6.add(presharcostlb);
 		presharcostlb.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -476,7 +486,7 @@ public class housedepot extends vendor{
 		drycostlb.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		drycostlb.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		tabscostlb = new JLabel("$ "+(cost[3]*amount[3]));
+		tabscostlb = new JLabel("$ "+(cost[4]*amount[4]));
 		tabscostlb.setBounds(183, 226, 96, 35);
 		panel_6.add(tabscostlb);
 		tabscostlb.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -553,7 +563,7 @@ public class housedepot extends vendor{
 		});
 		dryBTN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				amount[4]++;
+				amount[5]++;
 				refresh();
 			}
 		});
@@ -566,7 +576,7 @@ public class housedepot extends vendor{
 		});
 		tabsBTN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				amount[5]++;
+				amount[4]++;
 				refresh();
 			}
 		});
@@ -589,43 +599,49 @@ public class housedepot extends vendor{
 	
 	//refresh
 	public  void refresh() {
-		ti84lable.setText(""+amount[0]);
-		
-		tabslable.setText(""+amount[5]);
+	ti84lable.setText(""+amount[0]);
 		
 		presharpenedlable.setText(""+amount[1]);
-		
-		drylable.setText(""+amount[4]);
-		
+	
 		collegelable.setText(""+amount[2]) ;
 		
 		fileFolderlable.setText(""+amount[3]) ;
 		
+		tabslable.setText(""+amount[4]);
+		
+		drylable.setText(""+amount[5]);
+		
+
+		
+	
+		
 		lbti84.setText("Accent Ottoman x "+amount[0]);
 		
-		lbdry.setText("Bath Accesory Kit x "+amount[4]) ;
+		lbdry.setText("Bath Accessory Kit x "+amount[5]) ;
 		
 	    lbpresharpened.setText("Sillicone Tool x "+amount[1]) ;
 		
 		lbFileFolder.setText("Fitted Sheet x "+amount[3]) ;
 		
-		lbcollege.setText("Motion Loveseat  x "+amount[2]) ;
+		lbcollege.setText("Motion Loveseat x "+amount[2]) ;
 		
-		lbtabs.setText("Storage Cube x "+amount[5]) ;
+		lbtabs.setText("Storage Cube x "+amount[4]) ;
 		
 		
 	     ti84costlb.setText("$ "+((double)Math.round(amount[0]*cost[0]*100)/100));
 			
-			tabscostlb.setText("$ "+((double)Math.round(amount[5]*cost[5]*100)/100));
+			tabscostlb.setText("$ "+((double)Math.round(amount[4]*cost[4]*100)/100));
 			
 			presharcostlb.setText("$ "+((double)Math.round(amount[1]*cost[1]*100)/100));
 			
-			drycostlb.setText("$ "+((double)Math.round(amount[4]*cost[4]*100)/100));
+			drycostlb.setText("$ "+((double)Math.round(amount[5]*cost[5]*100)/100));
 			
 			collegecostlb.setText("$ "+((double)Math.round(amount[2]*cost[2]*100)/100)) ;
 			
 			fileFoldercostlb.setText("$ "+((double)Math.round(amount[3]*cost[3]*100)/100)) ;
 			
+		
+
 			double temp = (double)Math.round(((amount[0]*cost[0])+(amount[3]*cost[3])+(amount[1]*cost[1])+(amount[4]*cost[4])+(amount[2]*cost[2])+(amount[5]*cost[5]))*100)/100;
 			totalCost.setText("$ "+ temp);
 	}

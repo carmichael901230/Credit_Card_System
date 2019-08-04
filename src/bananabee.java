@@ -18,6 +18,14 @@ import javax.swing.border.LineBorder;
 public class bananabee extends vendor{
    double cost[]= {20.99,18.99,20.99,14.99,12.99,11.79};
    int    amount[]= {0,0,0,0,0,0};
+   String ItemsName[]= {
+		   "<html>Loaded Shrimp<br>Fajitas<br></html>",
+		   "<html>Chicken Quesadilla</html>",
+		   "<html>Loaded Chicken<br>Fajitas</html>",
+		   "<html>The Classic<br>Combo</html>",
+		   "<html>Taco Topped<br>Queso & Chips</html>",
+		   "<html>Neighborhood Nachos<br>Beef</html>" 
+   };
    double total=0.0;
    String shopName="bananabees";
    Calendar s;
@@ -91,9 +99,9 @@ public class bananabee extends vendor{
 		JButton btnNewButton_1 = new JButton("Check Out");
 		btnNewButton_1.setForeground(Color.WHITE);
 		btnNewButton_1.setBackground(Color.BLACK);
+		btnNewButton_1.setFont(new Font("Arial", Font.BOLD, 15));
 		btnNewButton_1.setOpaque(true);
 		btnNewButton_1.setBorderPainted(false);
-		btnNewButton_1.setFont(new Font("Arial", Font.BOLD, 15));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CheckOut temp = new CheckOut(cost,amount,shopName,s);
@@ -101,15 +109,14 @@ public class bananabee extends vendor{
 				frame.dispose();
 			}
 		});
-		btnNewButton_1.setOpaque(true);
 		btnNewButton_1.setBounds(539, 450, 120, 50);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("reset");
 		btnNewButton_2.setForeground(Color.WHITE);
-		btnNewButton_2.setBorderPainted(false);
 		btnNewButton_2.setBackground(Color.BLACK);
 		btnNewButton_2.setOpaque(true);
+		btnNewButton_2.setBorderPainted(false);
 		btnNewButton_2.setFont(new Font("Arial", Font.BOLD, 15));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -182,20 +189,20 @@ public class bananabee extends vendor{
 		tabsBTNjian.setBounds(6, 87, 50, 50);
 		panel_1.add(tabsBTNjian);
 		
-		JLabel label_5 = new JLabel("$ "+cost[5]);
+		JLabel label_5 = new JLabel("$ "+cost[4]);
 		label_5.setFont(new Font("Arial", Font.BOLD, 15));
 		label_5.setBounds(105, 71, 61, 16);
 		panel_1.add(label_5);
 		
-		collegelable = new JLabel(""+amount[2]);
+		collegelable = new JLabel(""+amount[4]);
 		collegelable.setFont(new Font("Cambria Math", Font.BOLD, 20));
 		collegelable.setBounds(56, 86, 50, 50);
 		panel_1.add(collegelable);
 		collegelable.setHorizontalAlignment(SwingConstants.CENTER);
 		tabsBTNjian.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(amount[5]>0)
-					amount[5]--;
+				if(amount[4]>0)
+					amount[4]--;
 				    refresh();
 			}
 		});
@@ -219,7 +226,7 @@ public class bananabee extends vendor{
 		dryBTNjian.setBounds(6, 87, 50, 50);
 		panel_2.add(dryBTNjian);
 		
-		drylable = new JLabel(""+amount[4]);
+		drylable = new JLabel(""+amount[5]);
 		drylable.setFont(new Font("Cambria Math", Font.BOLD, 20));
 		drylable.setHorizontalAlignment(SwingConstants.CENTER);
 		drylable.setBounds(57, 86, 50, 50);
@@ -233,7 +240,7 @@ public class bananabee extends vendor{
 		dryBTN.setBounds(110, 87, 50, 50);
 		panel_2.add(dryBTN);
 		
-		JLabel label_4 = new JLabel("$ "+cost[4]);
+		JLabel label_4 = new JLabel("$ "+cost[5]);
 		label_4.setFont(new Font("Arial", Font.BOLD, 15));
 		label_4.setBounds(110, 72, 61, 16);
 		panel_2.add(label_4);
@@ -269,7 +276,7 @@ public class bananabee extends vendor{
 		label_2.setBounds(105, 70, 61, 16);
 		panel_3.add(label_2);
 		
-		tabslable = new JLabel(""+amount[5]);
+		tabslable = new JLabel(""+amount[2]);
 		tabslable.setFont(new Font("Cambria Math", Font.BOLD, 20));
 		tabslable.setBounds(60, 86, 50, 50);
 		panel_3.add(tabslable);
@@ -306,7 +313,7 @@ public class bananabee extends vendor{
 		label_1.setBounds(105, 71, 61, 16);
 		panel_4.add(label_1);
 		
-		fileFolderlable = new JLabel(""+amount[3]);
+		fileFolderlable = new JLabel(""+amount[1]);
 		fileFolderlable.setFont(new Font("Cambria Math", Font.BOLD, 20));
 		fileFolderlable.setBounds(57, 86, 50, 50);
 		panel_4.add(fileFolderlable);
@@ -332,6 +339,14 @@ public class bananabee extends vendor{
 		panel_5.add(fileFolderBTN);
 		
 		JButton fileFolderBTNjian = new JButton("-");
+		fileFolderBTNjian.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(amount[3]>0) {
+					amount[3]--;
+					refresh();
+				}
+			}
+		});
 		fileFolderBTNjian.setContentAreaFilled(false);
 		fileFolderBTNjian.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
 		fileFolderBTNjian.setFont(new Font("Arial", Font.BOLD, 20));
@@ -343,7 +358,7 @@ public class bananabee extends vendor{
 		label_3.setBounds(115, 72, 61, 16);
 		panel_5.add(label_3);
 		
-		presharpenedlable = new JLabel(""+amount[1]);
+		presharpenedlable = new JLabel(""+amount[3]);
 		presharpenedlable.setFont(new Font("Cambria Math", Font.BOLD, 20));
 		presharpenedlable.setBounds(60, 86, 50, 50);
 		panel_5.add(presharpenedlable);
@@ -367,14 +382,14 @@ public class bananabee extends vendor{
 		lbti84.setBounds(6, 37, 171, 35);
 		panel_6.add(lbti84);
 		
-		lbFileFolder = new JLabel("Chicken Quesadilla x 0");
+		lbFileFolder = new JLabel("Taco Queso&Chips x "+amount[3]);
 		lbFileFolder.setBackground(Color.WHITE);
 		lbFileFolder.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lbFileFolder.setHorizontalAlignment(SwingConstants.RIGHT);
 		lbFileFolder.setBounds(6, 178, 171, 35);
 		panel_6.add(lbFileFolder);
 		
-		lbcollege = new JLabel("Classic Combo  x "+amount[2]);
+		lbcollege = new JLabel("Chicken Fajitas x "+amount[2]);
 		lbcollege.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lbcollege.setHorizontalAlignment(SwingConstants.RIGHT);
 		lbcollege.setBounds(6, 131, 171, 35);
@@ -410,20 +425,20 @@ public class bananabee extends vendor{
 		totalCost.setBounds(183, 322, 96, 35);
 		panel_6.add(totalCost);
 		
-		lbpresharpened = new JLabel("Chicken Fajitas x 0");
+		lbpresharpened = new JLabel("Chicken Quesadilla x "+amount[1]);
 		lbpresharpened.setBounds(6, 84, 171, 35);
 		panel_6.add(lbpresharpened);
 		lbpresharpened.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lbpresharpened.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		lbdry = new JLabel("Nachos Beef x 0");
+		lbdry = new JLabel("Nachos Beef x "+amount[5]);
 		lbdry.setBounds(6, 272, 171, 35);
 		panel_6.add(lbdry);
 		lbdry.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lbdry.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbdry.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		lbtabs = new JLabel("Taco Queso&Chips x 0");
+		lbtabs = new JLabel("Classic Combo x "+amount[4]);
 		lbtabs.setBounds(6, 225, 171, 35);
 		panel_6.add(lbtabs);
 		lbtabs.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -473,14 +488,6 @@ public class bananabee extends vendor{
 		Image banbee_logo = new ImageIcon(Login_View.class.getResource("bananaBees_logo.png")).getImage().getScaledInstance(180, 70, Image.SCALE_SMOOTH);
 		label_6.setIcon(new ImageIcon(banbee_logo));
 		panel_7.add(label_6);
-		
-		fileFolderBTNjian.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(amount[3]>0)
-					amount[3]--;
-				    refresh();
-			}
-		});
 		fileFolderBTN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				amount[3]++;
@@ -515,20 +522,20 @@ public class bananabee extends vendor{
 		});
 		dryBTN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				amount[4]++;
+				amount[5]++;
 				refresh();
 			}
 		});
 		dryBTNjian.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(amount[4]>0)
-					amount[4]--;
+				if(amount[5]>0)
+					amount[5]--;
 				    refresh();
 			}
 		});
 		tabsBTN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				amount[5]++;
+				amount[4]++;
 				refresh();
 			}
 		});
@@ -551,43 +558,49 @@ public class bananabee extends vendor{
 	
 	//refresh
 	public  void refresh() {
-		ti84lable.setText(""+amount[0]);
-		
-		tabslable.setText(""+amount[2]);
+	ti84lable.setText(""+amount[0]);
 		
 		presharpenedlable.setText(""+amount[3]);
-		
-		drylable.setText(""+amount[4]);
-		
-		collegelable.setText(""+amount[5]) ;
+	
+		collegelable.setText(""+amount[4]) ;
 		
 		fileFolderlable.setText(""+amount[1]) ;
 		
+		tabslable.setText(""+amount[2]);
+		
+		drylable.setText(""+amount[5]);
+		
+
+		
+	
+		
 		lbti84.setText("Shrimp Fajitas x "+amount[0]);
 		
-		lbdry.setText("Nachos Beef x "+amount[4]) ;
+		lbdry.setText("Nachos Beef x "+amount[5]) ;
 		
-	    lbpresharpened.setText("Chicken Fajitas x "+amount[2]) ;
+	    lbpresharpened.setText("Chicken Quesadilla x "+amount[1]) ;
 		
-		lbFileFolder.setText("Chicken Quesadilla x "+amount[1]) ;
+		lbFileFolder.setText("Taco Queso&Chips x "+amount[3]) ;
 		
-		lbcollege.setText("Classic Combo  x "+amount[5]) ;
+		lbcollege.setText("Chicken Fajitas x "+amount[2]) ;
 		
-		lbtabs.setText("Taco Queso&Chips x "+amount[3]) ;
+		lbtabs.setText("Classic Combo x "+amount[4]) ;
 		
 		
 	     ti84costlb.setText("$ "+((double)Math.round(amount[0]*cost[0]*100)/100));
 			
-			tabscostlb.setText("$ "+((double)Math.round(amount[5]*cost[5]*100)/100));
+			tabscostlb.setText("$ "+((double)Math.round(amount[2]*cost[2]*100)/100));
 			
 			presharcostlb.setText("$ "+((double)Math.round(amount[3]*cost[3]*100)/100));
 			
-			drycostlb.setText("$ "+((double)Math.round(amount[4]*cost[4]*100)/100));
+			drycostlb.setText("$ "+((double)Math.round(amount[5]*cost[5]*100)/100));
 			
-			collegecostlb.setText("$ "+((double)Math.round(amount[2]*cost[2]*100)/100)) ;
+			collegecostlb.setText("$ "+((double)Math.round(amount[1]*cost[1]*100)/100)) ;
 			
-			fileFoldercostlb.setText("$ "+((double)Math.round(amount[1]*cost[1]*100)/100)) ;
+			fileFoldercostlb.setText("$ "+((double)Math.round(amount[4]*cost[4]*100)/100)) ;
 			
+		
+
 			double temp = (double)Math.round(((amount[0]*cost[0])+(amount[3]*cost[3])+(amount[1]*cost[1])+(amount[4]*cost[4])+(amount[2]*cost[2])+(amount[5]*cost[5]))*100)/100;
 			totalCost.setText("$ "+ temp);
 	}
