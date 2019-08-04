@@ -202,7 +202,7 @@ public class groundfood extends vendor{
 		label_5.setBounds(105, 71, 61, 16);
 		panel_1.add(label_5);
 		
-		collegelable = new JLabel(""+amount[2]);
+		collegelable = new JLabel(""+amount[4]);
 		collegelable.setBounds(56, 86, 50, 50);
 		panel_1.add(collegelable);
 		collegelable.setHorizontalAlignment(SwingConstants.CENTER);
@@ -235,7 +235,7 @@ public class groundfood extends vendor{
 		dryBTNjian.setBounds(6, 87, 50, 50);
 		panel_2.add(dryBTNjian);
 		
-		drylable = new JLabel(""+amount[4]);
+		drylable = new JLabel(""+amount[5]);
 		drylable.setHorizontalAlignment(SwingConstants.CENTER);
 		drylable.setBounds(57, 86, 50, 50);
 		panel_2.add(drylable);
@@ -288,7 +288,7 @@ public class groundfood extends vendor{
 		label_2.setBounds(105, 70, 61, 16);
 		panel_3.add(label_2);
 		
-		tabslable = new JLabel(""+amount[5]);
+		tabslable = new JLabel(""+amount[2]);
 		tabslable.setBounds(60, 86, 50, 50);
 		panel_3.add(tabslable);
 		tabslable.setHorizontalAlignment(SwingConstants.CENTER);
@@ -327,7 +327,7 @@ public class groundfood extends vendor{
 		label_1.setBounds(105, 71, 61, 16);
 		panel_4.add(label_1);
 		
-		fileFolderlable = new JLabel(""+amount[3]);
+		fileFolderlable = new JLabel(""+amount[1]);
 		fileFolderlable.setBounds(57, 86, 50, 50);
 		panel_4.add(fileFolderlable);
 		fileFolderlable.setHorizontalAlignment(SwingConstants.CENTER);
@@ -366,7 +366,7 @@ public class groundfood extends vendor{
 		label_3.setBounds(115, 72, 61, 16);
 		panel_5.add(label_3);
 		
-		presharpenedlable = new JLabel(""+amount[1]);
+		presharpenedlable = new JLabel(""+amount[3]);
 		presharpenedlable.setBounds(63, 86, 50, 50);
 		panel_5.add(presharpenedlable);
 		presharpenedlable.setHorizontalAlignment(SwingConstants.CENTER);
@@ -414,13 +414,13 @@ public class groundfood extends vendor{
 		ti84costlb.setBounds(183, 38, 96, 35);
 		panel_6.add(ti84costlb);
 		
-		fileFoldercostlb = new JLabel("$ "+(cost[1]*amount[1]));
+		fileFoldercostlb = new JLabel("$ "+(cost[4]*amount[4]));
 		fileFoldercostlb.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		fileFoldercostlb.setHorizontalAlignment(SwingConstants.CENTER);
 		fileFoldercostlb.setBounds(183, 225, 96, 35);
 		panel_6.add(fileFoldercostlb);
 		
-		collegecostlb = new JLabel("$ "+(cost[5]*amount[5]));
+		collegecostlb = new JLabel("$ "+(cost[1]*amount[1]));
 		collegecostlb.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		collegecostlb.setHorizontalAlignment(SwingConstants.CENTER);
 		collegecostlb.setBounds(183, 84, 96, 35);
@@ -463,7 +463,7 @@ public class groundfood extends vendor{
 		drycostlb.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		drycostlb.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		tabscostlb = new JLabel("$ "+(cost[3]*amount[3]));
+		tabscostlb = new JLabel("$ "+(cost[2]*amount[2]));
 		tabscostlb.setBounds(189, 131, 86, 35);
 		panel_6.add(tabscostlb);
 		tabscostlb.setFont(new Font("Lucida Grande", Font.PLAIN, 15));

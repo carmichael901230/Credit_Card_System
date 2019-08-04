@@ -407,13 +407,13 @@ public class bananabee extends vendor{
 		ti84costlb.setBounds(183, 38, 96, 35);
 		panel_6.add(ti84costlb);
 		
-		fileFoldercostlb = new JLabel("$ "+(cost[1]*amount[1]));
+		fileFoldercostlb = new JLabel("$ "+(cost[4]*amount[4]));
 		fileFoldercostlb.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		fileFoldercostlb.setHorizontalAlignment(SwingConstants.CENTER);
 		fileFoldercostlb.setBounds(183, 225, 96, 35);
 		panel_6.add(fileFoldercostlb);
 		
-		collegecostlb = new JLabel("$ "+(cost[5]*amount[5]));
+		collegecostlb = new JLabel("$ "+(cost[1]*amount[1]));
 		collegecostlb.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		collegecostlb.setHorizontalAlignment(SwingConstants.CENTER);
 		collegecostlb.setBounds(183, 84, 96, 35);
@@ -456,7 +456,7 @@ public class bananabee extends vendor{
 		drycostlb.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		drycostlb.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		tabscostlb = new JLabel("$ "+(cost[3]*amount[3]));
+		tabscostlb = new JLabel("$ "+(cost[2]*amount[2]));
 		tabscostlb.setBounds(183, 131, 96, 35);
 		panel_6.add(tabscostlb);
 		tabscostlb.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
