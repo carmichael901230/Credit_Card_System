@@ -135,16 +135,19 @@ public class CheckOut extends vendor {
 		panel_1.add(lblSecuritCode);
 		
 		FN = new JTextField();
+		FN.setFont(new Font("Arial", Font.PLAIN, 15));
 		FN.setBounds(0, 61, 150, 30);
 		panel_1.add(FN);
 		FN.setColumns(10);
 		
 		LN = new JTextField();
+		LN.setFont(new Font("Arial", Font.PLAIN, 15));
 		LN.setBounds(174, 61, 150, 30);
 		panel_1.add(LN);
 		LN.setColumns(10);
 		
 		CN = new JTextField();
+		CN.setFont(new Font("Arial", Font.PLAIN, 15));
 		CN.setBounds(0, 120, 324, 30);
 		panel_1.add(CN);
 		CN.setColumns(10);
@@ -162,6 +165,7 @@ public class CheckOut extends vendor {
 		panel_1.add(lblNewLabel);
 		
 		SC = new JTextField();
+		SC.setFont(new Font("Arial", Font.PLAIN, 15));
 		SC.setBounds(0, 243, 100, 30);
 		panel_1.add(SC);
 		SC.setColumns(10);
@@ -183,6 +187,7 @@ public class CheckOut extends vendor {
 		panel_1.add(lblPassword);
 		
 		pwTextField = new JTextField();
+		pwTextField.setFont(new Font("Arial", Font.PLAIN, 15));
 		pwTextField.setColumns(10);
 		pwTextField.setBounds(0, 180, 324, 30);
 		panel_1.add(pwTextField);
@@ -207,7 +212,7 @@ public class CheckOut extends vendor {
 		
 		JLabel lblSummary = new JLabel("Summary");
 		lblSummary.setFont(new Font("Arial", Font.BOLD, 20));
-		lblSummary.setBounds(0, 0, 135, 30);
+		lblSummary.setBounds(10, 0, 135, 30);
 		panel_2.add(lblSummary);
 		
 		JLabel lblSubtotal = new JLabel("Subtotal");
@@ -276,7 +281,7 @@ public class CheckOut extends vendor {
 				cardNumber = cardInt+"";
 				try {
 					if(check(cardNumber,lastName,firstName,security)) {
-						int result = charge(cardNumber,realCost,shopName,s);
+						int result = charge(cardNumber,realCost,shopName,s, rawPW);
 						if(result==-1)
 							output="Insufficient Fund";
 						else if(result==1) {
@@ -286,6 +291,9 @@ public class CheckOut extends vendor {
 						}
 						else if(result==-2)
 							output="Credit card expired";
+						else if (result ==3) {
+							output="Incorrect Password";
+						}
 					}
 					else {
 						output="We can't find your infomation";

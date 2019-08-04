@@ -39,7 +39,7 @@ public class vendor {
 	  double newBalance;
 	 try { 
 		 Class.forName("com.mysql.cj.jdbc.Driver");
-	  Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC","root","chuhui1026");
+	  Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");
 	  Statement statement =con.createStatement();
 	  ResultSet data = statement.executeQuery("SELECT expireDate,remainCreditFROM credit_cards WHERE cardNumber='"+cardNumber+"'");
 	  Statement s2=con.createStatement();
@@ -78,7 +78,7 @@ public class vendor {
 	 try { 
 		 String id;
 		 Class.forName("com.mysql.cj.jdbc.Driver");
-	  Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/creditCard?userTimezone=true&serverTimezone=UTC","root","chuhui1026");
+	  Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");
 	  Statement statement =con.createStatement();
 	  
 	  ResultSet data = statement.executeQuery("SELECT id from users WHERE firstName= '"+firstName+"' AND lastName='"+lastName+"'");

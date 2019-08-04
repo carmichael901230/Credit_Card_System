@@ -34,6 +34,7 @@ import javax.swing.border.LineBorder;
 public class CreateUser_View extends JFrame{
 	private Color Color_navy = new Color(0,73,118);
 	private Color Color_lighterNavy = new Color(26, 88, 134);
+	private boolean finalDicision = true;
 	private String userNameString;
 	private String passwordString;
 	private String firstNameString;
@@ -129,11 +130,7 @@ public class CreateUser_View extends JFrame{
 		ssn1TF = new JPasswordField();
 		ssn1TF.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
-			public void insertUpdate(DocumentEvent e) {
-				if (ssn1TF.getPassword().length == 3) { 
-					ssn2TF.requestFocus();
-				} 
-			}
+			public void insertUpdate(DocumentEvent e) {if (ssn1TF.getPassword().length == 3) { ssn2TF.requestFocus(); } }
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {}
@@ -149,9 +146,7 @@ public class CreateUser_View extends JFrame{
 		ssn2TF.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				if (ssn2TF.getPassword().length == 2) {
-					ssn3TF.requestFocus();
-				}
+				if (ssn2TF.getPassword().length == 2) {ssn3TF.requestFocus();}
 			}
 			@Override
 			public void removeUpdate(DocumentEvent e) {	}
@@ -255,6 +250,7 @@ public class CreateUser_View extends JFrame{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				boolean allCase = true;
+				finalDicision = true;
 				storeData();
 				if(userNameString==null || userNameString.length() == 0) {
 					JOptionPane.showMessageDialog(null, "Please enter your username");
@@ -283,9 +279,6 @@ public class CreateUser_View extends JFrame{
 				}
 				else if(ssnString==null || ssnString.length() !=9 || !checkIsInteger(ssnString)) {
 					JOptionPane.showMessageDialog(null, "Please enter your society security number correctly");
-					ssn1TF.setText("");
-					ssn2TF.setText("");
-					ssn3TF.setText("");
 					ssn1TF.requestFocus();	
 					allCase = false;
 				}
@@ -296,24 +289,20 @@ public class CreateUser_View extends JFrame{
 					allCase = false;	
 				}
 				else if(passwordString == null) {
-					JOptionPane.showMessageDialog(null, "Please enter your password");
+					JOptionPane.showMessageDialog(null, "Please enter valid password (at least 6 characters)");
 					passwordTF.requestFocus();	
 					allCase = false;
-				}
-				else if (month.getSelectedItem().equals("Month") || 
-						 day.getSelectedItem().equals("Day") ||
-						 year.getSelectedItem().equals("Year")) {
-					JOptionPane.showMessageDialog(null, "Invalide Day of Birth");
-					allCase = false;
+					return;
 				}
 				if(allCase) {
 					writeDataIntoDatabase();
 					clean();
-					return;
 				}
-				ViewUser_Home openFrame = new ViewUser_Home(name,s);
-				openFrame.setVisible(true);
-				frame.dispose();
+				if(allCase && finalDicision) {
+					ViewUser_Home openFrame = new ViewUser_Home(name,s);
+					openFrame.setVisible(true);
+					frame.dispose();
+				}
 				btnCreateBTN.setBackground(Color_lighterNavy);
 			}
 			@Override
@@ -451,8 +440,8 @@ public class CreateUser_View extends JFrame{
 	}
 	
 	
-	  public String getMd5(String input)  { 
-		  	if(input.length() == 0) {return null;}
+	  public String getMd5(String input)  {
+		  	if(input.length() <= 6) { return null;}
 	        try {
 	            MessageDigest md = MessageDigest.getInstance("MD5"); 
 	            byte[] messageDigest = md.digest(input.getBytes()); 
@@ -527,7 +516,7 @@ public class CreateUser_View extends JFrame{
 			for(int i = 0; i < tempSSN3.length; i++) {ssnString += tempSSN3[i];}
 	  }
 	  
-	  public void writeDataIntoDatabase() {
+	  public int writeDataIntoDatabase() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection(
@@ -582,9 +571,12 @@ public class CreateUser_View extends JFrame{
 		} catch(SQLIntegrityConstraintViolationException e) {
 			JOptionPane.showMessageDialog(null, "Duplicated Info in our record");
 			firstNameTF.requestFocus();
+			finalDicision = false;
+			return 0;
 		 } 
-		catch (SQLException e) {e.printStackTrace();} 
-		catch (ClassNotFoundException e) {e.printStackTrace();}
+		catch (SQLException e) {e.printStackTrace();return 0;} 
+		catch (ClassNotFoundException e) {e.printStackTrace();return 0;}
+		  return 0;
 	  }
 	  public boolean checkIsInteger(String s) {
 		  try {
