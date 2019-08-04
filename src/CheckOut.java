@@ -15,6 +15,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
+import javax.swing.JPasswordField;
 
 public class CheckOut extends vendor {
 	private Color Color_green = new Color(0, 188, 65);
@@ -35,7 +36,7 @@ public class CheckOut extends vendor {
 	private JTextField LN;
 	private JTextField CN;
 	private JTextField SC;
-	private JTextField pwTextField;
+	private JPasswordField pwTextField;
 
 	/**
 	 * Launch the application.
@@ -186,10 +187,8 @@ public class CheckOut extends vendor {
 		lblPassword.setBounds(0, 165, 183, 15);
 		panel_1.add(lblPassword);
 		
-		pwTextField = new JTextField();
-		pwTextField.setFont(new Font("Arial", Font.PLAIN, 15));
-		pwTextField.setColumns(10);
-		pwTextField.setBounds(0, 180, 324, 30);
+		pwTextField = new JPasswordField();
+		pwTextField.setBounds(0, 179, 317, 30);
 		panel_1.add(pwTextField);
 		
 		JPanel panel_2 = new JPanel();
@@ -273,15 +272,19 @@ public class CheckOut extends vendor {
 				security=SC.getText();
 				String cardStr = CN.getText();
 				String rawPW = pwTextField.getText();
-				if (cardStr.length()<4) {
-					// TODO
-					JOptionPane.showMessageDialog(null,"Incorrect card number");
-				}
-				int cardInt = Integer.parseInt(cardStr.substring(cardStr.length()-4));
-				cardNumber = cardInt+"";
+//				if (cardStr.length()<4) {
+//					// TODO
+//					JOptionPane.showMessageDialog(null,"Incorrect card number");
+//				}
 				try {
-					if(check(cardNumber,lastName,firstName,security)) {
-						int result = charge(cardNumber,realCost,shopName,s, rawPW);
+					int cardInt = Integer.parseInt(cardStr.substring(cardStr.length()-4));
+					cardNumber = cardInt+"";
+				}
+				catch(Exception err) {}
+				try {
+					int checkRes = check(cardNumber,lastName,firstName,security, rawPW);
+					if(checkRes > 0) {
+						int result = charge(cardNumber,realCost,shopName,s);
 						if(result==-1)
 							output="Insufficient Fund";
 						else if(result==1) {
@@ -295,9 +298,13 @@ public class CheckOut extends vendor {
 							output="Incorrect Password";
 						}
 					}
-					else {
-						output="We can't find your infomation";
+					else if (checkRes == -1) {
+						output = "Sorry, we can't find your info";
 					}
+					else if (checkRes == -2) {
+						output = "Incorrect password";
+					}
+					
 				} catch (ClassNotFoundException | SQLException e1) {
 					e1.printStackTrace();
 				}

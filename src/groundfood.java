@@ -106,7 +106,7 @@ public class groundfood extends vendor{
 		btnNewButton_1.setFont(new Font("Arial", Font.BOLD, 15));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(total>1) {
+				if(total>0) {
 				CheckOut temp = new CheckOut(cost,amount,shopName,s);
 				temp.frame.setVisible(true);
 				frame.dispose();

@@ -12,7 +12,7 @@ public class vendor {
 	public static void main(String[]args) throws SQLException, ClassNotFoundException {
 	
 	}
-  public int charge(String cardNumber,double amount,String shopName,Calendar x,String passWord) throws SQLException, ClassNotFoundException {
+  public int charge(String cardNumber,double amount,String shopName,Calendar x) throws SQLException, ClassNotFoundException {
 	  Calendar today = Calendar.getInstance();
 	  String month;
 	  String date;
@@ -29,10 +29,7 @@ public class vendor {
 		  date=""+(today.get(today.DATE)+Math.abs(today.get(today.MINUTE)-x.get(x.MINUTE))/+1);
 	  }
 	  String inputDate=year+"-"+month+"-"+date+" 00:00:00";
-	  System.out.println(year);
-	  System.out.println(month);
-	  System.out.println(date);
-	  System.out.println(inputDate);
+
 	  String  edate;
 	  Calendar exdate =  Calendar.getInstance();
 	  double availableBalance;
@@ -41,13 +38,13 @@ public class vendor {
 		 Class.forName("com.mysql.cj.jdbc.Driver");
 	  Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");
 	  Statement statement =con.createStatement();
-	  ResultSet data = statement.executeQuery("SELECT expireDate,remainCreditFROM credit_cards WHERE cardNumber='"+cardNumber+"'");
+	  ResultSet data = statement.executeQuery("SELECT expireDate,remainCredit FROM credit_cards WHERE cardNumber='"+cardNumber+"'");
 	  Statement s2=con.createStatement();
-	  ResultSet pdd=s2.executeQuery("SELECT password FROM users WHERE cardNumber='"+cardNumber+"'");
+
 	  data.next();
-	  pdd.next();
+	 
 	  edate=data.getString("expireDate");
-	  String pd=pdd.getString("password");
+	 
 	 exdate.set(Integer.parseInt(edate.substring(0,4)),Integer.parseInt(edate.substring(5, 7))-1
 			 ,Integer.parseInt(edate.substring(8,10)));
 	 if(today.before(exdate)) {
@@ -55,9 +52,7 @@ public class vendor {
 		  if(availableBalance<amount) {
 			  return -1;
 		  }
-		  else if(!pd.equals(getMd5(passWord))) {
-			 return -3;
-		  }
+		
 		  else {
 			  newBalance=availableBalance-amount;
 			  statement.executeUpdate("UPDATE credit_cards set remainCredit = '"+ newBalance+"' WHERE cardNumber='"+cardNumber+"'");
@@ -74,31 +69,33 @@ public class vendor {
   	}
 	return 0;
 }
-  public boolean check(String cardNumber,String lastName,String firstName,String security) throws SQLException, ClassNotFoundException {
+  public int check(String cardNumber,String lastName,String firstName,String security, String password) throws SQLException, ClassNotFoundException {
 	 try { 
 		 String id;
 		 Class.forName("com.mysql.cj.jdbc.Driver");
 	  Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/credit_card_system?userTimezone=true&serverTimezone=UTC","root","wang87067835");
 	  Statement statement =con.createStatement();
 	  
-	  ResultSet data = statement.executeQuery("SELECT id from users WHERE firstName= '"+firstName+"' AND lastName='"+lastName+"'");
+	  ResultSet data = statement.executeQuery("SELECT id, password from users WHERE firstName= '"+firstName+"' AND lastName='"+lastName+"'");
 	  if(!data.next())
-		  return false;
+		  return -1;
+	  else if ( !data.getString("password").equals(getMd5(password))) {
+		  return -2;
+	  }
 	  else {
 		  id=data.getString("id");
 		  data=	statement.executeQuery("SELECT cardNumber,securityCode FROM credit_cards WHERE cardHolder='"+id+"'");
 	      while(data.next()) {
-	    	  if(data.getString("cardNumber").equals(cardNumber)&&data.getString("securityCode").equals(security))
-	    		  return true;
-	    	  return false;
+	    	  if(data.getString("cardNumber").equals(cardNumber)&&data.getString("securityCode").equals(security));
+	    		  return 1;
 	  	}
+	      return -1;
 	 }
 	 }
   catch(Exception e) {
 	  e.printStackTrace();;
-	  return false;
+	  return -1;
   	}
-	return false;
   }
   
   public String getMd5(String input) 
