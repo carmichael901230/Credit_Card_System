@@ -309,10 +309,11 @@ public class CreateUser_View extends JFrame{
 				if(allCase) {
 					writeDataIntoDatabase();
 					clean();
-					ViewUser_Home openFrame = new ViewUser_Home(name,s);
-					openFrame.setVisible(true);
-					frame.dispose();
+					return;
 				}
+				ViewUser_Home openFrame = new ViewUser_Home(name,s);
+				openFrame.setVisible(true);
+				frame.dispose();
 				btnCreateBTN.setBackground(Color_lighterNavy);
 			}
 			@Override
@@ -526,7 +527,7 @@ public class CreateUser_View extends JFrame{
 			for(int i = 0; i < tempSSN3.length; i++) {ssnString += tempSSN3[i];}
 	  }
 	  
-	  public int writeDataIntoDatabase() {
+	  public void writeDataIntoDatabase() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection(
@@ -580,12 +581,10 @@ public class CreateUser_View extends JFrame{
 			 JOptionPane.showMessageDialog(null, answer); 
 		} catch(SQLIntegrityConstraintViolationException e) {
 			JOptionPane.showMessageDialog(null, "Duplicated Info in our record");
-			userNameTF.requestFocus();
-			return 0;
+			firstNameTF.requestFocus();
 		 } 
-		catch (SQLException e) {e.printStackTrace();return 0;} 
-		catch (ClassNotFoundException e) {e.printStackTrace();return 0;}
-		  return 0;
+		catch (SQLException e) {e.printStackTrace();} 
+		catch (ClassNotFoundException e) {e.printStackTrace();}
 	  }
 	  public boolean checkIsInteger(String s) {
 		  try {

@@ -35,6 +35,7 @@ public class CheckOut extends vendor {
 	private JTextField LN;
 	private JTextField CN;
 	private JTextField SC;
+	private JTextField pwTextField;
 
 	/**
 	 * Launch the application.
@@ -124,44 +125,44 @@ public class CheckOut extends vendor {
 		JLabel lblCardNumber = new JLabel("Card Number (last 4 digits)");
 		lblCardNumber.setHorizontalAlignment(SwingConstants.LEFT);
 		lblCardNumber.setFont(new Font("Arial", Font.PLAIN, 15));
-		lblCardNumber.setBounds(0, 130, 183, 15);
+		lblCardNumber.setBounds(0, 101, 183, 15);
 		panel_1.add(lblCardNumber);
 		
 		JLabel lblSecuritCode = new JLabel("CCV");
 		lblSecuritCode.setHorizontalAlignment(SwingConstants.LEFT);
 		lblSecuritCode.setFont(new Font("Arial", Font.PLAIN, 15));
-		lblSecuritCode.setBounds(0, 208, 83, 15);
+		lblSecuritCode.setBounds(0, 221, 83, 15);
 		panel_1.add(lblSecuritCode);
 		
 		FN = new JTextField();
-		FN.setBounds(0, 75, 150, 30);
+		FN.setBounds(0, 61, 150, 30);
 		panel_1.add(FN);
 		FN.setColumns(10);
 		
 		LN = new JTextField();
-		LN.setBounds(174, 75, 150, 30);
+		LN.setBounds(174, 61, 150, 30);
 		panel_1.add(LN);
 		LN.setColumns(10);
 		
 		CN = new JTextField();
-		CN.setBounds(0, 150, 324, 30);
+		CN.setBounds(0, 120, 324, 30);
 		panel_1.add(CN);
 		CN.setColumns(10);
 		
 		JLabel lblFirstjName = new JLabel("First Name");
 		lblFirstjName.setHorizontalAlignment(SwingConstants.LEFT);
 		lblFirstjName.setFont(new Font("Arial", Font.PLAIN, 15));
-		lblFirstjName.setBounds(0, 55, 93, 15);
+		lblFirstjName.setBounds(0, 41, 93, 15);
 		panel_1.add(lblFirstjName);
 		
 		JLabel lblNewLabel = new JLabel("Last Name");
 		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 15));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel.setBounds(174, 54, 93, 15);
+		lblNewLabel.setBounds(174, 40, 93, 15);
 		panel_1.add(lblNewLabel);
 		
 		SC = new JTextField();
-		SC.setBounds(0, 230, 100, 30);
+		SC.setBounds(0, 243, 100, 30);
 		panel_1.add(SC);
 		SC.setColumns(10);
 		
@@ -175,6 +176,16 @@ public class CheckOut extends vendor {
 		lblError.setForeground(Color.RED);
 		lblError.setBounds(0, 28, 328, 16);
 		panel_1.add(lblError);
+		
+		JLabel lblPassword = new JLabel("Password");
+		lblPassword.setFont(new Font("Arial", Font.PLAIN, 15));
+		lblPassword.setBounds(0, 165, 183, 15);
+		panel_1.add(lblPassword);
+		
+		pwTextField = new JTextField();
+		pwTextField.setColumns(10);
+		pwTextField.setBounds(0, 180, 324, 30);
+		panel_1.add(pwTextField);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
@@ -256,6 +267,7 @@ public class CheckOut extends vendor {
 				lastName=LN.getText();
 				security=SC.getText();
 				String cardStr = CN.getText();
+				String rawPW = pwTextField.getText();
 				if (cardStr.length()<4) {
 					// TODO
 					JOptionPane.showMessageDialog(null,"Incorrect card number");
