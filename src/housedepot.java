@@ -111,9 +111,11 @@ public class housedepot extends vendor{
 		btnNewButton_1.setBorderPainted(false);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(total>1) {
 				CheckOut temp = new CheckOut(cost,amount,shopName,s);
 				temp.frame.setVisible(true);
 				frame.dispose();
+				}
 			}
 		});
 		frame.getContentPane().setLayout(null);
@@ -198,7 +200,7 @@ public class housedepot extends vendor{
 		tabsBTN.setBounds(110, 87, 50, 50);
 		panel_1.add(tabsBTN);
 		
-		tabslable = new JLabel(""+amount[5]);
+		tabslable = new JLabel(""+amount[4]);
 		tabslable.setFont(new Font("Cambria Math", Font.BOLD, 20));
 		tabslable.setHorizontalAlignment(SwingConstants.CENTER);
 		tabslable.setBounds(57, 86, 50, 50);
@@ -247,7 +249,7 @@ public class housedepot extends vendor{
 		dryBTNjian.setBounds(6, 87, 50, 50);
 		panel_2.add(dryBTNjian);
 		
-		drylable = new JLabel(""+amount[4]);
+		drylable = new JLabel(""+amount[5]);
 		drylable.setFont(new Font("Cambria Math", Font.BOLD, 20));
 		drylable.setHorizontalAlignment(SwingConstants.CENTER);
 		drylable.setBounds(57, 86, 50, 50);
@@ -642,8 +644,8 @@ public class housedepot extends vendor{
 			
 		
 
-			double temp = (double)Math.round(((amount[0]*cost[0])+(amount[3]*cost[3])+(amount[1]*cost[1])+(amount[4]*cost[4])+(amount[2]*cost[2])+(amount[5]*cost[5]))*100)/100;
-			totalCost.setText("$ "+ temp);
+			total = (double)Math.round(((amount[0]*cost[0])+(amount[3]*cost[3])+(amount[1]*cost[1])+(amount[4]*cost[4])+(amount[2]*cost[2])+(amount[5]*cost[5]))*100)/100;
+			totalCost.setText("$ "+ total);
 	}
 	public void reset(){
 		for(int i=0;i<cost.length;i++)
