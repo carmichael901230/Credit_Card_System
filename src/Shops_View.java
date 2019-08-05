@@ -31,6 +31,7 @@ public class Shops_View extends JFrame {
 
 	private Color Color_marsh = new Color(155, 146, 60);
 	private Color Color_green = new Color(0, 188, 65);
+	private Color Color_navy = new Color(0,73,118);
 	
 	private JPanel contentPane;
 
@@ -55,7 +56,7 @@ public class Shops_View extends JFrame {
 	 */
 	public Shops_View(Calendar s) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 565, 450);
+		setBounds(100, 100, 779, 450);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -65,7 +66,7 @@ public class Shops_View extends JFrame {
 		JPanel logoPanel = new JPanel();
 		logoPanel.setLayout(null);
 		logoPanel.setBackground(Color.WHITE);
-		logoPanel.setBounds(170, 10, 246, 55);
+		logoPanel.setBounds(274, 10, 246, 55);
 		contentPane.add(logoPanel);
 		Image logo = new ImageIcon(Login_View.class.getResource("shoank_logo.png")).getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT);
 		
@@ -96,7 +97,7 @@ public class Shops_View extends JFrame {
 		
 		JPanel shopsPanel = new JPanel();
 		shopsPanel.setBackground(Color.WHITE);
-		shopsPanel.setBounds(39, 109, 473, 294);
+		shopsPanel.setBounds(39, 109, 688, 294);
 		contentPane.add(shopsPanel);
 		shopsPanel.setLayout(new GridLayout(2, 1, 10, 10));
 		
@@ -117,7 +118,7 @@ public class Shops_View extends JFrame {
 		JLabel lblValmart = new JLabel();
 		Image valmart_logo = new ImageIcon(Login_View.class.getResource("valmart_logo.png")).getImage().getScaledInstance(231, 46, Image.SCALE_SMOOTH);
 		lblValmart.setIcon(new ImageIcon(valmart_logo));
-		lblValmart.setBounds(0, 50, 231, 46);
+		lblValmart.setBounds(60, 52, 231, 46);
 		valmartPanel.add(lblValmart);
 		
 		JPanel housedepotPanel = new JPanel();
@@ -137,7 +138,7 @@ public class Shops_View extends JFrame {
 		JLabel lblHousedepot = new JLabel();
 		Image housedepot_logo = new ImageIcon(Login_View.class.getResource("houseDepot_logo.png")).getImage().getScaledInstance(142, 142, Image.SCALE_SMOOTH);
 		lblHousedepot.setIcon(new ImageIcon(housedepot_logo));
-		lblHousedepot.setBounds(40, 0, 142, 142);
+		lblHousedepot.setBounds(95, 0, 142, 142);
 		housedepotPanel.add(lblHousedepot);
 		
 		JPanel bananaBeesPanel = new JPanel();
@@ -157,7 +158,7 @@ public class Shops_View extends JFrame {
 		JLabel lblBananaBees = new JLabel();
 		Image banbee_logo = new ImageIcon(Login_View.class.getResource("bananaBees_logo.png")).getImage().getScaledInstance(231, 88, Image.SCALE_SMOOTH);
 		lblBananaBees.setIcon(new ImageIcon(banbee_logo));
-		lblBananaBees.setBounds(0, 26, 231, 90);
+		lblBananaBees.setBounds(64, 24, 231, 90);
 		bananaBeesPanel.add(lblBananaBees);
 		
 		JPanel groundFoodPanel = new JPanel();
@@ -178,23 +179,23 @@ public class Shops_View extends JFrame {
 		lblGround.setForeground(new Color(113, 62, 45));
 		lblGround.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblGround.setFont(new Font("Arial", Font.PLAIN, 35));
-		lblGround.setBounds(15, 36, 108, 68);
+		lblGround.setBounds(78, 37, 108, 68);
 		groundFoodPanel.add(lblGround);
 		
 		JLabel lblFood = new JLabel("F   od");
 		lblFood.setForeground(new Color(0, 143, 67));
 		lblFood.setFont(new Font("Arial", Font.BOLD, 35));
-		lblFood.setBounds(126, 36, 95, 68);
+		lblFood.setBounds(189, 37, 95, 68);
 		groundFoodPanel.add(lblFood);
 		
 		JLabel lblImg = new JLabel();
 		Image groundFood_logo = new ImageIcon(Login_View.class.getResource("groundfood_logo.png")).getImage().getScaledInstance(29, 30, Image.SCALE_SMOOTH);
 		lblImg.setIcon(new ImageIcon(groundFood_logo));
-		lblImg.setBounds(146, 51, 30, 37);
+		lblImg.setBounds(209, 52, 30, 37);
 		groundFoodPanel.add(lblImg);
 
 		
-		JButton btnBack = new JButton("< Back");
+		JButton btnBack = new JButton("< Home");
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -210,7 +211,25 @@ public class Shops_View extends JFrame {
 		btnBack.setBackground(Color.WHITE);
 		btnBack.setForeground(Color_green);
 		btnBack.setFont(new Font("Arial", Font.PLAIN, 25));
-		btnBack.setBounds(15, 15, 120, 35);
+		btnBack.setBounds(15, 20, 100, 35);
 		contentPane.add(btnBack);
+		
+		JButton btnBank = new JButton("Bank");
+		btnBank.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnBank.setFocusable(false);
+		btnBank.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Login_View login = new Login_View(s);
+				login.setVisible(true);
+				dispose();
+			}
+		});
+		btnBank.setContentAreaFilled(false);
+		btnBank.setBorder(new LineBorder(Color_navy, 2, true));
+		btnBank.setForeground(Color_navy);
+		btnBank.setFont(new Font("Arial", Font.PLAIN, 20));
+		btnBank.setBounds(129, 20, 100, 35);
+		contentPane.add(btnBank);
 	}
 }

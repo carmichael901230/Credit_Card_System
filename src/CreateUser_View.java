@@ -441,7 +441,7 @@ public class CreateUser_View extends JFrame{
 	
 	
 	  public String getMd5(String input)  {
-		  	if(input.length() <= 6) { return null;}
+		  	if(input.length() < 6) { return null;}
 	        try {
 	            MessageDigest md = MessageDigest.getInstance("MD5"); 
 	            byte[] messageDigest = md.digest(input.getBytes()); 

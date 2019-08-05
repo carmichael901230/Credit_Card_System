@@ -393,7 +393,7 @@ public class Login_View extends JFrame {
 		);
 		logoPanel.setLayout(gl_logoPanel);
 		
-		JButton btnBack = new JButton("< Back");
+		JButton btnBack = new JButton("< Home");
 		btnBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
