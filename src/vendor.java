@@ -86,7 +86,7 @@ public class vendor {
 		  id=data.getString("id");
 		  data=	statement.executeQuery("SELECT cardNumber,securityCode FROM credit_cards WHERE cardHolder='"+id+"'");
 	      while(data.next()) {
-	    	  if(data.getString("cardNumber").equals(cardNumber)&&data.getString("securityCode").equals(security));
+	    	  if(data.getString("cardNumber").equals(cardNumber)&&data.getString("securityCode").equals(security))
 	    		  return 1;
 	  	}
 	      return -1;
