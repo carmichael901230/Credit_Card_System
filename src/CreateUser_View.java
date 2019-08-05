@@ -574,7 +574,14 @@ public class CreateUser_View extends JFrame{
 			finalDicision = false;
 			return 0;
 		 } 
-		catch (SQLException e) {e.printStackTrace();return 0;} 
+		catch (SQLException e) {
+					JOptionPane.showMessageDialog(null, "Invalide Date of birth");
+			finalDicision=false;
+					
+					return 0;
+				       
+				       
+				       } 
 		catch (ClassNotFoundException e) {e.printStackTrace();return 0;}
 		  return 0;
 	  }
